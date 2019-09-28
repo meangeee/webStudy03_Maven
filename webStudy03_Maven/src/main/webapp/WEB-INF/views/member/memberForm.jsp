@@ -187,7 +187,6 @@
 			url : action,
 			method : method?method:"get",
 			data : queryString,
-			dataType : "json",
 			success : function(resp) {
 				if(resp.valid){
 					useId.show();
