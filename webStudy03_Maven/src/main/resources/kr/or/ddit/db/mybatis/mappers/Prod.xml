@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.ddit.prod.dao.IProdDAO">
+	<select id="selectProdList" resultType="ProdVO">
+		SELECT PROD_ID,
+		PROD_NAME, PROD_LGU,
+		PROD_BUYER, PROD_COST, PROD_PRICE,
+		PROD_MILEAGE
+		,
+		BUYER_NAME
+		, LPROD_NM
+		FROM PROD INNER JOIN LPROD ON (PROD_LGU =
+		LPROD_GU)
+		INNER JOIN BUYER ON (PROD_BUYER = BUYER_ID)
+	</select>
+	<select id="selectProd" parameterType="string"
+		resultType="ProdVO">
+		SELECT
+		PROD_ID, PROD_NAME, PROD_LGU,
+		PROD_BUYER, PROD_COST,
+		PROD_PRICE,
+		PROD_SALE, PROD_OUTLINE, PROD_DETAIL,
+		PROD_IMG,
+		PROD_TOTALSTOCK, PROD_INSDATE,
+		PROD_PROPERSTOCK, PROD_SIZE, PROD_COLOR,
+		PROD_DELIVERY, PROD_UNIT, PROD_QTYIN,
+		PROD_QTYSALE, PROD_MILEAGE
+		,
+		LPROD_NM
+		, BUYER_NAME
+		FROM PROD INNER JOIN LPROD ON (PROD_LGU =
+		LPROD_GU)
+		INNER JOIN BUYER ON (PROD_BUYER = BUYER_ID)
+		WHERE PROD_ID =
+		#{prod_id}
+	</select>
+	<update id="updateProd" parameterType="ProdVO">
+		UPDATE PROD
+		SET
+		PROD_NAME =
+		#{prod_name},
+		PROD_COST = #{prod_cost},
+		PROD_PRICE = #{prod_price},
+		PROD_SALE = #{prod_sale},
+		PROD_OUTLINE = #{prod_outline},
+		PROD_DETAIL =
+		#{prod_detail},
+		PROD_IMG = #{prod_img},
+		PROD_TOTALSTOCK =
+		#{prod_totalstock},
+		PROD_PROPERSTOCK= #{prod_properstock},
+		PROD_SIZE =
+		#{prod_size},
+		PROD_COLOR = #{prod_color},
+		PROD_DELIVERY =
+		#{prod_delivery},
+		PROD_UNIT = #{prod_unit},
+		PROD_QTYIN = #{prod_qtyin},
+		PROD_QTYSALE = #{prod_qtysale},
+		PROD_MILEAGE = #{prod_mileage}
+		WHERE
+		PROD_ID = #{prod_id}
+	</update>
+
+	<insert id="insertProd" parameterType="ProdVO">
+		<selectKey order="BEFORE" resultType="String" keyProperty="prod_id">
+			SELECT #{prod_lgu} ||LPAD(NVL(TO_NUMBER(SUBSTR(MAX(PROD_ID), 5)),0) + 1, 6, '0')
+			FROM PROD
+			WHERE PROD_LGU = #{prod_lgu}
+		</selectKey>
+		INSERT INTO PROD (
+			PROD_ID, PROD_NAME, PROD_LGU,
+			PROD_BUYER, PROD_COST,
+			PROD_PRICE,
+			PROD_SALE, PROD_OUTLINE, PROD_DETAIL,
+			PROD_IMG,
+			PROD_TOTALSTOCK,
+			PROD_INSDATE,
+			PROD_PROPERSTOCK, PROD_SIZE, PROD_COLOR,
+			PROD_DELIVERY,
+			PROD_UNIT, PROD_QTYIN,
+			PROD_QTYSALE, PROD_MILEAGE
+		) VALUES (
+			#{prod_id}, #{prod_name}, #{prod_lgu},
+			#{prod_buyer}, #{prod_cost}, #{prod_price},
+			#{prod_sale}, #{prod_outline}, #{prod_detail},
+			#{prod_img}, #{prod_totalstock}, #{prod_insdate},
+			#{prod_properstock}, #{prod_size}, #{prod_color},
+			#{prod_delivery}, #{prod_unit}, #{prod_qtyin},
+			#{prod_qtysale}, #{prod_mileage}
+		)
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

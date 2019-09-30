@@ -55,7 +55,6 @@ public class MemberInsertController{
 	
 	@URIMapping(value="/member/memberInsert.do", method=HttpMethod.POST)
 	public String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		MemberVO member = new MemberVO();
 		//미리공유 왜? 만약 가입하다가 검증에 실패. 그럴때마다 기존 데이터를 가지고 다녀야 해서 그러나 아직까진 비어있음
 		req.setAttribute("member", member);
@@ -99,11 +98,7 @@ public class MemberInsertController{
 		}
 		req.setAttribute("message", message);
 		//dispatch방식으로 기존 데이터를 갖고 갈 수 있다
-		if(redirect) {
-			return "redirect:/"+viewName;
-		}else {
 			return viewName;
-		}
 	}
 
 	private boolean validate(MemberVO member, Map<String, String> errors) {

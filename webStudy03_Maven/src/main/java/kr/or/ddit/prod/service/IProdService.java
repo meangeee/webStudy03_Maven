@@ -21,7 +21,7 @@ public interface IProdService {
 	 * 
 	 * @return
 	 */
-	public List<ProdVO> retrievevProdList();
+	public List<ProdVO> retrieveProdList();
 	
 	public ProdVO retrieveProd(String prod_id);
 	

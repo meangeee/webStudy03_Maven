@@ -3,45 +3,48 @@ package kr.or.ddit.prod.service;
 import java.util.List;
 
 import kr.or.ddit.enums.ServiceResult;
+import kr.or.ddit.exception.CommonException;
 import kr.or.ddit.prod.dao.IProdDAO;
 import kr.or.ddit.prod.dao.ProdDAOImpl;
 import kr.or.ddit.vo.ProdVO;
 
 public class ProdServiceImpl implements IProdService {
-	
-	//dao와의 의존관계
-	IProdDAO dao = new ProdDAOImpl();
-	
-	//자기자신
-	private static IProdService instance;
-	
-	//singleton
-	public static IProdService getInstance() {
-		if(instance == null) instance = new ProdServiceImpl();
-		return instance;
-	}
+
+	IProdDAO dao = new ProdDAOImpl();	
 	
 	@Override
 	public ServiceResult createProd(ProdVO prod) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceResult result = null;
+		if(dao.insertProd(prod)==0) {
+			int cnt = dao.insertProd(prod);
+			if(cnt > 0) result = ServiceResult.OK;
+			else result = ServiceResult.FAILED;
+		}
+		return result;
 	}
 
 	@Override
-	public List<ProdVO> retrievevProdList() {
+	public List<ProdVO> retrieveProdList() {
 		return dao.selectProdList();
 	}
 
 	@Override
 	public ProdVO retrieveProd(String prod_id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProdVO prod = dao.selectProd(prod_id);
+		if(prod==null) 
+			throw new CommonException(prod_id+" 상품이 없음.");
+		return prod;
 	}
 
 	@Override
 	public ServiceResult modifyProd(ProdVO prod) {
-		// TODO Auto-generated method stub
-		return null;
+		retrieveProd(prod.getProd_id());
+		ServiceResult result = null;
+		int cnt = dao.updateProd(prod);
+		if(cnt > 0) result = ServiceResult.OK;
+		else result = ServiceResult.FAILED;
+		return result;
+		
 	}
 
 }
