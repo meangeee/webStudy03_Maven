@@ -16,6 +16,7 @@ import kr.or.ddit.buyer.service.BuyerServiceImpl;
 import kr.or.ddit.buyer.service.IBuyerService;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
+import kr.or.ddit.utils.MarshallingUtils;
 import kr.or.ddit.vo.BuyerVO;
 import kr.or.ddit.vo.PagingInfoVO;
 
@@ -25,6 +26,7 @@ public class BuyerListController{
 	IBuyerService service = new BuyerServiceImpl();
 	@URIMapping("/buyer/buyerList.do")
 	public String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String accept = req.getHeader("Accept");
 		String pageParam = req.getParameter("page");
 		int currentPage = 1;
 		if(StringUtils.isNumeric(pageParam)) {
@@ -39,6 +41,23 @@ public class BuyerListController{
 		pagingVO.setDataList(buyerList);
 		req.setAttribute("pagingVO", pagingVO);
 		
-		return "buyer/buyerList";
+		if(accept.toLowerCase().contains("json")) {
+			resp.setContentType("application/json;charset=UTF-8");
+			
+			
+			String json = new MarshallingUtils().marshalling(buyerList);
+			
+			//그것을 화면에 출력해준다
+			try(
+				PrintWriter out = resp.getWriter();
+				){
+				out.println(json);
+				}
+				return null;
+			}else {
+				String viewName = "buyer/buyerList";
+				return viewName;
+		}
+		
 	}
 }
