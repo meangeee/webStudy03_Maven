@@ -37,7 +37,28 @@
 		</tr>
 		<tr>
 			<th>거래처</th>
-			<td>${prod.buyer_name }</td>
+			<td>
+				<table>
+					<thead>
+						<tr>
+							<th>거래처코드</th>
+							<th>거래처명</th>
+							<th>담당자</th>
+							<th>연락처</th>
+							<th>소재지</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${prod.buyer.buyer_id }</td>
+							<td>${prod.buyer.buyer_name }</td>
+							<td>${prod.buyer.buyer_charger }</td>
+							<td>${prod.buyer.buyer_comtel }</td>
+							<td>${prod.buyer.buyer_add1 }</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
 		</tr>
 		<tr>
 			<th>구매가</th>
@@ -113,6 +134,40 @@
 				>상품 수정</button>
 			</td>
 		</tr>
+	</table>
+	<h4>구매 기록</h4>
+	<table>
+		<thead>
+			<tr>
+				<th>회원아이디</th>
+				<th>회원명</th>
+				<th>휴대폰</th>
+				<th>이메일</th>
+				<th>소재지</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:choose>
+				<c:when test="${not empty prod.memberList }">
+			<c:forEach items="${prod.memberList }" var="member">
+				<tr>
+					<td>${member.mem_id }</td>
+					<td>${member.mem_name }</td>
+					<td>${member.mem_hp }</td>
+					<td>${member.mem_mail }</td>
+					<td>${member.mem_add1 }</td>
+				</tr>
+			</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td colspan="5">
+							구매자가 없음.
+						</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
+		</tbody>
 	</table>
 </body>
 </html>

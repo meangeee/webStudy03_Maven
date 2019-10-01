@@ -3,6 +3,7 @@ package kr.or.ddit.member.dao;
 import java.util.List;
 
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 /**
  * 회원관리를 위한 Persistence Layer
  * CRUD
@@ -17,11 +18,13 @@ public interface IMemberDAO {
 	 */
 	public int insertMember(MemberVO member);
 	
+	public int selectMemberCount(PagingInfoVO<MemberVO> pagingVO);
 	/**
 	 * 회원 목록 조회
+	 * @param pagingVO TODO
 	 * @return 조건에 맞는 회원이 없는 경우, size()==0
 	 */
-	public List<MemberVO> selectMemberList();
+	public List<MemberVO> selectMemberList(PagingInfoVO pagingVO);
 	
 	/**
 	 * 회원 상세 조회

@@ -138,6 +138,39 @@
          </tr>
       </table>
    </form>
+   
+   <h4>구매기록</h4>
+   <table class="table table-bordered">
+   	<thead>
+   		<tr>
+   			<th>상품코드</th>
+   			<th>상품명</th>
+   			<th>상품분류</th>
+   			<th>거래처명</th>
+   			<th>구매가</th>
+   			<th>판매가</th>
+   		</tr>
+   	</thead>
+   	<tbody>
+   		<c:if test="${empty savedMember.prodList }">
+   			<tr>
+   				<td colspan="6">구매기록 없음. 쫌 사,,,</td>
+   			</tr>
+   		</c:if>
+   		<c:if test="${not empty savedMember.prodList }">
+			<c:forEach items="${savedMember.prodList }" var="prod">
+				<tr>
+					<td>${prod.prod_id }</td>
+					<td>${prod.prod_name }</td>
+					<td>${prod.lprod_nm }</td>
+					<td>${prod.buyer.buyer_name }</td>
+					<td>${prod.prod_cost }</td>
+					<td>${prod.prod_price }</td>
+				</tr>
+			</c:forEach>
+   		</c:if>
+   	</tbody>
+   </table>
    <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

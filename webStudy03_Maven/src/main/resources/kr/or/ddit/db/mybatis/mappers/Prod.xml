@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.ddit.prod.dao.IProdDAO">
-	<select id="selectProdList" resultType="ProdVO">
+
+	<select id="selectProdCount" resultType="int">
+		SELECT COUNT(PROD_ID)
+		FROM PROD
+	</select>
+
+	<select id="selectProdList" parameterType="PagingInfoVO"
+		resultType="ProdVO">
+		SELECT B.*
+		FROM
+		(
+		SELECT A.*, ROWNUM RNUM
+		FROM (
 		SELECT PROD_ID,
 		PROD_NAME, PROD_LGU,
 		PROD_BUYER, PROD_COST, PROD_PRICE,
-		PROD_MILEAGE
-		,
-		BUYER_NAME
-		, LPROD_NM
+		PROD_MILEAGE, BUYER_NAME, LPROD_NM
 		FROM PROD INNER JOIN LPROD ON (PROD_LGU =
 		LPROD_GU)
 		INNER JOIN BUYER ON (PROD_BUYER = BUYER_ID)
+		ORDER BY PROD_LGU DESC
+		) A
+		) B
+	<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+	]]>
 	</select>
-	<select id="selectProd" parameterType="string"
-		resultType="ProdVO">
-		SELECT
-		PROD_ID, PROD_NAME, PROD_LGU,
-		PROD_BUYER, PROD_COST,
-		PROD_PRICE,
-		PROD_SALE, PROD_OUTLINE, PROD_DETAIL,
-		PROD_IMG,
-		PROD_TOTALSTOCK, PROD_INSDATE,
-		PROD_PROPERSTOCK, PROD_SIZE, PROD_COLOR,
-		PROD_DELIVERY, PROD_UNIT, PROD_QTYIN,
-		PROD_QTYSALE, PROD_MILEAGE
-		,
-		LPROD_NM
-		, BUYER_NAME
-		FROM PROD INNER JOIN LPROD ON (PROD_LGU =
-		LPROD_GU)
-		INNER JOIN BUYER ON (PROD_BUYER = BUYER_ID)
-		WHERE PROD_ID =
-		#{prod_id}
-	</select>
+	<resultMap type="ProdVO" id="prodMap" autoMapping="true">
+		<id column="PROD_ID" property="prod_id"/>
+		
+		<collection property="memberList" 
+			javaType="java.util.List" ofType="MemberVO" autoMapping="true">
+			<id column="MEM_ID" property="mem_id"/>
+		</collection>
+	</resultMap>
+	<select id="selectProd" parameterType="string" resultMap="prodMap">
+      SELECT
+          PROD_ID,    PROD_NAME,    PROD_LGU,
+          PROD_BUYER,    PROD_COST,    PROD_PRICE,
+          PROD_SALE,    PROD_OUTLINE,    PROD_DETAIL,
+          PROD_IMG,    PROD_TOTALSTOCK,    PROD_INSDATE,
+          PROD_PROPERSTOCK,    PROD_SIZE,    PROD_COLOR,
+          PROD_DELIVERY,    PROD_UNIT,    PROD_QTYIN,
+          PROD_QTYSALE,    PROD_MILEAGE
+          , (SELECT LPROD_NM FROM LPROD WHERE LPROD_GU = PROD_LGU) LPROD_NM
+          , BUYER_NAME "buyer.buyer_name", BUYER_ID "buyer.buyer_id"
+          , BUYER_CHARGER "buyer.buyer_charger", BUYER_COMTEL "buyer.buyer_comtel"
+          , BUYER_ADD1 "buyer.buyer_add1"
+          , MEM_ID, MEM_NAME, MEM_HP, MEM_ADD1, MEM_MAIL
+      FROM PROD 
+              INNER JOIN   BUYER ON (PROD_BUYER = BUYER_ID)
+              LEFT OUTER JOIN (
+                 SELECT DISTINCT CART_PROD, MEM_ID, MEM_NAME, MEM_HP, MEM_ADD1, MEM_MAIL
+                  FROM CART INNER JOIN MEMBER ON (CART_MEMBER = MEM_ID)
+              ) ON (PROD_ID = CART_PROD)
+      WHERE PROD_ID = #{prod_id}
+   </select>
 	<update id="updateProd" parameterType="ProdVO">
 		UPDATE PROD
 		SET

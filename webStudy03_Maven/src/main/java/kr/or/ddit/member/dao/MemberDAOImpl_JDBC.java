@@ -10,6 +10,7 @@ import java.util.List;
 
 import kr.or.ddit.db.ConnectionFactory;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class MemberDAOImpl_JDBC implements IMemberDAO {
 	private static MemberDAOImpl_JDBC instance;
@@ -149,7 +150,7 @@ public class MemberDAOImpl_JDBC implements IMemberDAO {
 	}
 	
 	@Override
-	public List<MemberVO> selectMemberList() {
+	public List<MemberVO> selectMemberList(PagingInfoVO pagingVO) {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 
 		StringBuffer sql = new StringBuffer();

@@ -6,6 +6,7 @@ import kr.or.ddit.enums.ServiceResult;
 import kr.or.ddit.exception.CommonException;
 import kr.or.ddit.prod.dao.IProdDAO;
 import kr.or.ddit.prod.dao.ProdDAOImpl;
+import kr.or.ddit.vo.PagingInfoVO;
 import kr.or.ddit.vo.ProdVO;
 
 public class ProdServiceImpl implements IProdService {
@@ -22,12 +23,18 @@ public class ProdServiceImpl implements IProdService {
 		}
 		return result;
 	}
+	
+	@Override
+	public int retrievevProdCount(PagingInfoVO pagingVO) {
+		return dao.selectProdCount(pagingVO);
+	}
+	
 
 	@Override
-	public List<ProdVO> retrieveProdList() {
-		return dao.selectProdList();
+	public List<ProdVO> retrieveProdList(PagingInfoVO pagingVO) {
+		return dao.selectProdList(pagingVO);
 	}
-
+	
 	@Override
 	public ProdVO retrieveProd(String prod_id) {
 		ProdVO prod = dao.selectProd(prod_id);

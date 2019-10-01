@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import kr.or.ddit.db.mybatis.CustomSqlSessionFactoryBuilder;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class MemberDAOImpl implements IMemberDAO {
 	
@@ -27,14 +28,25 @@ public class MemberDAOImpl implements IMemberDAO {
 			return cnt;
 		}
 	}
-
+	
 	@Override
-	public List<MemberVO> selectMemberList() {
+	public int selectMemberCount(PagingInfoVO<MemberVO> pagingVO) {
+		try(
+				SqlSession sqlSession = SqlSessionFactory.openSession();
+			){
+				IMemberDAO mapper = sqlSession.getMapper(IMemberDAO.class);
+				return mapper.selectMemberCount(pagingVO);
+			}
+	}
+	
+	
+	@Override
+	public List<MemberVO> selectMemberList(PagingInfoVO pagingVO) {
 		try(
 			SqlSession sqlSession = SqlSessionFactory.openSession();
 		){
 			IMemberDAO mapper = sqlSession.getMapper(IMemberDAO.class);
-			return mapper.selectMemberList(); //아래코드보다 속도가 느리긴 함. 하지만 안정성이 높음
+			return mapper.selectMemberList(pagingVO); //아래코드보다 속도가 느리긴 함. 하지만 안정성이 높음
 //			return sqlSession.selectList("kr.or.ddit.member.dao.IMemberDAO.selectMemberList");
 		}
 	}

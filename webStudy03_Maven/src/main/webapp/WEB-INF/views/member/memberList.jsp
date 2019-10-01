@@ -38,6 +38,12 @@
 	</thead>
 	<tbody id="listBody">
 	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="6" id="pagingArea">
+			</td>
+		</tr>
+	</tfoot>
 </table>
 
 <!-- Modal -->
@@ -67,8 +73,13 @@
 
 <script type="text/javascript">
 	var listBody = $("#listBody");
+	var pagingArea = $("#pagingArea")
 	var listForm = $("#listForm");
 	var exampleModal = $("#exampleModal");
+	pagingArea.on("click", "a", function(){
+		let page = $(this).data("page");
+		paging(page);
+	});
 	exampleModal.on("hidden.bs.modal",function(){
 		$(this).find(".modal-body").remove("table");
 	});
@@ -91,35 +102,47 @@
 		});
 		return false;
 	});
-	$.ajax({
-// 		data : "",
-		dataType : "json", // REST 방식
-		success : function(resp) {
-			let trTags = [];
-			$(resp).each(function(index, member) {
-				let trTag = $("<tr>").append(
-								$("<td>").text(member.mem_id),
-								$("<td>").text(member.mem_name),
-								$("<td>").text(member.mem_hp),
-								$("<td>").text(member.mem_mail),
-								$("<td>").text(member.mem_add1),
-								$("<td>").text(member.mem_mileage)
-							).prop("id", member.mem_id);
-				trTags.push(trTag);
-			});
-			listBody.html(trTags);
-		},
-		error : function(errorResp) {
-			console.log(errorResp.status);
-		}
+	
+	
+	function paging(page){
+		if(page<1) return false;
+		
+		$.ajax({
+			data : "page="+page,
+			dataType : "json", // REST 방식
+			success : function(resp) {
+				let memberList = resp.dataList;
+				let trTags = [];
+				$(memberList).each(
+						function(index, member) {
+							let trTag = $("<tr>").append(
+									$("<td>").text(member.mem_id),
+									$("<td>").text(member.mem_name),
+									$("<td>").text(member.mem_hp),
+									$("<td>").text(member.mem_mail),
+									$("<td>").text(member.mem_add1),
+									$("<td>").text(member.mem_mileage)).prop(
+									"id", member.mem_id);
+							trTags.push(trTag);
+						});
+				listBody.html(trTags);
+				pagingArea.html(resp.pagingHTML);
+			},
+			error : function(errorResp) {
+				console.log(errorResp.status);
+			}
 
-	});
-	listBody.on("click", "tr" ,function(){
+		});
+	}
+
+	listBody.on("click", "tr", function() {
 		//상세정보 받기
 		let who = ($(this).prop("id"));
 		listForm.find("[name='who']").val(who);
 		listForm.submit();
 	});
+	
+	paging(1);
 </script>
 </body>
 </html>

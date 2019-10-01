@@ -9,9 +9,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.or.ddit.utils.ReflectionUtils;
 
 public class HandlerMapper implements IHandlerMapper{
+   private static Logger logger = LoggerFactory.getLogger(HandlerMapper.class);
+   
    public Map<URIMappingCondition, URIMappingInfo> handlerMap;
    
    public HandlerMapper(String[] basePackages) {
@@ -33,7 +38,7 @@ public class HandlerMapper implements IHandlerMapper{
                URIMappingCondition key =  new URIMappingCondition(mapping.value(), mapping.method());
                URIMappingInfo info = new URIMappingInfo(key, handler, mtd);
                handlerMap.put(key, info);
-               System.out.printf("%s 핸들러 : %s\n", key, info);
+               logger.info("{} 핸들러 : {}", key, info);
             }
          } catch (InstantiationException | IllegalAccessException e) {
             System.err.println(e.getMessage());

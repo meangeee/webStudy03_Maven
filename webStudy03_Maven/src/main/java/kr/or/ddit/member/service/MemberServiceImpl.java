@@ -9,6 +9,7 @@ import kr.or.ddit.member.dao.MemberDAOImpl_JDBC;
 import kr.or.ddit.member.exception.NotAuthenticatedException;
 import kr.or.ddit.member.exception.UserNotFoundException;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class MemberServiceImpl implements IMemberService {
 	// 결합력 최상. -> HCLC 지향 -> Factory Object pattern, Stategy pattern(DI)
@@ -60,8 +61,13 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public List<MemberVO> retrieveMemberList() {
-		return dao.selectMemberList();
+	public int retrievevMemberCount(PagingInfoVO<MemberVO> pagingVO) {
+		return dao.selectMemberCount(pagingVO);
+	}
+	
+	@Override
+	public List<MemberVO> retrieveMemberList(PagingInfoVO pagingVO) {
+		return dao.selectMemberList(pagingVO);
 	}
 
 	@Override

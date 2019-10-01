@@ -22,26 +22,46 @@
          #{mem_memorial}, #{mem_memorialday}, 2000
       )
    </insert>
+   
+   <select id="selectMemberCount" parameterType="PagingInfoVO" resultType="int">
+   	SELECT COUNT(MEM_ID)
+   	FROM MEMBER
+   </select>
+   
 	<select id="selectMemberList" resultType="MemberVO">
-	SELECT
-			MEM_ID, MEM_NAME, MEM_HP, 
+	SELECT A.*
+	FROM(
+		SELECT ROWNUM RNUM,
+			MEM_ID, MEM_NAME, MEM_HP,
 			MEM_MAIL, MEM_ADD1, MEM_MILEAGE
-	FROM MEMBER
+			FROM MEMBER
+		) A
+	WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
-	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
-		 SELECT                                                      
-		     MEM_ID,    MEM_PASS,    MEM_NAME,                       
-		     MEM_REGNO1,    MEM_REGNO2,                              
-		     TO_CHAR(MEM_BIR, 'YYYY-MM-DD') MEM_BIR,                 
-		     MEM_ZIP,    MEM_ADD1,    MEM_ADD2,                      
-		     MEM_HOMETEL,    MEM_COMTEL,    MEM_HP,                  
-		     MEM_MAIL,    MEM_JOB,    MEM_LIKE,                      
-		     MEM_MEMORIAL,                                           
-		     TO_CHAR(MEM_MEMORIALDAY, 'YYYY-MM-DD') MEM_MEMORIALDAY, 
-		     MEM_MILEAGE,                                            
-		     MEM_DELETE                                              
-		 FROM  MEMBER                      
-		 WHERE MEM_ID = #{mem_id} AND MEM_DELETE IS NULL 
+	<resultMap type="MemberVO" id="memberMap" autoMapping="true">
+		<id column="MEM_ID" property="mem_id"/>
+		<collection property="prodList" ofType="ProdVO" autoMapping="true">
+			<id column="PROD_ID" property="prod_id"/>
+			<association property="buyer" javaType="BuyerVO" autoMapping="true">
+				<id column="BUYER_ID" property="buyer_id"/>
+			</association>
+		</collection>
+	</resultMap>
+	<select id="selectMember" parameterType="MemberVO" resultMap="memberMap">
+		 SELECT  MEM_ID,    MEM_PASS,    MEM_NAME,                                      
+             MEM_REGNO1,    MEM_REGNO2,    TO_CHAR(MEM_BIR,'YYYY-MM-DD') MEM_BIR,   
+             MEM_ZIP,    MEM_ADD1,    MEM_ADD2,                                     
+             MEM_HOMETEL,    MEM_COMTEL,    MEM_HP,                                 
+             MEM_MAIL,    MEM_JOB,    MEM_LIKE,                                     
+             MEM_MEMORIAL,    TO_CHAR(MEM_MEMORIALDAY,'YYYY-MM-DD') MEM_MEMORIALDAY,
+             MEM_MILEAGE,    MEM_DELETE
+             , PROD_ID, PROD_NAME, PROD_COST, PROD_PRICE
+             , (SELECT LPROD_NM FROM LPROD WHERE LPROD_GU = PROD_LGU) LPROD_NM
+             , BUYER_ID, BUYER_NAME, BUYER_COMTEL                                      
+        FROM MEMBER LEFT OUTER JOIN CART ON (MEM_ID = CART_MEMBER)
+                 LEFT OUTER JOIN PROD ON (CART_PROD = PROD_ID) 
+                 LEFT OUTER JOIN BUYER ON (PROD_BUYER = BUYER_ID)                                                             
+      WHERE MEM_ID= #{mem_id} AND MEM_DELETE IS NULL
 	</select>
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE  MEMBER SET
