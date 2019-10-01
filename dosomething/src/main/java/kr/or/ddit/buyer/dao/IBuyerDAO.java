@@ -2,7 +2,11 @@ package kr.or.ddit.buyer.dao;
 
 import java.util.List;
 
-import kr.or.ddit.buyer.vo.BuyerVO;
+import kr.or.ddit.vo.BuyerVO;
+
+
+
+
 
 /**
  * Buyer 관리 Persistence Layer

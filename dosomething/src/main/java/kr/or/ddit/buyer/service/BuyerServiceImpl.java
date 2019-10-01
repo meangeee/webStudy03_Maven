@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.or.ddit.buyer.dao.BuyerDAOImpl;
 import kr.or.ddit.buyer.dao.IBuyerDAO;
-import kr.or.ddit.buyer.vo.BuyerVO;
+import kr.or.ddit.vo.BuyerVO;
 
 public class BuyerServiceImpl implements IBuyerService{
 

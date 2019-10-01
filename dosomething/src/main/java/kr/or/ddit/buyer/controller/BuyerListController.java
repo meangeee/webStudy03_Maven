@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.buyer.service.BuyerServiceImpl;
 import kr.or.ddit.buyer.service.IBuyerService;
-import kr.or.ddit.buyer.vo.BuyerVO;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.utils.MarshallingUtils;
+import kr.or.ddit.vo.BuyerVO;
 
 @CommandHandler
 public class BuyerListController{

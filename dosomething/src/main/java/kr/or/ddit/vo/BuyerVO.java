@@ -1,4 +1,6 @@
-package kr.or.ddit.buyer.vo;
+package kr.or.ddit.vo;
+
+
 
 public class BuyerVO {
 	private String buyer_id;

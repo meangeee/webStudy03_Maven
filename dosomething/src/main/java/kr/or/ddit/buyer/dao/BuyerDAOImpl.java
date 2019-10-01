@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.ddit.buyer.vo.BuyerVO;
 import kr.or.ddit.db.ConnectionFactory;
+import kr.or.ddit.vo.BuyerVO;
 
 public class BuyerDAOImpl implements IBuyerDAO {
 

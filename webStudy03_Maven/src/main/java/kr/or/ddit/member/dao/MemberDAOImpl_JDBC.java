@@ -242,4 +242,10 @@ public class MemberDAOImpl_JDBC implements IMemberDAO {
 		}
 	}
 
+	@Override
+	public int selectMemberCount(PagingInfoVO<MemberVO> pagingVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

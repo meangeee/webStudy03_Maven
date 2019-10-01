@@ -2,7 +2,8 @@ package kr.or.ddit.buyer.service;
 
 import java.util.List;
 
-import kr.or.ddit.buyer.vo.BuyerVO;
+import kr.or.ddit.vo.BuyerVO;
+
 
 /**
  * buyer관리를 위한 Business Logic Layer

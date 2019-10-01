@@ -1,9 +1,6 @@
 package kr.or.ddit.buyer.controller;
 
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +9,9 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import kr.or.ddit.buyer.service.BuyerServiceImpl;
 import kr.or.ddit.buyer.service.IBuyerService;
-import kr.or.ddit.buyer.vo.BuyerVO;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
+import kr.or.ddit.vo.BuyerVO;
 
 @CommandHandler
 public class BuyerInsertController {
