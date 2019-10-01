@@ -21,7 +21,22 @@
 			</tr>
 		</thead>
 
-		<tbody id="body">
+		<tbody>
+			<c:set var = "buyerList" value="${pagingVO.dataList }"/>
+			<c:forEach var="buyer" items="${buyerList }">
+				<c:url value="/buyer/detail" var="viewURL">
+					<c:param name="what" value="${buyer.buyer_id }"/>
+				</c:url>
+				<tr>
+					<td><a href="${viewURL}">${buyer.buyer_id }</a></td>
+					<td>${buyer.buyer_name }</td>
+					<td>${buyer.buyer_lgu }</td>
+					<td>${buyer.buyer_bankname }</td>
+					<td>${buyer.buyer_zip }</td>
+					<td>${buyer.buyer_add1 }</td>
+					<td>${buyer.buyer_mail }</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<br>
@@ -71,27 +86,27 @@
 
 
 	<script type="text/javascript">
-		var body = $('#body');
+// 		var body = $('#body');
 		
-		$.ajax({
-			dataType : "json",
-			success : function(resp) {
+// 		$.ajax({
+// 			dataType : "json",
+// 			success : function(resp) {
 				
-				code = "";
-				$(resp).each(function(i, v) {
-					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
-// 					alert(v.buyer_name);
-					code += "<tr>";
-					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
-					code += "</tr>";
-				});
-				      body.html(code);
-			},
-			error : function(errorResp) {
-				console.log(errorResp.stauts);
-			}
+// 				code = "";
+// 				$(resp).each(function(i, v) {
+// 					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
+// // 					alert(v.buyer_name);
+// 					code += "<tr>";
+// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
+// 					code += "</tr>";
+// 				});
+// 				      body.html(code);
+// 			},
+// 			error : function(errorResp) {
+// 				console.log(errorResp.stauts);
+// 			}
 			
-		});
+// 		});
 		//생성
 		var confirm = $('#confirm');
 		confirm.on('click', function(){
