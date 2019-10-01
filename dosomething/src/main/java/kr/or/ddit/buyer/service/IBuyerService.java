@@ -3,6 +3,7 @@ package kr.or.ddit.buyer.service;
 import java.util.List;
 
 import kr.or.ddit.vo.BuyerVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 
 /**
@@ -19,11 +20,15 @@ public interface IBuyerService {
  	 */
 	public int insertBuyer(BuyerVO buyer);
 	
+	
+	
+	public int retrieveBuyerCount(PagingInfoVO pagingVO);
 	/**
 	 * buyer 목록 조회
+	 * @param pagingVO TODO
 	 * @return 조건에 맞는 회원이 없는 경우, size()==0
 	 */
-	public List<BuyerVO> selectBuyerList();
+	public List<BuyerVO> selectBuyerList(PagingInfoVO pagingVO);
 	
 	/**
 	 * buyer 상세 목록 조회

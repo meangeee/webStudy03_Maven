@@ -3,6 +3,7 @@ package kr.or.ddit.buyer.dao;
 import java.util.List;
 
 import kr.or.ddit.vo.BuyerVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 
 
@@ -26,9 +27,10 @@ public interface IBuyerDAO {
 	
 	/**
 	 * buyer 목록 조회
+	 * @param pagingVO TODO
 	 * @return 조건에 맞는 회원이 없는 경우, size()==0
 	 */
-	public List<BuyerVO> selectBuyerList();
+	public List<BuyerVO> selectBuyerList(PagingInfoVO pagingVO);
 	
 	/**
 	 * buyer 상세 목록 조회
@@ -52,8 +54,7 @@ public interface IBuyerDAO {
 	public int deleteBuyer(BuyerVO buyer);
 	
 	
-	
-	
+	public int selectBuyerCount(PagingInfoVO pagingVO);
 	
 	
 	

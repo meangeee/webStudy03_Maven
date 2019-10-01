@@ -10,40 +10,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import kr.or.ddit.buyer.service.BuyerServiceImpl;
 import kr.or.ddit.buyer.service.IBuyerService;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.utils.MarshallingUtils;
 import kr.or.ddit.vo.BuyerVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 @CommandHandler
 public class BuyerListController{
 	//service가져오기
-	IBuyerService service = BuyerServiceImpl.getInstance();
+	IBuyerService service = new BuyerServiceImpl();
 	@URIMapping("/buyer/buyerList.do")
 	public String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//접속경로가져오기
-		String accept = req.getHeader("Accept");
-		//selectbuyerlist를 담은 list만들기
-		List<BuyerVO> list = service.selectBuyerList();
-		//header에 json이 있으면  ㅋ utf설정해주고 marshalling을 쓴다
-		if(accept.toLowerCase().contains("json")) {
-			resp.setContentType("application/json;charset=UTF-8");
-			
-			
-			String json = new MarshallingUtils().marshalling(list);
-			
-			//그것을 화면에 출력해준다
-			try(
-				PrintWriter out = resp.getWriter();
-				){
-				out.println(json);
-				}
-				return null;
-			}else {
-				String viewName = "buyer/buyerList";
-				return viewName;
+		String pageParam = req.getParameter("page");
+		int currentPage = 1;
+		if(StringUtils.isNumeric(pageParam)) {
+			currentPage = Integer.parseInt(pageParam);
 		}
+		PagingInfoVO<BuyerVO> pagingVO = new PagingInfoVO<>();
+		int totalRecord = service.retrieveBuyerCount(pagingVO);
+		pagingVO.setTotalRecord(totalRecord);
+		pagingVO.setCurrentPage(currentPage);
+		
+		List<BuyerVO> buyerList = service.selectBuyerList(pagingVO);
+		pagingVO.setDataList(buyerList);
+		req.setAttribute("pagingVO", pagingVO);
+		
+		return "buyer/buyerList";
 	}
 }

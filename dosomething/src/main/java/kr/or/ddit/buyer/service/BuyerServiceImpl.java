@@ -5,18 +5,11 @@ import java.util.List;
 import kr.or.ddit.buyer.dao.BuyerDAOImpl;
 import kr.or.ddit.buyer.dao.IBuyerDAO;
 import kr.or.ddit.vo.BuyerVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class BuyerServiceImpl implements IBuyerService{
-
-	//결합력이 최상,,그래도 일단 써보자
-	private IBuyerDAO dao = BuyerDAOImpl.getInstance();
-	//내자신
-	private static IBuyerService instance;
-	//singleton
-	public static IBuyerService getInstance() {
-		if(instance==null) instance = new BuyerServiceImpl();
-		return instance;
-	}
+	
+	IBuyerDAO dao = new BuyerDAOImpl();
 	
 	@Override
 	public int insertBuyer(BuyerVO buyer) {
@@ -24,8 +17,13 @@ public class BuyerServiceImpl implements IBuyerService{
 	}
 
 	@Override
-	public List<BuyerVO> selectBuyerList() {
-		return dao.selectBuyerList();
+	public int retrieveBuyerCount(PagingInfoVO pagingVO) {
+		return dao.selectBuyerCount(pagingVO);
+	}
+	
+	@Override
+	public List<BuyerVO> selectBuyerList(PagingInfoVO pagingVO) {
+		return dao.selectBuyerList(pagingVO);
 	}
 
 	@Override
@@ -42,5 +40,7 @@ public class BuyerServiceImpl implements IBuyerService{
 	public int deleteBuyer(BuyerVO buyer) {
 		return dao.deleteBuyer(buyer);
 	}
+
+
 
 }

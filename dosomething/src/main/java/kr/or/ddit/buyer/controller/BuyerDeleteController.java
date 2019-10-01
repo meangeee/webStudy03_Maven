@@ -11,7 +11,7 @@ import kr.or.ddit.vo.BuyerVO;
 
 @CommandHandler
 public class BuyerDeleteController {
-	IBuyerService service = BuyerServiceImpl.getInstance();
+	IBuyerService service = new BuyerServiceImpl();
 	@URIMapping("/buyer/buyerDelete.do")
 	public String doGet(HttpServletRequest req, HttpServletResponse resp) {
 		String bId = req.getParameter("id");

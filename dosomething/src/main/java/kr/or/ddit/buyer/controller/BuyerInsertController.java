@@ -15,7 +15,7 @@ import kr.or.ddit.vo.BuyerVO;
 
 @CommandHandler
 public class BuyerInsertController {
-	IBuyerService service = BuyerServiceImpl.getInstance();
+	IBuyerService service = new BuyerServiceImpl();
 	@URIMapping("/buyer/buyerInsert.do")
 	public String insertBuyer(HttpServletRequest req, HttpServletResponse resp) {
 		BuyerVO bv = new BuyerVO();

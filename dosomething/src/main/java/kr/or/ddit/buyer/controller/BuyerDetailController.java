@@ -19,7 +19,7 @@ import kr.or.ddit.vo.BuyerVO;
 @CommandHandler
 public class BuyerDetailController {
 
-	IBuyerService service = BuyerServiceImpl.getInstance();
+	IBuyerService service = new BuyerServiceImpl();
 
 	@URIMapping("/buyer/detail")
 	public String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
