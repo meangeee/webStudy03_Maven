@@ -74,17 +74,17 @@
 					<h4 class="modal-title">Modal Heading</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<form id="buyer_form">
+				<form id="buyer_form" method="post" enctype="multipart/form-data">
 					<!-- Modal body -->
 					<div class="modal-body">
-						BUYER_ID : <input id="bid" name="buyer_id" type="text"><br>
-						BUYER_NAME : <input id="bname" name="buyer_name" type="text"><br>
-						BUYER_LGU : <input id="blgu" name="buyer_lgu" type="text"><br>
-						BUYER_BANKNAME : <input id="bbank" name="buyer_bankname"
-							type="text"><br> BUYER_ZIP : <input id="bzip"
-							name="buyer_zip" type="text"><br> BUYER_ADD1 : <input
-							id="badd" name="buyer_add1" type="text"><br>
-						BUYER_MAIL : <input id="bmail" name="buyer_mail" type="text">
+						BUYER_ID : <input id="bid" name="buyer_id" type="text" /><br>
+						BUYER_NAME : <input id="bname" name="buyer_name" type="text" /><br>
+						BUYER_LGU : <input id="blgu" name="buyer_lgu" type="text" /><br>
+						BUYER_BANKNAME : <input id="bbank" name="buyer_bankname" type="text" /><br> 
+						BUYER_ZIP : <input id="bzip" name="buyer_zip" type="text" /><br> 
+						BUYER_ADD1 : <input id="badd" name="buyer_add1" type="text" /><br>
+						BUYER_MAIL : <input id="bmail" name="buyer_mail" type="text" /><br>
+						BUYER_IMG : <input type="file" name="buyer_image" accept="image/*" />
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
@@ -168,6 +168,7 @@
 			console.log(data);
 			$.ajax({
 				url : "${pageContext.request.contextPath }/buyer/buyerInsert.do",
+				method : "post",
 				data : data,
 				dataType: 'text',
 				success : function(resp){
@@ -235,7 +236,7 @@
 					code += "<td><input name='buyer_mail' type='text' value='"+resp.buyer_mail+"' ></td></tr>";
 					
 					code += "<tr><td>BUYER_IMG</td>";
-					code += "<td><input name='buyer_img' type='file' value='"+resp.buyer_img+"' ></td></tr>";
+					code += "<td><img src='${pageContext.request.contextPath}/buyerImages/${buyer.buyer_img}' /></td></tr>";
 					
 					code += "</table>"
 					code += "</form>"

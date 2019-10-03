@@ -127,7 +127,7 @@ public class ProdInsertController {
 		}
 		if (StringUtils.isBlank(prod.getProd_img())) {
 			valid = false;
-			errors.put("prod_img", "이미지경로? 누락");
+			errors.put("prod_img", "이미지 누락");
 		}
 		if (prod.getProd_totalstock()<=0) {
 			valid = false;

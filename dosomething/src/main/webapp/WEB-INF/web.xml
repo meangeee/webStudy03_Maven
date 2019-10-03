@@ -27,6 +27,7 @@
 			<param-name>basePackages</param-name>
 			<param-value>
         kr.or.ddit.buyer.controller
+        kr.or.ddit.common.controller
         </param-value>
 		</init-param>
 		<init-param>
@@ -95,3 +96,5 @@
 		<location>/error/error500.jsp</location>
 	</error-page>
 </web-app>
+
+

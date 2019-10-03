@@ -59,10 +59,10 @@
 	<insert id="insertBuyer" parameterType="BuyerVO">
 		INSERT INTO BUYER (BUYER_ID,           
 				BUYER_NAME, BUYER_LGU, BUYER_BANKNAME,
-				BUYER_ZIP, BUYER_ADD1 , BUYER_MAIL)
+				BUYER_ZIP, BUYER_ADD1 , BUYER_MAIL, BUYER_IMG)
 		 VALUES (#{buyer_id}, #{buyer_name}, #{buyer_lgu},
 		 		#{buyer_bankname}, #{buyer_zip}, 
-		 		#{buyer_add1}, #{buyer_mail})
+		 		#{buyer_add1}, #{buyer_mail}, #{buyer_img})
 	
 	</insert>
 	
@@ -74,7 +74,9 @@
 			BUYER_ZIP = #{buyer_zip},
 			BUYER_ADD1 = #{buyer_add1},
 			BUYER_MAIL = #{buyer_mail}
-			
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(buyer_img)">
+          	, BUYER_IMG      =   #{buyer_img}
+          </if>
 		WHERE BUYER_ID = #{buyer_id} 
 	</update>
 	
