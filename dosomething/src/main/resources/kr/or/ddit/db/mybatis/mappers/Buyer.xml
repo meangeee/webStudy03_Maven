@@ -51,7 +51,7 @@
 			 BUYER_ID, BUYER_NAME, BUYER_LGU, BUYER_BANK,      
 			 BUYER_BANKNAME, BUYER_ZIP,          
 		 	 BUYER_ADD1, BUYER_ADD2,             
-			 BUYER_MAIL
+			 BUYER_MAIL, BUYER_IMG
 		 FROM BUYER   
 		 WHERE BUYER_ID = #{buyer_id} 
 	</select>

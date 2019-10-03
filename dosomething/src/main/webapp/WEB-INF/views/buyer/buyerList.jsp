@@ -204,7 +204,7 @@
 //             code+="<td><input nam
             
 
-		body.on('click','td',function(){
+		body.on('click','tr',function(){
 			var id = $(this).prop("id");
 			$.ajax({
 				url : "${pageContext.request.contextPath }/buyer/detail",
@@ -233,6 +233,9 @@
 	
 					code += "<tr><td>BUYER_MAIL</td>";
 					code += "<td><input name='buyer_mail' type='text' value='"+resp.buyer_mail+"' ></td></tr>";
+					
+					code += "<tr><td>BUYER_IMG</td>";
+					code += "<td><input name='buyer_img' type='file' value='"+resp.buyer_img+"' ></td></tr>";
 					
 					code += "</table>"
 					code += "</form>"

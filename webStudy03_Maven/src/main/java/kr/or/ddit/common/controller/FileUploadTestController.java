@@ -29,14 +29,14 @@ public class FileUploadTestController {
       // <load-on-startup>1</load-on-startup>
        // <multipart-config></multipart-config>
       
-//      1. 저장위치(/prodImages)
+//    1. 저장위치(/prodImages)
       String saveFolderURL = "/prodImages";
       String saveFolderPath = req.getServletContext().getRealPath(saveFolderURL);
       File saveFolder = new File(saveFolderPath);
       if(!saveFolder.exists()) saveFolder.mkdirs(); // 파일이 없으면 만들기
       
-//      2. 저장명
-//      Content-Disposition: form-data; name="uploadFile"; filename=""
+//    2. 저장명
+//    Content-Disposition: form-data; name="uploadFile"; filename=""
       String header = filePart.getHeader("Content-Disposition");
       int firstIdx = header.indexOf("filename");
       int secondIdx = header.indexOf("=", firstIdx);
