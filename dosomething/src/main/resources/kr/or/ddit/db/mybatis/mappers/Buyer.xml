@@ -3,23 +3,29 @@
 <mapper namespace="kr.or.ddit.buyer.dao.IBuyerDAO">
 	
 	 <sql id="searchFrag">
-      <where>
-         <if test="searchVO!=null">
-            <if
-               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_id)">
-               BUYER_ID = #{searchVO.buyer_id}
-            </if>
-            <if
-               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_name)">
-               AND BUYER_NAME = #{searchVO.buyer_name}
-            </if>
-            <if
-               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_add1)">
-               AND INSTR (BUYER_ADD1, #{searchVO.buyer_add1}) > 0
-            </if>
-         </if>
-      </where>
-   </sql>
+  	<where>
+  		<if test="searchMap!=null">
+  			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchMap.searchWord)">
+  			<choose>
+  				<when test="'id'.equals(searchMap.searchType)">
+  					BUYER_ID = #{searchMap.searchWord}
+  				</when>
+  				<when test="'name'.equals(searchMap.searchType)">
+  					BUYER_NAME = #{searchMap.searchWord}
+  				</when>
+  				<when test="'addr'.equals(searchMap.searchType)">
+  					BUYER_ADD1 LIKE '%'||#{searchMap.searchWord}||'%'
+  				</when>
+  				<otherwise>
+  					BUYER_ID = #{searchMap.searchWord}
+  					OR BUYER_NAME = #{searchMap.searchWord}
+  					OR BUYER_ADD1 LIKE '%'||#{searchMap.searchWord}||'%'
+  				</otherwise>
+  			</choose>
+  			</if>
+  		</if>
+  	</where>
+  </sql>
 	
 	
 	<select id="selectBuyerCount" parameterType="PagingInfoVO" resultType="int">
@@ -32,7 +38,7 @@
 		SELECT A.*
 		FROM(
 			SELECT ROWNUM RNUM, BUYER_ID, 
-					BUYER_NAME
+					BUYER_NAME, BUYER_ADD1
 			FROM BUYER
 			<include refid="searchFrag"></include>
 			) A

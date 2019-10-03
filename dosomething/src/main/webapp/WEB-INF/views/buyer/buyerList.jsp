@@ -17,17 +17,24 @@
 
 </head>
 <body>
-	<form id="searchForm">
-		<input type="hidden" name="page" />
-		<input type="hidden" name="buyer_id" value="${pagingVO.searchVO.buyer_id }"/>
-		<input type="hidden" name="buyer_name" value="${pagingVO.searchVO.buyer_name }"/>
-		<input type="hidden" name="buyer_add1" value="${pagingVO.searchVO.buyer_add1 }"/>
-	</form>
 	
+	<form id="searchForm"> <!-- 입력 받기 위한 div -->
+		<input type="hidden" name="page" />
+		<select name ="searchType">
+			<option value>전체</option>
+			<option value="id">아이디</option>
+			<option value="name">이름</option>
+			<option value="addr">지역</option>
+		</select>
+		<input type="text" name="searchWord"/>
+		<input type="submit" value="검색"/>
+	</form>
 	<table>
 		<thead>
 			<tr>
-				<th>거래처 이름</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>지역</th>
 			</tr>
 		</thead>
 
@@ -36,12 +43,14 @@
 		<tfoot>
 			<tr>
 				<td>
-					<div id="detail"></div>
+					<div id="detail">
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="7">
-					<div id="pagingArea">${pagingVO.pagingHTML }</div>
+				<td colspan="3">
+					<div id="pagingArea">
+					</div>
 				</td>
 			</tr>
 		</tfoot>
@@ -60,17 +69,14 @@
 	<div class="modal" id="myModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
-
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Modal Heading</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<form id="buyer_form">
-
 					<!-- Modal body -->
 					<div class="modal-body">
-
 						BUYER_ID : <input id="bid" name="buyer_id" type="text"><br>
 						BUYER_NAME : <input id="bname" name="buyer_name" type="text"><br>
 						BUYER_LGU : <input id="blgu" name="buyer_lgu" type="text"><br>
@@ -79,9 +85,7 @@
 							name="buyer_zip" type="text"><br> BUYER_ADD1 : <input
 							id="badd" name="buyer_add1" type="text"><br>
 						BUYER_MAIL : <input id="bmail" name="buyer_mail" type="text">
-
 					</div>
-
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button id="confirm" type="button" class="btn btn-danger"
@@ -99,28 +103,63 @@
 		var body = $('#body');
 		var pagingArea = $("#pagingArea");
 		var pageTag = $("[name='page']");
+		var searchForm = $("#searchForm");
 		
-		$.ajax({
-			dataType : "json",
-			success : function(resp) {
-				
-				code = "";
-				$(resp).each(function(i, v) {
-					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
-// 					alert(v.buyer_name);
-					code += "<tr>";
-					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
-					code += "</tr>";
-				});
-				body.html(code);
-				pagingArea.html(resp.pagingHTML);
-				pageTag.val("1");
-			},
-			error : function(errorResp) {
-				console.log(errorResp.stauts);
-			}
+		searchForm.on("submit", function(event){
+			event.preventDefault();
+			var action = $(this).attr("action");
+			var method = $(this).attr("method");
+			var queryString = $(this).serialize();
 			
+			$.ajax({
+				data : queryString,
+				dataType : "json",
+				success : function(resp) {
+					let buyerList = resp.dataList; //VO에있는거
+					let trTags = [];
+					$(buyerList).each(function(index, buyer){
+						let trTag = $("<tr>").append(
+							$("<td>").text(buyer.buyer_id),		
+							$("<td>").text(buyer.buyer_name),		
+							$("<td>").text(buyer.buyer_add1)		
+						).prop("id", buyer.buyer_id);
+						trTags.push(trTag);
+					});
+					body.html(trTags);
+					pagingArea.html(resp.pagingHTML);
+					pageTag.val("1");
+				},
+				error : function(errorResp) {
+					console.log(errorResp.status);
+				}
+			});
+			return false;
 		});
+		
+		//list뽑기
+// 		$.ajax({
+// 			dataType : "json",
+// 			success : function(resp) {
+				
+// 				code = "";
+// 				$(resp).each(function(i, v) {
+// 					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
+// // 					alert(v.buyer_name);
+// 					code += "<tr>";
+// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_id + "</td>";
+// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
+// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_add1 + "</td>";
+// 					code += "</tr>";
+// 				});
+// 				body.html(code);
+// 				pagingArea.html(resp.pagingHTML);
+// 				pageTag.val("1");
+// 			},
+// 			error : function(errorResp) {
+// 				console.log(errorResp.stauts);
+// 			}
+			
+// 		});
 		
 		//생성
 		var confirm = $('#confirm');
@@ -244,36 +283,18 @@
 			})	
 		})
 		
+		function paging(page){
+			if(page<1) return false;
+			pageTag.val(page);
+			searchForm.submit();
+		}
 		
 		pagingArea.on("click", "a", function(){
 			let page = $(this).data("page");
 			paging(page);
 		});
 		
-		
-		//페이징
-// 		$("#pagingArea").on("click", function(){
-// 			let page = $(this.)data("page");
-// 			$.ajax({
-// 				url : "",
-// 				method : "",
-// 				data : "",
-// 				dataType : "",
-// 				success : function(resp) {
-
-// 				},
-// 				error : function(errorResp) {
-// 					console.log(errorResp.status);
-// 				}
-// 			});
-			
-// 		})
-		
-		function paging(page){
-			if(page<1) return false;
-			pageTag.val(page);
-			searchForm.submit();
-		}
+		paging(1);
 	</script>
 
 </body>
