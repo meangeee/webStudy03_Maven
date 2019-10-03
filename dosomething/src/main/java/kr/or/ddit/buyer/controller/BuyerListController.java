@@ -32,7 +32,7 @@ public class BuyerListController{
 		if(StringUtils.isNumeric(pageParam)) {
 			currentPage = Integer.parseInt(pageParam);
 		}
-		PagingInfoVO<BuyerVO> pagingVO = new PagingInfoVO<>();
+		PagingInfoVO<BuyerVO> pagingVO = new PagingInfoVO<>(5, 2);
 		int totalRecord = service.retrieveBuyerCount(pagingVO);
 		pagingVO.setTotalRecord(totalRecord);
 		pagingVO.setCurrentPage(currentPage);

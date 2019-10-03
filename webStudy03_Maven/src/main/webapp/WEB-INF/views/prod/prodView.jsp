@@ -81,8 +81,8 @@
 			<td>${prod.prod_detail }</td>
 		</tr>
 		<tr>
-			<th>이미지경로?</th>
-			<td>${prod.prod_img }</td>
+			<th>이미지</th>
+			<td><img src="${pageContext.request.contextPath }/prodImages/${prod.prod_img }" /></td>
 		</tr>
 		<tr>
 			<th>상품재고</th>
@@ -129,7 +129,7 @@
 				<c:url value="/prod/prodUpdate.do" var="updateURL">
 					<c:param name="what" value="${prod.prod_id }"/>
 				</c:url>
-				<button type="button"
+				<button type="button" class="btn btn-info"
 					onclick="location.href='${updateURL}';"
 				>상품 수정</button>
 			</td>
@@ -149,20 +149,20 @@
 		<tbody>
 			<c:choose>
 				<c:when test="${not empty prod.memberList }">
-			<c:forEach items="${prod.memberList }" var="member">
-				<tr>
-					<td>${member.mem_id }</td>
-					<td>${member.mem_name }</td>
-					<td>${member.mem_hp }</td>
-					<td>${member.mem_mail }</td>
-					<td>${member.mem_add1 }</td>
-				</tr>
-			</c:forEach>
+					<c:forEach items="${prod.memberList }" var="member">
+						<tr>
+							<td>${member.mem_id }</td>
+							<td>${member.mem_name }</td>
+							<td>${member.mem_hp }</td>
+							<td>${member.mem_mail }</td>
+							<td>${member.mem_add1 }</td>
+						</tr>
+					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<tr>
 						<td colspan="5">
-							구매자가 없음.
+							구매자가 없음. 안팔려...
 						</td>
 					</tr>
 				</c:otherwise>

@@ -26,7 +26,7 @@ public interface IMemberService {
 	 */
 	public MemberVO retrieveMember(MemberVO member);
 	
-	public int retrievevMemberCount(PagingInfoVO<MemberVO> pagingVO);
+	public int retrieveMemberCount(PagingInfoVO<MemberVO> pagingVO);
 	/**
 	 * 목록조회
 	 * @param pagingVO TODO

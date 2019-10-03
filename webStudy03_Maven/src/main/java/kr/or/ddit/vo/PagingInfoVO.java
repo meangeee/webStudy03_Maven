@@ -1,6 +1,7 @@
 package kr.or.ddit.vo;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class PagingInfoVO<T> {
 	private int totalRecord;
 	private int totalPage;
-	private int screenSize = 10;
+	private int screenSize = 5;
 	private int blockSize = 5;
 	private int currentPage = 1;
 	private int startRow;
@@ -21,7 +22,9 @@ public class PagingInfoVO<T> {
 	private int endPage;
 	private String pagingHTML;
 	private List<T> dataList;
-
+	private T searchVO;
+	private Map<String, Object> searchMap;
+	
 	public PagingInfoVO(int screenSize, int blockSize) {
 		super();
 		this.screenSize = screenSize;

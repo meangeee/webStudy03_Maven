@@ -6,13 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
+	<form id="searchForm">
+		<input type="hidden" name="page" />
+		<input type="hidden" name="buyer_id" value="${pagingVO.searchVO.buyer_id }"/>
+		<input type="hidden" name="buyer_name" value="${pagingVO.searchVO.buyer_name }"/>
+		<input type="hidden" name="buyer_add1" value="${pagingVO.searchVO.buyer_add1 }"/>
+	</form>
+	
 	<table>
 		<thead>
 			<tr>
@@ -23,67 +34,71 @@
 		<tbody id="body">
 		</tbody>
 		<tfoot>
-		<tr>
-			<td>
-				<div id="detail"></div>
-			</td>
-		</tr>
-      	<tr>
-         	<td colspan="7">
-            <div id="pagingArea">
-            ${pagingVO.pagingHTML }
-         	</div>
-         	</td>
-      	</tr>
-   		</tfoot>
+			<tr>
+				<td>
+					<div id="detail"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="7">
+					<div id="pagingArea">${pagingVO.pagingHTML }</div>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 	<br>
 	<br>
 	<hr>
 	<br>
 	<br>
-<button id="insert" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">생성</button>
+	<button id="insert" type="button" class="btn btn-primary"
+		data-toggle="modal" data-target="#myModal">생성</button>
 	<button id="modify" type="button">수정</button>
 	<button id="deleteBtn" type="button">삭제</button>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-<form id="buyer_form">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<form id="buyer_form">
 
-      <!-- Modal body -->
-      <div class="modal-body">
-      
-        BUYER_ID : <input id="bid" name="buyer_id" type="text"><br>
-        BUYER_NAME : <input id="bname" name="buyer_name" type="text"><br>
-        BUYER_LGU : <input id="blgu" name="buyer_lgu" type="text"><br>
-        BUYER_BANKNAME : <input id="bbank" name="buyer_bankname" type="text"><br>
-        BUYER_ZIP : <input id="bzip" name="buyer_zip" type="text"><br>
-        BUYER_ADD1 : <input id="badd" name="buyer_add1" type="text"><br>
-        BUYER_MAIL : <input id="bmail" name="buyer_mail" type="text">
-      
-      </div>
+					<!-- Modal body -->
+					<div class="modal-body">
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button id="confirm" type="button" class="btn btn-danger" data-dismiss="modal">submit</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-  </form>
-    </div>
-  </div>
-</div>
+						BUYER_ID : <input id="bid" name="buyer_id" type="text"><br>
+						BUYER_NAME : <input id="bname" name="buyer_name" type="text"><br>
+						BUYER_LGU : <input id="blgu" name="buyer_lgu" type="text"><br>
+						BUYER_BANKNAME : <input id="bbank" name="buyer_bankname"
+							type="text"><br> BUYER_ZIP : <input id="bzip"
+							name="buyer_zip" type="text"><br> BUYER_ADD1 : <input
+							id="badd" name="buyer_add1" type="text"><br>
+						BUYER_MAIL : <input id="bmail" name="buyer_mail" type="text">
+
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button id="confirm" type="button" class="btn btn-danger"
+							data-dismiss="modal">submit</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
 	<script type="text/javascript">
+	
 		var body = $('#body');
+		var pagingArea = $("#pagingArea");
+		var pageTag = $("[name='page']");
 		
 		$.ajax({
 			dataType : "json",
@@ -97,13 +112,16 @@
 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
 					code += "</tr>";
 				});
-				      body.html(code);
+				body.html(code);
+				pagingArea.html(resp.pagingHTML);
+				pageTag.val("1");
 			},
 			error : function(errorResp) {
 				console.log(errorResp.stauts);
 			}
 			
 		});
+		
 		//생성
 		var confirm = $('#confirm');
 		confirm.on('click', function(){
@@ -226,6 +244,36 @@
 			})	
 		})
 		
+		
+		pagingArea.on("click", "a", function(){
+			let page = $(this).data("page");
+			paging(page);
+		});
+		
+		
+		//페이징
+// 		$("#pagingArea").on("click", function(){
+// 			let page = $(this.)data("page");
+// 			$.ajax({
+// 				url : "",
+// 				method : "",
+// 				data : "",
+// 				dataType : "",
+// 				success : function(resp) {
+
+// 				},
+// 				error : function(errorResp) {
+// 					console.log(errorResp.status);
+// 				}
+// 			});
+			
+// 		})
+		
+		function paging(page){
+			if(page<1) return false;
+			pageTag.val(page);
+			searchForm.submit();
+		}
 	</script>
 
 </body>

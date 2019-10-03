@@ -17,36 +17,35 @@ import kr.or.ddit.vo.BuyerVO;
 
 @CommandHandler
 public class OthersController {
-	IOthersDAO othersDAO = new OthersDAOImpl();	
-	
-	@URIMapping("/prod/getLprodList.do")
-	public String getLprodListForAjax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		List<Map<String, Object>> lprodList = othersDAO.selectLprodList();
-		resp.setContentType("application/json;charset=UTF-8");
-		String json = new MarshallingUtils().marshalling(lprodList);
-		try(
-			PrintWriter out = resp.getWriter();
-		){
-			out.println(json);
-		}
-		return null;
-	}
-	
-	@URIMapping("/prod/getBuyerList.do")
-	public String getBuyerListForAjax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		List<BuyerVO> buyerList = othersDAO.selectBuyerList(null);
-		resp.setContentType("application/json;charset=UTF-8");
-		String json = new MarshallingUtils().marshalling(buyerList);
-		try(
-			PrintWriter out = resp.getWriter();
-		){
-			out.println(json);
-		}
-		return null;
-	}
+   IOthersDAO othersDAO = new OthersDAOImpl();   
+   
+   @URIMapping("/prod/getLprodList.do")
+   public String getLprodListForAjax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+      List<Map<String, Object>> lprodList = othersDAO.selectLprodList();
+      resp.setContentType("application/json;charset=UTF-8");
+      String json = new MarshallingUtils().marshalling(lprodList);
+      try(
+         PrintWriter out = resp.getWriter();
+      ){
+         out.println(json);
+      }
+      return null;
+   }
+   
+   @URIMapping("/prod/getBuyerList.do")
+   public String getBuyerListForAjax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+     String lgu = req.getParameter("prod_lgu");
+      List<BuyerVO> buyerList = othersDAO.selectBuyerList(lgu);
+      resp.setContentType("application/json;charset=UTF-8");
+      String json = new MarshallingUtils().marshalling(buyerList);
+      try(
+         PrintWriter out = resp.getWriter();
+      ){
+         out.println(json);
+      }
+      return null;
+   }
 }
-
-
 
 
 

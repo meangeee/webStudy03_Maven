@@ -2,15 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.buyer.dao.IBuyerDAO">
 	
-	<select id="selectBuyerCount" resultType="int">
+	 <sql id="searchFrag">
+      <where>
+         <if test="searchVO!=null">
+            <if
+               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_id)">
+               BUYER_ID = #{searchVO.buyer_id}
+            </if>
+            <if
+               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_name)">
+               AND BUYER_NAME = #{searchVO.buyer_name}
+            </if>
+            <if
+               test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchVO.buyer_add1)">
+               AND INSTR (BUYER_ADD1, #{searchVO.buyer_add1}) > 0
+            </if>
+         </if>
+      </where>
+   </sql>
+	
+	
+	<select id="selectBuyerCount" parameterType="PagingInfoVO" resultType="int">
 		SELECT COUNT(BUYER_ID)
 		FROM BUYER
+		<include refid="searchFrag"></include>
 	</select>
+	
 	<select id="selectBuyerList" resultType="BuyerVO">
-		SELECT
-			BUYER_ID, 
-			BUYER_NAME
-		FROM BUYER
+		SELECT A.*
+		FROM(
+			SELECT ROWNUM RNUM, BUYER_ID, 
+					BUYER_NAME
+			FROM BUYER
+			<include refid="searchFrag"></include>
+			) A
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow} 
 	</select>
 
 	<select id="selectBuyer" parameterType="String"

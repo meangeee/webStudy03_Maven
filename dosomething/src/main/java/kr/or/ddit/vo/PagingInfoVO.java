@@ -21,6 +21,7 @@ public class PagingInfoVO<T> {
 	private int endPage;
 	private String pagingHTML;
 	private List<T> dataList;
+	private T searchVO;
 
 	public PagingInfoVO(int screenSize, int blockSize) {
 		super();
@@ -68,6 +69,7 @@ public class PagingInfoVO<T> {
 	      html.append("</ul>");
 	      html.append("</nav>");
 	      pagingHTML = html.toString();
+	      
 	      return pagingHTML;
 	   }
 }

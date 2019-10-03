@@ -2,11 +2,11 @@ package kr.or.ddit.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,22 +24,29 @@ import kr.or.ddit.vo.PagingInfoVO;
 @CommandHandler
 public class MemberListController{ // Plain Old Java Object
 	IMemberService service = MemberServiceImpl.getInstance();
-	
+
 	@URIMapping(value="/member/memberList.do", method=HttpMethod.GET)
-	public String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String memberList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pageParam = req.getParameter("page");
+		String searchType = req.getParameter("searchType");
+		String searchWord = req.getParameter("searchWord");
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("searchType", searchType);
+		searchMap.put("searchWord", searchWord);
+		
 		int currentPage = 1;
 		if(StringUtils.isNumeric(pageParam)) {
 			currentPage = Integer.parseInt(pageParam);
 		}
-		//동기 요청과 비동기 요청을 구분하여 응답 데이터를 요청한다
 		String accept = req.getHeader("Accept");
 		PagingInfoVO<MemberVO> pagingVO = new PagingInfoVO<MemberVO>(5, 3);
-		int totalRecord = service.retrievevMemberCount(pagingVO); //totalRecord와 page가 결정
+		pagingVO.setSearchMap(searchMap);
+		int totalRecord = service.retrieveMemberCount(pagingVO);
 		pagingVO.setTotalRecord(totalRecord);
 		pagingVO.setCurrentPage(currentPage);
 		List<MemberVO> list = service.retrieveMemberList(pagingVO);
 		pagingVO.setDataList(list);
+		
 		if(accept.toLowerCase().contains("json")) {
 			resp.setContentType("application/json;charset=UTF-8");
 			
@@ -59,6 +66,17 @@ public class MemberListController{ // Plain Old Java Object
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

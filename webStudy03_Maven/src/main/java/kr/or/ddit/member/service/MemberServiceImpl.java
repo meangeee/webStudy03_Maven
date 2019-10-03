@@ -61,7 +61,7 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public int retrievevMemberCount(PagingInfoVO<MemberVO> pagingVO) {
+	public int retrieveMemberCount(PagingInfoVO<MemberVO> pagingVO) {
 		return dao.selectMemberCount(pagingVO);
 	}
 	

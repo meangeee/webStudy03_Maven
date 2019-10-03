@@ -1,11 +1,15 @@
 package kr.or.ddit.prod.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
@@ -17,20 +21,30 @@ import kr.or.ddit.vo.ProdVO;
 @CommandHandler
 // POJO
 public class ProdListController {
+	private static Logger logger = LoggerFactory.getLogger(ProdListController.class);
 	IProdService service = new ProdServiceImpl();
-	
+
 	@URIMapping("/prod/prodList.do")
 	public String prodList(HttpServletRequest req, HttpServletResponse resp) {
+		ProdVO searchVO = new ProdVO();
+		try {
+			BeanUtils.populate(searchVO, req.getParameterMap());
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			logger.error("검색 중 예외 발생", e);
+		}
+		
+		
 		String pageParam = req.getParameter("page");
 		int currentPage = 1;
-		if(StringUtils.isNumeric(pageParam)) {
+		if (StringUtils.isNumeric(pageParam)) {
 			currentPage = Integer.parseInt(pageParam);
 		}
-		PagingInfoVO<ProdVO> pagingVO = new PagingInfoVO<>();
+		PagingInfoVO<ProdVO> pagingVO = new PagingInfoVO<>(5, 3);
+		pagingVO.setSearchVO(searchVO);
 		int totalRecord = service.retrievevProdCount(pagingVO);
 		pagingVO.setTotalRecord(totalRecord);
 		pagingVO.setCurrentPage(currentPage);
-		
+
 		List<ProdVO> prodList = service.retrieveProdList(pagingVO);
 		pagingVO.setDataList(prodList);
 		req.setAttribute("pagingVO", pagingVO);
@@ -38,19 +52,3 @@ public class ProdListController {
 		return "prod/prodList";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
