@@ -1,6 +1,8 @@
 package kr.or.ddit.member.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import kr.or.ddit.enums.ServiceResult;
@@ -21,6 +25,8 @@ import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.HttpMethod;
 import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.wrapper.MultipartRequestWrapper;
+import kr.or.ddit.wrapper.PartWrapper;
 
 @CommandHandler
 public class MemberInsertController{
@@ -64,6 +70,16 @@ public class MemberInsertController{
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
+		
+		
+		if(req instanceof MultipartRequestWrapper) {
+			PartWrapper partWrapper = ((MultipartRequestWrapper) req).getPartWrapper("mem_image");
+			if(partWrapper!=null) {
+				member.setMem_img(partWrapper.getBytes());
+			}
+		}
+			
+		
 		//검증 여러개가 안될 수 있으니까
 		Map<String, String> errors = new HashMap<String, String>();
 		//통과 또 안될 수 있으니까

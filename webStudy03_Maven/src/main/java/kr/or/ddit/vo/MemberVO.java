@@ -1,6 +1,7 @@
 package kr.or.ddit.vo;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.List;
 
 import lombok.Data;
@@ -43,7 +44,14 @@ public class MemberVO implements Serializable {
 	private Integer mem_mileage;
 	private String mem_delete;
 	private List<ProdVO> prodList;
+	private byte[] mem_img;
 	
+	public String getMem_imageBase64() {
+		if(mem_img==null) return null;
+		return Base64.getEncoder().encodeToString(mem_img);
+	}
+	
+	private String mem_role;
 	
 	@Override
 	public int hashCode() {

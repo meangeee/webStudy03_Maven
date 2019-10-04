@@ -74,7 +74,7 @@
 					<h4 class="modal-title">Modal Heading</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<form id="buyer_form" method="post" enctype="multipart/form-data">
+				<form id="buyer_form" method="post">
 					<!-- Modal body -->
 					<div class="modal-body">
 						BUYER_ID : <input id="bid" name="buyer_id" type="text" /><br>
@@ -171,6 +171,9 @@
 				method : "post",
 				data : data,
 				dataType: 'text',
+				contentType : false,
+	            processData : false,
+	            enctype: 'multipart/form-data',
 				success : function(resp){
 					alert ("글쓰기 성공");
 					$('#mymodal').modal('hide');
@@ -236,7 +239,7 @@
 					code += "<td><input name='buyer_mail' type='text' value='"+resp.buyer_mail+"' ></td></tr>";
 					
 					code += "<tr><td>BUYER_IMG</td>";
-					code += "<td><img src='${pageContext.request.contextPath}/buyerImages/${buyer.buyer_img}' /></td></tr>";
+					code += "<td><img src=${pageContext.request.contextPath}/buyerImages/${buyer.buyer_img}' /></td></tr>";
 					
 					code += "</table>"
 					code += "</form>"

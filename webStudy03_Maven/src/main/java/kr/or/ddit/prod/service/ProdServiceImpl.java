@@ -16,14 +16,17 @@ public class ProdServiceImpl implements IProdService {
 	@Override
 	public ServiceResult createProd(ProdVO prod) {
 		ServiceResult result = null;
-		if(dao.insertProd(prod)==0) {
+		if (dao.insertProd(prod) == 0) {
 			int cnt = dao.insertProd(prod);
-			if(cnt > 0) result = ServiceResult.OK;
-			else result = ServiceResult.FAILED;
+			if (cnt > 0) {
+				result = ServiceResult.OK;
+			} else {
+				result = ServiceResult.FAILED;
+			}
 		}
 		return result;
 	}
-	
+
 	@Override
 	public int retrievevProdCount(PagingInfoVO pagingVO) {
 		return dao.selectProdCount(pagingVO);

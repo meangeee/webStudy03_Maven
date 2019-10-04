@@ -11,17 +11,62 @@
   </welcome-file-list>
   <context-param>
     <param-name>service</param-name>
-    <param-value>/kr/or/ddit/servlet05/service.xml</param-value>
+    <param-value>/kr/or/ddit/db/servlet05/service.xml</param-value>
   </context-param>
+  
+  <listener>
+  	<listener-class>kr.or.ddit.listener.SampleTestListener</listener-class>
+  </listener>
+  
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>kr.or.ddit.filter.AuthenticationFilter</filter-class>
+    <init-param>
+      <param-name>securedPath</param-name>
+      <param-value>/kr/or/ddit/sercuredService.xml</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>AuthorizationFilter</filter-name>
+    <filter-class>kr.or.ddit.filter.AuthorizationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthorizationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>kr.or.ddit.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>MultipartRequestCheckFilter</filter-name>
+    <filter-class>kr.or.ddit.filter.MultipartRequestCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MultipartRequestCheckFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>kr.or.ddit.mvc.FrontController</servlet-class>
     <init-param>
       <param-name>basePackages</param-name>
       <param-value>
-           kr.or.ddit.member.controller
-           kr.or.ddit.common.controller
-           kr.or.ddit.prod.controller
+        kr.or.ddit.member.controller
+        kr.or.ddit.common.controller
+        kr.or.ddit.prod.controller
         </param-value>
     </init-param>
     <init-param>
@@ -33,10 +78,11 @@
       <param-value>.jsp</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
-    <multipart-config></multipart-config>
+    <multipart-config/>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
+    <url-pattern>/member/*</url-pattern>
     <url-pattern>/buyer/*</url-pattern>
     <url-pattern>/mypage</url-pattern>
     <url-pattern>/login</url-pattern>
@@ -57,9 +103,9 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ImageServlet</servlet-name>
-    <servlet-class>kr.or.ddit.servlet01.A07_ImageServlet</servlet-class>
+    <servlet-class>kr.or.ddit.servlet01.ImageServlet</servlet-class>
     <init-param>
-      <param-name>image</param-name>
+      <param-name>imgFolderPath</param-name>
       <param-value>d:/contents</param-value>
     </init-param>
   </servlet>
@@ -73,9 +119,5 @@
   <error-page>
     <exception-type>java.lang.NullPointerException</exception-type>
     <location>/error/errorNullPoint.jsp</location>
-  </error-page>
-  <error-page>
-    <error-code>500</error-code>
-    <location>/error/error500.jsp</location>
   </error-page>
 </web-app>
