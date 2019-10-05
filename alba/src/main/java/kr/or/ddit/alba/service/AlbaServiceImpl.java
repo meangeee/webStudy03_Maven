@@ -2,12 +2,14 @@ package kr.or.ddit.alba.service;
 
 import java.util.List;
 
+import kr.or.ddit.alba.dao.AlbaDAOImpl;
+import kr.or.ddit.alba.dao.IAlbaDAO;
 import kr.or.ddit.vo.AlbaVO;
 
 public class AlbaServiceImpl implements IAlbaService {
 	
-	private IAlbaService dao = new AlbaServiceImpl();
-	//로직 재활용
+	private IAlbaDAO dao = new AlbaDAOImpl();
+	
 	private static IAlbaService instance;
 	
 	public static IAlbaService getInstance() {
@@ -17,14 +19,12 @@ public class AlbaServiceImpl implements IAlbaService {
 	
 	@Override
 	public List<AlbaVO> retrieveAlbaList() {
-		
-		return dao.retrieveAlbaList();
+		return dao.selectAlbaList();
 	}
 
 	@Override
-	public AlbaVO retrieveAlba(AlbaVO alba) {
-		// TODO Auto-generated method stub
-		return null;
+	public AlbaVO retrieveAlba(String alba_id) {
+		return dao.selectAlba(alba_id);
 	}
 
 	@Override

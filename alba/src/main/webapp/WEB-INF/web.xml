@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>webStudy03_Maven</display-name>
+  <display-name>albaproject</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,64 +9,13 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <context-param>
-    <param-name>service</param-name>
-    <param-value>/kr/or/ddit/db/servlet05/service.xml</param-value>
-  </context-param>
-  
-  <listener>
-  	<listener-class>kr.or.ddit.listener.SampleTestListener</listener-class>
-  </listener>
-  
-  <filter>
-    <filter-name>AuthenticationFilter</filter-name>
-    <filter-class>kr.or.ddit.filter.AuthenticationFilter</filter-class>
-    <init-param>
-      <param-name>securedPath</param-name>
-      <param-value>/kr/or/ddit/sercuredService.xml</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthenticationFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>AuthorizationFilter</filter-name>
-    <filter-class>kr.or.ddit.filter.AuthorizationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthorizationFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>kr.or.ddit.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>MultipartRequestCheckFilter</filter-name>
-    <filter-class>kr.or.ddit.filter.MultipartRequestCheckFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>MultipartRequestCheckFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>kr.or.ddit.mvc.FrontController</servlet-class>
     <init-param>
       <param-name>basePackages</param-name>
       <param-value>
-        kr.or.ddit.member.controller
-        kr.or.ddit.common.controller
-        kr.or.ddit.prod.controller
+        kr.or.ddit.alba.controller
         </param-value>
     </init-param>
     <init-param>
@@ -89,19 +38,6 @@
     <url-pattern>/logout</url-pattern>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>DescriptionServlet</servlet-name>
-    <servlet-class>kr.or.ddit.servlet01.DescriptionServlet</servlet-class>
-    <init-param>
-      <param-name>param</param-name>
-      <param-value>value</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DescriptionServlet</servlet-name>
-    <url-pattern>/desc</url-pattern>
-  </servlet-mapping>
-  
   <session-config>
     <session-timeout>2</session-timeout>
   </session-config>

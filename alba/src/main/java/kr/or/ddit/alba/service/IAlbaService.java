@@ -8,7 +8,7 @@ public interface IAlbaService {
 
 	public List<AlbaVO> retrieveAlbaList();
 	
-	public AlbaVO retrieveAlba(AlbaVO alba);
+	public AlbaVO retrieveAlba(String alba_id);
 	
 	public int createAlba(AlbaVO alba);
 	

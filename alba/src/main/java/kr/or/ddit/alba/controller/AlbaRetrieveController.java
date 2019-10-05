@@ -1,42 +1,42 @@
 package kr.or.ddit.alba.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import kr.or.ddit.alba.service.AlbaServiceImpl;
 import kr.or.ddit.alba.service.IAlbaService;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
-import kr.or.ddit.utils.MarshallingUtils;
 import kr.or.ddit.vo.AlbaVO;
 
 @CommandHandler
 public class AlbaRetrieveController {
 	IAlbaService service = AlbaServiceImpl.getInstance();
+
 	@URIMapping("/alba/albaList.do")
 	public String selcectAlbaList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-	
-		String accept = req.getHeader("Accpet");
 		List<AlbaVO> list = service.retrieveAlbaList();
+		req.setAttribute("list", list);
+		return "alba/albaList";
 		
-		if(accept.toLowerCase().contains("json")) {
-			resp.setContentType("application/json;charset=UTF-8");
-			String json = new MarshallingUtils()
-								.marshalling(list);
-			
-			try(
-				PrintWriter out = resp.getWriter();
-			){
-				out.println(json);
-			}
+	}
+	
+	@URIMapping("/alba/albaView.do")
+	public String selectAlba(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		//받기
+		String al_id = req.getParameter("al_id");
+		if(StringUtils.isBlank(al_id)) {
+			resp.sendError(400);
 			return null;
-		}else {
-			String viewName = "alba/albaList";
-			return viewName;
 		}
+		AlbaVO alba = service.retrieveAlba(al_id);
+		req.setAttribute("alba", alba);
+		return "alba/albaView";
 	}
 }
+

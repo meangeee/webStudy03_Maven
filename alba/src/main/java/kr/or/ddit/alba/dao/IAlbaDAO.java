@@ -16,7 +16,7 @@ public interface IAlbaDAO {
 	 * @param alba 조회활 알바에 대한 조건을 가진 VO
 	 * @return 조건에 맞는 알바가 없는 경우 , null 반환
 	 */
-	public AlbaVO selectAlba(AlbaVO alba);
+	public AlbaVO selectAlba(String alba_id);
 	
 	/** 신규 등록
 	 * @param alba

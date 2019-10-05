@@ -23,9 +23,13 @@ public class AlbaDAOImpl implements IAlbaDAO {
 	}
 
 	@Override
-	public AlbaVO selectAlba(AlbaVO alba) {
-		// TODO Auto-generated method stub
-		return null;
+	public AlbaVO selectAlba(String alba_id) {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+			IAlbaDAO mapper = sqlSession.getMapper(IAlbaDAO.class);
+			return mapper.selectAlba(alba_id);
+		}
 	}
 
 	@Override

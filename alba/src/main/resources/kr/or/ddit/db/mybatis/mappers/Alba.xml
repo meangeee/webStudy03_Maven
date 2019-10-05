@@ -2,13 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.alba.dao.IAlbaDAO">
 
-
-	<select id="selectAlbaList" resultType="AlbaVO">
-	SELECT * FROM ALBA;
+	<resultMap type="AlbaVO" id="albaMap1" autoMapping="true">
+		<id column="AL_ID" property="al_id"/>
+		<collection property="gradeList" ofType="GradeVO" autoMapping="true">
+			<id column="GR_CODE" property="gr_code"/>
+		</collection>
+	</resultMap>
+	<select id="selectAlbaList" resultMap="albaMap1" resultType="AlbaVO">
+	SELECT AL_ID,
+		AL_NAME,
+		AL_AGE,
+		AL_HP,
+		AL_GEN,
+		B.GR_NAME,
+		AL_BTYPE
+		FROM ALBA A INNER JOIN GRADE B ON (A.GR_CODE = B.GR_CODE)
 	</select>
 
 
-
-
-
+	<resultMap type="AlbaVO" id="albaMap2" autoMapping="true">
+		<id column="AL_ID" property="al_id"/>
+			<collection property="gradeList" ofType="GradeVO" autoMapping="true">
+				<id column="GR_CODE" property="gr_code"/>
+			</collection>
+		<collection property="licenseAlbaList" ofType="LicenseAlbaVO" autoMapping="true">
+			<id column="AL_ID" property="al_id" />
+			<collection property="licenseList" ofType="LicenseVO" autoMapping="true">
+				<id column="LIC_CODE" property="lic_code"/>
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="selectAlba" parameterType="String" resultMap="albaMap2">
+	SELECT
+    	A.AL_ID,	AL_NAME,	AL_AGE,	    
+    	AL_ADDRESS,	AL_HP,	AL_SPEC,		    
+    	AL_DESC,	A.GR_CODE,	AL_CAREER,		
+    	AL_GEN,		AL_BTYPE,	AL_MAIL,
+    	GR_NAME, 	C.LIC_CODE, LIC_NAME
+	FROM ALBA A INNER JOIN GRADE B ON (A.GR_CODE = B.GR_CODE)
+            LEFT OUTER JOIN LIC_ALBA C ON (A.AL_ID = C.AL_ID)
+            LEFT OUTER JOIN LICENSE D ON (C.LIC_CODE = D.LIC_CODE)
+    WHERE A.AL_ID = #{al_id} 
+	</select>
 </mapper>

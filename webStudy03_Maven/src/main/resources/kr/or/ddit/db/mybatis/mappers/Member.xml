@@ -61,6 +61,7 @@
 	) A
 	WHERE RNUM BETWEEN #{startRow} AND #{endRow} 
   </select>
+  
   <resultMap type="MemberVO" id="memberMap" autoMapping="true">
   	<id column="MEM_ID" property="mem_id"/>
   	<collection property="prodList" ofType="ProdVO" autoMapping="true">
@@ -111,6 +112,7 @@
 	 </if>  
 	 WHERE  MEM_ID	=	#{mem_id}      
   </update>
+  
   <delete id="deleteMember" parameterType="MemberVO">
   	UPDATE MEMBER    
 	SET              
