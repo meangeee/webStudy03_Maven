@@ -19,6 +19,6 @@ public class AlbaVO {
 	private String al_spec    ;
 	private String gr_code	  ;
 	private List<LicenseAlbaVO> licenseAlbaList;
-	private List<GradeVO> gradeList;
+	private GradeVO grade;
 	private LicenseVO licencse;
 }

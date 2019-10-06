@@ -3,45 +3,145 @@
 <mapper namespace="kr.or.ddit.alba.dao.IAlbaDAO">
 
 	<resultMap type="AlbaVO" id="albaMap1" autoMapping="true">
-		<id column="AL_ID" property="al_id"/>
-		<collection property="gradeList" ofType="GradeVO" autoMapping="true">
-			<id column="GR_CODE" property="gr_code"/>
-		</collection>
+		<id column="AL_ID" property="al_id" />
+		<association property="grade" javaType="GradeVO"
+			autoMapping="true">
+			<id column="GR_CODE" property="gr_code" />
+		</association>
 	</resultMap>
-	<select id="selectAlbaList" resultMap="albaMap1" resultType="AlbaVO">
-	SELECT AL_ID,
+	<select id="selectAlbaList" resultMap="albaMap1"
+		resultType="AlbaVO">
+		SELECT AL_ID,
 		AL_NAME,
 		AL_AGE,
 		AL_HP,
 		AL_GEN,
 		B.GR_NAME,
 		AL_BTYPE
-		FROM ALBA A INNER JOIN GRADE B ON (A.GR_CODE = B.GR_CODE)
+		FROM ALBA A INNER
+		JOIN GRADE B ON (A.GR_CODE = B.GR_CODE)
 	</select>
 
 
-	<resultMap type="AlbaVO" id="albaMap2" autoMapping="true">
-		<id column="AL_ID" property="al_id"/>
-			<collection property="gradeList" ofType="GradeVO" autoMapping="true">
-				<id column="GR_CODE" property="gr_code"/>
-			</collection>
-		<collection property="licenseAlbaList" ofType="LicenseAlbaVO" autoMapping="true">
+	<resultMap type="AlbaVO" id="albaMap" autoMapping="true">
+		<id column="AL_ID" property="al_id" />
+		<association property="grade" javaType="GradeVO"
+			autoMapping="true">
+			<id column="GR_CODE" property="gr_code" />
+		</association>
+		<collection property="licenseAlbaList" ofType="LicenseAlbaVO"
+			autoMapping="true">
 			<id column="AL_ID" property="al_id" />
-			<collection property="licenseList" ofType="LicenseVO" autoMapping="true">
-				<id column="LIC_CODE" property="lic_code"/>
+			<id column="LIC_CODE" property="lic_code" />
+			<collection property="licenseList" ofType="LicenseVO"
+				autoMapping="true">
+				<id column="LIC_CODE" property="lic_code" />
 			</collection>
 		</collection>
 	</resultMap>
-	<select id="selectAlba" parameterType="String" resultMap="albaMap2">
-	SELECT
-    	A.AL_ID,	AL_NAME,	AL_AGE,	    
-    	AL_ADDRESS,	AL_HP,	AL_SPEC,		    
-    	AL_DESC,	A.GR_CODE,	AL_CAREER,		
-    	AL_GEN,		AL_BTYPE,	AL_MAIL,
-    	GR_NAME, 	C.LIC_CODE, LIC_NAME
-	FROM ALBA A INNER JOIN GRADE B ON (A.GR_CODE = B.GR_CODE)
-            LEFT OUTER JOIN LIC_ALBA C ON (A.AL_ID = C.AL_ID)
-            LEFT OUTER JOIN LICENSE D ON (C.LIC_CODE = D.LIC_CODE)
-    WHERE A.AL_ID = #{al_id} 
+	<select id="selectAlba" parameterType="String"
+		resultMap="albaMap">
+		SELECT
+		A.AL_ID, AL_NAME, AL_AGE,
+		AL_ADDRESS, AL_HP, AL_SPEC,
+		AL_DESC, A.GR_CODE, AL_CAREER,
+		AL_GEN, AL_BTYPE, AL_MAIL,
+		GR_NAME,
+		C.LIC_CODE, LIC_NAME
+		FROM ALBA A INNER JOIN GRADE B ON (A.GR_CODE =
+		B.GR_CODE)
+		LEFT OUTER JOIN LIC_ALBA C ON (A.AL_ID = C.AL_ID)
+		LEFT OUTER
+		JOIN LICENSE D ON (C.LIC_CODE = D.LIC_CODE)
+		WHERE A.AL_ID = #{al_id}
 	</select>
+
+	<delete id="deleteAlba" parameterType="String">
+		DELETE FROM ALBA
+		WHERE
+		AL_ID = #{al_id}
+	</delete>
+
+	<insert id="insertAlba" parameterType="AlbaVO">
+		<selectKey order="BEFORE" resultType="String"
+			keyProperty="al_id">
+			SELECT 'ALBA_'||trim(to_char(alba_seq.nextval,'000')) AS
+			AL_ID
+			FROM DUAL
+		</selectKey>
+		INSERT INTO ALBA (
+		AL_ID, AL_NAME, AL_AGE,
+		AL_ADDRESS, AL_HP, AL_SPEC,
+		AL_DESC, GR_CODE, AL_CAREER,
+		AL_GEN, AL_BTYPE, AL_MAIL
+		)
+		VALUES(
+		#{al_id}, #{al_name}, #{al_age},
+		#{al_address}, #{al_hp}, #{al_spec},
+		#{al_desc}, #{gr_code}, #{al_career},
+		#{al_gen}, #{al_btype},
+		#{al_mail}
+		)
+	</insert>
+
+
+	<insert id="insertLic" parameterType="LicenseAlbaVO">
+		INSERT INTO LIC_ALBA(
+		AL_ID,LIC_CODE,LIC_IMAGE
+		)
+		VALUES(
+		#{al_id},#{lic_code},#{lic_image}
+		)
+	</insert>
+	
+	<update id="updateAlba" parameterType="AlbaVO" >
+		UPDATE ALBA
+            SET
+               al_name = #{al_name},
+               al_age = #{al_age}, 
+               al_address = #{al_address},
+               al_hp = #{al_hp},
+               al_spec = #{al_spec},
+               al_desc = #{al_desc},
+               gr_code = #{gr_code},
+               al_career = #{al_career},
+               al_gen = #{al_gen},
+               al_btype = #{al_btype},
+               al_mail = #{al_mail}
+            where
+               al_id = #{al_id}
+
+	</update>
+	
+	<insert id="insertImg" parameterType="LicenseAlbaVO">
+         INSERT INTO LIC_ALBA(
+            AL_ID,LIC_CODE,LIC_IMAGE 
+         )
+         VALUES(
+            #{al_id},#{lic_code},#{lic_image}
+         )
+   </insert>
+   
+   <update id="updateImg" parameterType="LicenseAlbaVO">
+         UPDATE LIC_ALBA
+            SET 
+               LIC_IMAGE = #{lic_image,jdbcType=BLOB}
+            WHERE 
+               AL_ID = #{al_id} and LIC_CODE = #{lic_code}   
+   </update>
+	
+	<select id="selecImg" parameterType="LicenseAlbaVO" resultType="LicenseAlbaVO">
+      SELECT LIC_IMAGE FROM LIC_ALBA WHERE AL_ID=#{al_id} and lic_code=#{lic_code}
+   </select>
+   
+   
+   
+   <select id="gradeList" resultType="GradeVO">
+      select gr_code,gr_name from grade 
+   </select>
+   
+   <select id="licenseList" resultType="LicenseVO">
+      select lic_code,lic_name from license
+   </select>
+	
 </mapper>

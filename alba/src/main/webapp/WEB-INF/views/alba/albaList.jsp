@@ -16,6 +16,8 @@
 	src="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<c:url value="/alba/albaInsert.do" var="insertURL" />
+	<button class="btn btn-info" type="button" onclick="location.href='${insertURL}';">알바 추가</button>
 <table class="table">
 	<thead>
 		<tr>

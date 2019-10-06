@@ -20,7 +20,7 @@
 	<table class="table table-bordered">
 		<tr>
 			<th>아이디</th>
-			<td>${alba.al_id}</td>
+			<td id="al_id">${alba.al_id}</td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -48,13 +48,7 @@
 		</tr>
 		<tr>
 			<th>학력사항</th>
-			<c:choose>
-				<c:when test="${not empty alba.gradeList }">
-					<c:forEach var="grade" items="${alba.gradeList }">
-						<td>${grade.gr_name}</td>
-					</c:forEach>
-				</c:when>
-			</c:choose>
+				<td>${alba.grade.gr_name}</td>
 		</tr>
 		<tr>
 			<th>경력</th>
@@ -78,11 +72,9 @@
 			<c:choose>
 				<c:when test="${not empty alba.licenseAlbaList }">
 					<c:forEach var="lic" items="${alba.licenseAlbaList }">
-						<c:url var="viewURL" value="/alba/licenseImage.do">
-							<c:param name="al_id" value="${alba.al_id }" />
-						</c:url>
+						
 						<c:forEach var="license" items="${lic.licenseList}">
-							<td><a href="${viewURL }">${license.lic_name }</a></td>
+							<td class="licenseCode" lic_code="${license.lic_code }" >${license.lic_name }</td>
 						</c:forEach>	
 					</c:forEach>
 				</c:when>
@@ -91,6 +83,65 @@
 				</c:otherwise>
 			</c:choose>
 		</tr>
+		
+		<tr>
+      		<th>자격증사진</th>
+      		<td>
+         	<img src="#" id="image" height="300px" width="300px"/>
+      		</td>
+   		</tr>
 	</table>
+	
+	<c:url value="/alba/albaDelete.do" var="deleteURL">
+		<c:param name="al_id" value="${alba.al_id }"></c:param>
+	</c:url>
+	<button type="button" onclick="location.href='${deleteURL}';">삭제</button>
+	
+	<c:url value="/alba/albaUpdate.do" var="updateURL">
+		<c:param name="al_id" value="${alba.al_id }"></c:param>
+	</c:url>
+	<button type="button" onclick="location.href='${updateURL }';">수정</button>
+	
+	
+	<script type="text/javascript">
+	var licenseCode = $('.licenseCode');
+	var albaId = $('#al_id');
+	   
+	   $(document).ready(function(){
+	        $("#image").hide();
+	    });
+	   
+	   licenseCode.on('click',function(event){
+	      
+	      
+	      var idValue = albaId.text();
+	      var codeValue = $(this).attr("lic_code");
+	      alert(codeValue);
+	         $.ajax({
+	            url : "${pageContext.request.contextPath }/alba/licenseImage.do",
+	            method : "post",
+	            data : {
+	               "al_id" : idValue,
+	               "lic_code" : codeValue
+	            },
+	            success : function(resp){
+	             if(!resp.valid) {
+	                        var base64 = resp.base64;
+	                        $("#image").attr("src", "data:image/jpeg;base64,"+base64);
+	                        $("#image").show();
+	                    } else {
+	                        $("#image").hide();
+	                        alert("이미지 파일이 존재하지 않습니다.");
+	                    }
+	            },
+	            error : function(err){
+	               console.log(err.status);
+	            }
+	            
+	         });
+	      
+	   })
+	
+	</script>
 </body>
 </html>
