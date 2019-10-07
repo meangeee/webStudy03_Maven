@@ -1,6 +1,7 @@
 package kr.or.ddit.alba.controller;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,8 @@ import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.HttpMethod;
 import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.vo.AlbaVO;
+import kr.or.ddit.vo.GradeVO;
+import kr.or.ddit.vo.LicenseVO;
 
 @CommandHandler
 public class AlbaUpdateController {
@@ -20,6 +23,10 @@ public class AlbaUpdateController {
 	@URIMapping("/alba/albaUpdate.do")
 	public String openForm(HttpServletRequest req, HttpServletResponse resp) {
 		String al_id= req.getParameter("al_id");
+		List<LicenseVO> licenseName = service.licenseList();
+		List<GradeVO> gradeName = service.gradeList();
+		req.setAttribute("licenseName", licenseName);
+		req.setAttribute("gradeName", gradeName);
 		AlbaVO alba = service.retrieveAlba(al_id);
 		req.setAttribute("alba", alba);
 		return "alba/albaForm";

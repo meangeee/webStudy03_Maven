@@ -106,25 +106,25 @@
 				<td>
 					<select class="lic" name="lic_code">
 						<option value="0">선택하세요</option>
-					<c:forEach items="${licenseName}" var="l">
-						<option value="${l.lic_code}">${l.lic_name}</option>
-					</c:forEach>
+							<c:forEach items="${licenseName}" var="l">
+								<option value="${l.lic_code}">${l.lic_name}</option>
+							</c:forEach>
 					</select>
 					<input type="file" name="lic_image" />
 					<br>
 					<select class="lic" name="lic_code">
 						<option value="0">선택하세요</option>
-					<c:forEach items="${licenseName}" var="l">
-						<option value="${l.lic_code}">${l.lic_name}</option>
-					</c:forEach>
+							<c:forEach items="${licenseName}" var="l">
+								<option value="${l.lic_code}">${l.lic_name}</option>
+							</c:forEach>
 					</select>
 					<input type="file" name="lic_image" />
 					<br>
 					<select class="lic" name="lic_code">
 						<option value="0">선택하세요</option>
-					<c:forEach items="${licenseName}" var="l">
-						<option value="${l.lic_code}">${l.lic_name}</option>
-					</c:forEach>
+							<c:forEach items="${licenseName}" var="l">
+								<option value="${l.lic_code}">${l.lic_name}</option>
+							</c:forEach>
 					</select>
 				<input type="file" name="lic_image" />
 			</td>

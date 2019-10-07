@@ -10,6 +10,7 @@ public class LicenseAlbaVO {
 	private String al_id;
 	private String lic_code;
 	private byte[] lic_image;
+	private String lic_name;
 	private List<LicenseVO> licenseList;
 
 	public String getLic_base64() {
