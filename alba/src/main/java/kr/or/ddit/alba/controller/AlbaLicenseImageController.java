@@ -19,7 +19,7 @@ import kr.or.ddit.vo.LicenseAlbaVO;
 
 @CommandHandler
 public class AlbaLicenseImageController {
-	IAlbaService service = AlbaServiceImpl.getInstance();
+	IAlbaService service = new AlbaServiceImpl();
 	@URIMapping(value="/alba/licenseImage.do" , method=HttpMethod.POST)
 	public String openImage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		

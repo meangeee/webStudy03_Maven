@@ -28,7 +28,7 @@ import kr.or.ddit.wrapper.PartWrapper;
 
 @CommandHandler
 public class AlbaInsertController {
-	IAlbaService service = AlbaServiceImpl.getInstance();
+	IAlbaService service = new AlbaServiceImpl();
 
 	@URIMapping("/alba/albaInsert.do")
 	public String loadAlbaForm(HttpServletRequest req, HttpServletResponse resp) {

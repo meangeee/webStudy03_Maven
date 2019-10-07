@@ -12,7 +12,8 @@ import kr.or.ddit.vo.LicenseAlbaVO;
 import kr.or.ddit.vo.LicenseVO;
 
 public class AlbaDAOImpl implements IAlbaDAO {
-	private SqlSessionFactory sqlSessionFactory = CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
+	private SqlSessionFactory sqlSessionFactory = 
+			CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
 
 	@Override
 	public List<AlbaVO> selectAlbaList() {
@@ -31,13 +32,8 @@ public class AlbaDAOImpl implements IAlbaDAO {
 	}
 
 	@Override
-	public int insertAlba(AlbaVO alba) {
-		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
-			IAlbaDAO mapper = sqlSession.getMapper(IAlbaDAO.class);
-			int cnt = mapper.insertAlba(alba);
-			sqlSession.commit();
-			return cnt;
-		}
+	public int insertAlba(AlbaVO alba, SqlSession sqlSession) {
+		return sqlSession.insert("kr.or.ddit.alba.dao.IAlbaDAO.insertAlba", alba);
 	}
 
 	@Override

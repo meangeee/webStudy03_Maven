@@ -2,6 +2,9 @@ package kr.or.ddit.alba.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import kr.or.ddit.alba.dao.AlbaDAOImpl;
 import kr.or.ddit.alba.dao.IAlbaDAO;
 import kr.or.ddit.vo.AlbaVO;
@@ -13,13 +16,7 @@ public class AlbaServiceImpl implements IAlbaService {
 
 	private IAlbaDAO dao = new AlbaDAOImpl();
 
-	private static IAlbaService instance;
-
-	public static IAlbaService getInstance() {
-		if (instance == null)
-			instance = new AlbaServiceImpl();
-		return instance;
-	}
+	SqlSessionFactory sessionFactory = kr.or.ddit.db.mybatis.CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
 
 	@Override
 	public List<AlbaVO> retrieveAlbaList() {
@@ -33,7 +30,17 @@ public class AlbaServiceImpl implements IAlbaService {
 
 	@Override
 	public int createAlba(AlbaVO alba) {
-		return dao.insertAlba(alba);
+		try (SqlSession sqlSession = sessionFactory.openSession();) {
+			int rowCnt = dao.insertAlba(alba, sqlSession);
+			List<LicenseAlbaVO> licAlbaList = alba.getLicenseAlbaList();
+			if (licAlbaList != null && licAlbaList.size() > 0) {
+				dao.insertAlba(alba, sqlSession);
+			}
+			if (rowCnt > 0) {
+				sqlSession.commit();
+			}
+			return rowCnt;
+		}
 	}
 
 	@Override

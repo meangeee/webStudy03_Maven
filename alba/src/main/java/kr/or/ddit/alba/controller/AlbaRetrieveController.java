@@ -16,7 +16,7 @@ import kr.or.ddit.vo.AlbaVO;
 
 @CommandHandler
 public class AlbaRetrieveController {
-	IAlbaService service = AlbaServiceImpl.getInstance();
+	IAlbaService service = new AlbaServiceImpl();
 
 	@URIMapping("/alba/albaList.do")
 	public String selcectAlbaList(HttpServletRequest req, HttpServletResponse resp) throws IOException {

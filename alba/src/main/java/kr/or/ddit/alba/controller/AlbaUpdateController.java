@@ -16,7 +16,7 @@ import kr.or.ddit.vo.AlbaVO;
 
 @CommandHandler
 public class AlbaUpdateController {
-	IAlbaService service = AlbaServiceImpl.getInstance();
+	IAlbaService service = new AlbaServiceImpl();
 	@URIMapping("/alba/albaUpdate.do")
 	public String openForm(HttpServletRequest req, HttpServletResponse resp) {
 		String al_id= req.getParameter("al_id");

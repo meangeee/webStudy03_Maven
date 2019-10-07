@@ -10,7 +10,7 @@ import kr.or.ddit.mvc.annotation.URIMapping;
 
 @CommandHandler
 public class AlbaDeleteController {
-	IAlbaService service = AlbaServiceImpl.getInstance();
+	IAlbaService service = new AlbaServiceImpl();
 	@URIMapping("/alba/albaDelete.do")
 	public String deleteAlba(HttpServletRequest req, HttpServletResponse resp) {
 		String al_id = req.getParameter("al_id");

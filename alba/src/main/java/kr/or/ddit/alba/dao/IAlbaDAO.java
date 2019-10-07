@@ -2,6 +2,8 @@ package kr.or.ddit.alba.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.ddit.vo.AlbaVO;
 import kr.or.ddit.vo.GradeVO;
 import kr.or.ddit.vo.LicenseAlbaVO;
@@ -21,11 +23,12 @@ public interface IAlbaDAO {
 	 */
 	public AlbaVO selectAlba(String alba_id);
 	
-	/** 신규 등록
+	/**
 	 * @param alba
-	 * @return 성공 (>0) 실패 (<=0)
+	 * @param sqlSession
+	 * @return
 	 */
-	public int insertAlba(AlbaVO alba);
+	public int insertAlba(AlbaVO alba, SqlSession sqlSession);
 	
 	
 	/** 정보 수정
