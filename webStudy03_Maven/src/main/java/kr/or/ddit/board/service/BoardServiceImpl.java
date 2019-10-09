@@ -24,7 +24,8 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public Board2VO retrieveBoard(Board2VO board) {
 		Board2VO saved = boardDAO.selectBoard(board);
-		if(saved == null) throw new CommonException("해당 게시물 없음");
+		if (saved == null)
+			throw new CommonException("해당 게시물 없음");
 		boardDAO.updateBoardHit(board);
 		return saved;
 	}

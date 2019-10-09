@@ -13,7 +13,7 @@ public interface IReplyService {
 	 */
 	public ServiceResult createReply(Reply2VO reply);
 	public int retrieveReplyCount(PagingInfoVO<Reply2VO> pagingVO);
-	public List<Reply2VO> retrieveReplyList(PagingInfoVO<Reply2VO> paiInfoVO);
+	public List<Reply2VO> retrieveReplyList(PagingInfoVO<Reply2VO> pagingVO);
 	
 	/** 경우의 수 3가지
 	 * DB에서 확인 함

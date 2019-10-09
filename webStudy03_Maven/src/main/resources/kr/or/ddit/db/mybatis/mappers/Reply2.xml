@@ -1,3 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.ddit.db.mybatis.mappers.Reply2"></mapper>
+<mapper namespace="kr.or.ddit.board.dao.IReply2DAO">
+
+	<select id="selectReplyCount" parameterType="PagingInfoVO" resultType="int">
+		SELECT COUNT(*)
+		FROM REPLY2
+	
+	</select>
+	
+	<select id="selectReplyList" parameterType="PagingInfoVO" resultType="Reply2VO">
+		SELECT 
+				REP_NO,
+				B.BO_NO,
+				REP_CONTENT,
+				REP_WRITER,
+				REP_DATE,
+				REP_IP
+		FROM REPLY2 R, BOARD2 B
+		WHERE R.BO_NO = B.BO_NO
+   	 			AND R.BO_NO = #{bo_no}
+	</select>
+	
+	<insert id="insertReply">
+		<selectKey order="BEFORE" keyProperty="rep_no" resultType="int" >
+			SELECT NVL(MAX(REP_NO), 0)+1 FROM REPLY2
+		</selectKey>
+		INSERT INTO REPLY2 (
+			REP_NO,
+			REP_CONTENT,
+			REP_WRITER,
+			REP_DATE,
+			REP_IP
+		) VALUES	(
+			#{req_no}, #{req_content}, #{req_writer},
+			SYSDATE, #{rep_ip}
+		)
+	</insert>
+</mapper>

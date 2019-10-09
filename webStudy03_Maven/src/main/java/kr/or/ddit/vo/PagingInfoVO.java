@@ -3,13 +3,13 @@ package kr.or.ddit.vo;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class PagingInfoVO<T> {
 	private int totalRecord;
 	private int totalPage;
@@ -24,6 +24,9 @@ public class PagingInfoVO<T> {
 	private List<T> dataList;
 	private T searchVO;
 	private Map<String, Object> searchMap;
+	private int bo_no;
+	private int rep_no;
+	
 	
 	public PagingInfoVO(int screenSize, int blockSize) {
 		super();

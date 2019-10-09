@@ -75,8 +75,8 @@
 					<input type="text" class="form-control mr-2" name="searchWord" />
 					<input type="submit" class="btn btn-info mr-2" value="검색" />
 					<input type="button" class="btn btn-info" 
-					value="새글쓰기"
-					onclick="locatino.href='<c:rul value="/board/boardInsert.do"/>';"
+						value="새글쓰기" 
+						onclick="location.href='<c:url value="/board/boardInsert.do"/>';"
 					/>
 				</form>
 				<div id="pagingArea">
@@ -154,6 +154,10 @@
 		});
 		return false;
 	});
+	
+	
+	
+	
 	pagingArea.on("click", "a", function(event){
 		event.preventDefault();
 		let page = $(this).data("page");
@@ -162,6 +166,7 @@
 		searchForm.submit();
 		return false;
 	});
+	
 	
 </script>
 </body>

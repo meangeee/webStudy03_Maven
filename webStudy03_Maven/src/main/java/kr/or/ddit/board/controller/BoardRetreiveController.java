@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.mvc.annotation.CommandHandler;
@@ -19,6 +21,7 @@ import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.utils.MarshallingUtils;
 import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.vo.PagingInfoVO;
+import kr.or.ddit.vo.ProdVO;
 
 @CommandHandler
 public class BoardRetreiveController {
@@ -38,7 +41,6 @@ public class BoardRetreiveController {
 		if(StringUtils.isNumeric(pageParam)) {
 			currentPage = Integer.parseInt(pageParam);
 		}
-		String accept = req.getHeader("Accept");
 		PagingInfoVO<Board2VO> pagingVO = 
 					new PagingInfoVO<Board2VO>(7, 5);
 		pagingVO.setSearchMap(searchMap);
@@ -48,16 +50,15 @@ public class BoardRetreiveController {
 		List<Board2VO> list = service.retrieveBoardList(pagingVO);
 		pagingVO.setDataList(list);
 		
+		String accept = req.getHeader("Accept");
 		if(accept.toLowerCase().contains("json")) {
 			resp.setContentType("application/json;charset=UTF-8");
 			
-			String json = new MarshallingUtils()
-							.marshalling(pagingVO);
-			
+			ObjectMapper mapper = new ObjectMapper();
 			try(
 				PrintWriter out = resp.getWriter();	
 			){
-				out.println(json);
+				mapper.writeValue(out, pagingVO);
 			}
 			return null;
 		}else {
@@ -66,19 +67,17 @@ public class BoardRetreiveController {
 			return viewName;
 		}
 	}
+	
 	@URIMapping("/board/boardView.do")
-	public String goToView(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public String boardView(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String what = req.getParameter("what");
 		if(StringUtils.isBlank(what)) {
 			resp.sendError(400);
 			return null;
 		}
-		Board2VO b = new Board2VO();
-		b.setBo_no(Integer.parseInt(what));
-		Board2VO board = service.retrieveBoard(b);
-		req.setAttribute("what", what);
+		Board2VO board = 
+				service.retrieveBoard(new Board2VO(Integer.parseInt(what)));
 		req.setAttribute("board", board);
-		
 		return "board/boardView";
 	}
 }
