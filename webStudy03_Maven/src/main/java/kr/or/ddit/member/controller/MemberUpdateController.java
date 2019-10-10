@@ -88,10 +88,10 @@ public class MemberUpdateController {
 
 	private boolean validate(MemberVO member, Map<String, String> errors) {
 		boolean valid = true;
-		if (StringUtils.isBlank(member.getMem_id())) {
-			valid = false;
-			errors.put("mem_id", "회원아이디 누락");
-		}
+//		if (StringUtils.isBlank(member.getMem_id())) {
+//			valid = false;
+//			errors.put("mem_id", "회원아이디 누락");
+//		}
 		if (StringUtils.isBlank(member.getMem_pass())) {
 			valid = false;
 			errors.put("mem_pass", "비밀번호 누락");

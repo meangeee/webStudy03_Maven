@@ -154,10 +154,6 @@
 		});
 		return false;
 	});
-	
-	
-	
-	
 	pagingArea.on("click", "a", function(event){
 		event.preventDefault();
 		let page = $(this).data("page");
@@ -166,7 +162,6 @@
 		searchForm.submit();
 		return false;
 	});
-	
 	
 </script>
 </body>

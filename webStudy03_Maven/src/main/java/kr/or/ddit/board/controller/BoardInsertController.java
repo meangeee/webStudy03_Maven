@@ -17,6 +17,8 @@ import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.HttpMethod;
 import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.vo.Board2VO;
+import kr.or.ddit.wrapper.MultipartRequestWrapper;
+import kr.or.ddit.wrapper.PartWrapper;
 
 @CommandHandler
 public class BoardInsertController {
@@ -41,6 +43,11 @@ public class BoardInsertController {
 		req.setAttribute("errors", errors);
 		
 		boolean valid = validate(board, errors);
+		
+		if(req instanceof MultipartRequestWrapper) {
+			PartWrapper[] bo_file = ((MultipartRequestWrapper) req).getPartWrappers("bo_file");
+			board.setBo_file(bo_file);
+		}
 		
 		String viewName = null;
 		String message = null;

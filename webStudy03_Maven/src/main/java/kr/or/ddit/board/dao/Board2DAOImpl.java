@@ -33,15 +33,21 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public int updateBoardHit(Board2VO board) {
-		// TODO Auto-generated method stub
-		return 0;
+		try(
+			SqlSession sqlSession = sqlSessionFactory.openSession();	
+			){
+			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
+			int cnt = mapper.updateBoardHit(board);
+			sqlSession.commit();
+			return cnt;
+		}
 	}
 
 	@Override
 	public Board2VO selectBoard(Board2VO board) {
 		try(
-				SqlSession sqlSession = sqlSessionFactory.openSession();
-				){
+			SqlSession sqlSession = sqlSessionFactory.openSession();	
+		){
 			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
 			return mapper.selectBoard(board);
 		}
@@ -66,17 +72,17 @@ public class Board2DAOImpl implements IBoard2DAO {
 			return mapper.selectBoardList(pagingVO);
 		}
 	}
-
+	//mybatis 뭐 어쩌고 하려고 만든거임
 	@Override
 	public int updateBoard(Board2VO board) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	//그래서 얘를 써야 함. 세션을 받는 구조인 얘를
 	@Override
 	public int updateBoard(Board2VO board, SqlSession sqlSession) {
-		// TODO Auto-generated method stub
-		return 0;
+		IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
+		return mapper.updateBoard(board);
 	}
 
 	@Override
@@ -87,8 +93,8 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public int deleteBoard(Board2VO board, SqlSession sqlSession) {
-		// TODO Auto-generated method stub
-		return 0;
+		IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
+		return mapper.deleteBoard(board);
 	}
 
 	@Override
