@@ -72,13 +72,13 @@ public class Board2DAOImpl implements IBoard2DAO {
 			return mapper.selectBoardList(pagingVO);
 		}
 	}
-	//mybatis 뭐 어쩌고 하려고 만든거임
+	//mybatis 인식용 xml에서는 세션을 파라미터로 받는 메서드를 사용할 수 없어서
 	@Override
 	public int updateBoard(Board2VO board) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	//그래서 얘를 써야 함. 세션을 받는 구조인 얘를
+	//실제로는 세션을 받는 이 메서드를 사용해야함.
 	@Override
 	public int updateBoard(Board2VO board, SqlSession sqlSession) {
 		IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
