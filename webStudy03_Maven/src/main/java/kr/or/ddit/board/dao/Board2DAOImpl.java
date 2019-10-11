@@ -10,19 +10,17 @@ import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.vo.PagingInfoVO;
 
 public class Board2DAOImpl implements IBoard2DAO {
-	
-	SqlSessionFactory sqlSessionFactory =
-			CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
+
+	SqlSessionFactory sqlSessionFactory = CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
+
 	@Override
 	public int insertBoard(Board2VO board) {
-		try(
-			SqlSession sqlSession = sqlSessionFactory.openSession();	
-			){
-		IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
-		int cnt = mapper.insertBoard(board);
-		sqlSession.commit();
-		return cnt;
-	}
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
+			int cnt = mapper.insertBoard(board);
+			sqlSession.commit();
+			return cnt;
+		}
 	}
 
 	@Override
@@ -33,9 +31,7 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public int updateBoardHit(Board2VO board) {
-		try(
-			SqlSession sqlSession = sqlSessionFactory.openSession();	
-			){
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
 			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
 			int cnt = mapper.updateBoardHit(board);
 			sqlSession.commit();
@@ -45,9 +41,7 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public Board2VO selectBoard(Board2VO board) {
-		try(
-			SqlSession sqlSession = sqlSessionFactory.openSession();	
-		){
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
 			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
 			return mapper.selectBoard(board);
 		}
@@ -55,9 +49,7 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public int selectBoardCount(PagingInfoVO<Board2VO> pagingVO) {
-		try(
-			SqlSession sqlSession = sqlSessionFactory.openSession();	
-		){
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
 			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
 			return mapper.selectBoardCount(pagingVO);
 		}
@@ -65,20 +57,20 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public List<Board2VO> selectBoardList(PagingInfoVO<Board2VO> pagingVO) {
-		try(
-			SqlSession sqlSession = sqlSessionFactory.openSession();	
-		){
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
 			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
 			return mapper.selectBoardList(pagingVO);
 		}
 	}
-	//mybatis 인식용 xml에서는 세션을 파라미터로 받는 메서드를 사용할 수 없어서
+
+	// mybatis 인식용 xml에서는 세션을 파라미터로 받는 메서드를 사용할 수 없어서
 	@Override
 	public int updateBoard(Board2VO board) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	//실제로는 세션을 받는 이 메서드를 사용해야함.
+
+	// 실제로는 세션을 받는 이 메서드를 사용해야함.
 	@Override
 	public int updateBoard(Board2VO board, SqlSession sqlSession) {
 		IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
@@ -99,8 +91,12 @@ public class Board2DAOImpl implements IBoard2DAO {
 
 	@Override
 	public int updateBoLike(Board2VO board) {
-		// TODO Auto-generated method stub
-		return 0;
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+			IBoard2DAO mapper = sqlSession.getMapper(IBoard2DAO.class);
+			int cnt = mapper.updateBoLike(board);
+			sqlSession.commit();
+			return cnt;
+		}
 	}
 
 }

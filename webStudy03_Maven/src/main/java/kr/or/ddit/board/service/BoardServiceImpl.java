@@ -167,8 +167,10 @@ public class BoardServiceImpl implements IBoardService {
 
 	@Override
 	public ServiceResult incrementLike(int bo_no) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceResult result = null;
+		int cnt = boardDAO.updateBoLike(new Board2VO(bo_no));
+		if(cnt > 0) result = ServiceResult.OK;
+		else result = ServiceResult.FAILED;
+		return result;
 	}
-
 }

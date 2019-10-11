@@ -47,7 +47,12 @@
 		</tr>
 		<tr>
 			<th>추천수</th>
-			<td>${board.bo_like }</td>
+			<td>
+				<p id="likeCount">${board.bo_like } </p>
+				<c:if test="${likable}">
+					<input id="likeBtn" type="button" value="좋아요" />
+				</c:if>
+			</td>
 		</tr>
 		<tr>
 			<th>원글번호</th>
@@ -198,6 +203,8 @@
 </div>
 <script type="text/javascript" src="${cPath }/js/reply.js"></script>
 <script type="text/javascript">
+	var likeBtn = $("#likeBtn");
+	var likeCount =$("#likeCount");
 
 	let deleteBoardModal = $("#deleteBoardModal");
 	deleteBoardModal.on("hidden.bs.modal", function(){
@@ -210,7 +217,31 @@
 	<c:if test="${not empty message }">
 		$(document).toastmessage('showWarningToast', '${message }');
 		<c:remove var="message" scope="session"/>
-	</c:if>	
+	</c:if>
+	
+	
+	likeBtn.on("click", function(){
+		$.ajax({
+			url : "${cPath }/board/boardLike.do",
+			method : "post",
+			data : {
+				"bo_no" : ${board.bo_no}
+			},
+				
+			dataType : 'text',
+			success : function(resp) {
+// 				let tag = $("<p>").text(resp.bo_like);
+// 				$('#likeCount').html(tag);
+				if(resp=="OK"){
+					likeCount.text(parseInt(likeCount.text().trim())+1);
+					likeBtn.remove();
+				}
+			},
+			error : function(errorResp) {
+				console.log(errorResp.status);
+			}
+		});
+	})
 </script>
 </body>
 </html>

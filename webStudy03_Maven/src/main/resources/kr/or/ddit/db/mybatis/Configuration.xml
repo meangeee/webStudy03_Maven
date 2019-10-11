@@ -3,6 +3,10 @@
 <configuration>
 	<properties resource="kr/or/ddit/db/dbInfo.properties" />
 	
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+	</settings>
+	
 	<typeAliases>
 		<package name="kr.or.ddit.vo"/>
 	</typeAliases>

@@ -2,11 +2,13 @@ package kr.or.ddit.board.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +20,7 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.mvc.annotation.CommandHandler;
 import kr.or.ddit.mvc.annotation.URIMapping;
+import kr.or.ddit.utils.CookieUtil;
 import kr.or.ddit.utils.MarshallingUtils;
 import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.vo.PagingInfoVO;
@@ -78,6 +81,20 @@ public class BoardRetreiveController {
 		Board2VO board = 
 				service.retrieveBoard(new Board2VO(Integer.parseInt(what)));
 		req.setAttribute("board", board);
+		//쿠키 꺼내기
+		String cookieValue = new CookieUtil(req).getCookieValue("likeCookie");
+		boolean likable = false;
+		if(cookieValue!=null) {
+			ObjectMapper mapper = new ObjectMapper();
+			int[] boNos = mapper.readValue(cookieValue, int[].class);
+			Arrays.sort(boNos);
+			//aserlization ??? 뭐? 어디서 사용했었데요.
+			int idx = Arrays.binarySearch(boNos, Integer.parseInt(what));
+			if(idx < 0) likable = true;
+		}else {
+			likable = true;
+		}
+		req.setAttribute("likable", likable);
 		return "board/boardView";
 	}
 }
