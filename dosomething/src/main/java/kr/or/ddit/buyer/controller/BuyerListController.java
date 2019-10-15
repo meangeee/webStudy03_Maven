@@ -17,7 +17,7 @@ import kr.or.ddit.buyer.service.IBuyerService;
 import kr.or.ddit.vo.BuyerVO;
 import kr.or.ddit.vo.PagingInfoVO;
 
-@Controller
+@Controller 오류
 public class BuyerListController{
 	//service가져오기
 	@Inject
