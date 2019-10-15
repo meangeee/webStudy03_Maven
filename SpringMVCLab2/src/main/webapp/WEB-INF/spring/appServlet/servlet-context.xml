@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 핸들러 맵퍼 인보커 또 뭐 어쩌고 포함해서 얘 하나로 끝남 -->
+	<mvc:annotation-driven />
+	
+	<bean id="IRVR" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/WEB-INF/views/"
+		p:suffix=".jsp"
+	/>
+	
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+<!-- 	위임해주기위한 전략 근데 뭘 위임해? -->
+<!--    자원을 관리하기 위한 전략 1 -->
+<!-- 	<mvc:default-servlet-handler/> -->
+<!-- 	여기 뭔소린지 다시 설명해주실분 ㅎㅎ 이게 정적자원을 관리하는 두번째 방법이라는데요 -->
+<!-- 이녀석의 장점은 cache-period를 0으로 하면 저장하지 않아서 일괄적으로 관리 할 수 있다는데요? 자원에 관한 일괄관리.
+	 단점은 일괄관리 자체가 단점이 될 수 있음. 그럴때는 위에 있는 녀석을 쓰세요! -->
+	<mvc:resources location="/resources/" mapping="/res/**" cache-period="0"></mvc:resources>
+	
+<!-- 	MultipartResolver (MultipartRequestCheckFilter) -->
+<!-- 	request(원본요청) -> MultipartHttpServletRequest(MultipartRequestWrapper)로 변경하는 역할. -->
+<!-- 	part -> MultipartFile(PartWrapper) -->
+<!--    id는 항상 이걸로. 다른건 핸들러가 못찾음 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+</beans>

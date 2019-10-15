@@ -1,0 +1,28 @@
+@charset "UTF-8";
+#header{
+	width: 100%;
+	height: 100px;
+	background-color: yellow;
+}
+#leftMenu{
+	float: left;
+	width: 20%;
+	height: 500px;
+	background-color: green;
+}
+#contents{
+	float: right;
+	width: 79%;
+	height: 500px;
+}
+#footer{
+	float: left;
+	width: 100%;
+	height: 100px;
+	background-color: silver;
+}
+
+
+
+
+

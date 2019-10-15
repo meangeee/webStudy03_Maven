@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<!-- bean, c, p, util, context -->
+<!-- 	Properties 로딩 방법 -->
+<!-- 	1.	util 네임스페이스를 사용하여 bean 으로 등록. -->
+	<util:properties id="sampleProps" location="classpath:kr/or/ddit/sercuredService.xml"> 
+		<prop key="key1">value1</prop>
+		<prop key="key2">value2</prop>
+	</util:properties>
+	
+<!-- 	2. context 네임스페이스를 사용하여, Property placeholder 형태로 접근.-->
+<!--  		얘는 id로 등록하는 구조가 아님. = 이자리에서 bean으로 등록된다는 것이 아님 -->
+<!-- 		미리등록되어있는 properties에 집어넣는 구조 -->
+<!-- 	<context:property-placeholder location="classpath:kr/or/ddit/sercuredService.xml"/> -->
+	
+		<!-- sampleProps빈이 갖고 있는  특문을 갖고 있을때 이걸로 이용['/']=. 같음 property의 정보 -->
+	<bean id="propertyVO1" class="kr.or.ddit.vo.PropertyVO" 
+		c:firstProp="#{sampleProps['/mypage']}"
+		c:secondProp="#{sampleProps['/memberUpdate.do']}"
+	/>
+	
+	<!-- placeholder는 ${}방식으로 -->
+<!-- 	<bean id="propertyVO2" class="kr.or.ddit.vo.PropertyVO"  -->
+<!-- 		p:firstProp="${/mypage}" -->
+<!-- 		p:secondProp="${/memberUpdate.do}" -->
+<!-- 	/> -->
+	
+<!-- 	1. dbInfo.properties 파일을 로딩하고, DbInfoVO 객체를 빈으로 등록한 후, -->
+<!-- 	1) 프로퍼티스 파일을 bean으로 등록. setter injection -->
+<!-- 	2) 프로퍼티스 파일을 property Source로 등록. constructor injection -->
+	
+<!-- 	propertySource라는 id등록	 -->
+<!-- 	<util:properties id="propertySource" location="classpath:kr/or/ddit/dbInfo.properties"> -->
+<!-- 	</util:properties> -->
+ <util:properties id="dbInfo1" location="classpath:kr/or/ddit/dbInfo.properties">
+      
+   </util:properties>
+		
+	<!-- 프로퍼티 소스 하나만 만들고 거기다가 쓰는거라 둘이 충돌?  -->
+<!-- 	<context:property-placeholder location="classpath:kr/or/ddit/dbInfo.properties"/> -->
+   
+   <!-- 진희언니에게 물어보자. -->
+   <context:property-placeholder location="classpath:kr/or/ddit/dbInfo.properties"/>
+<!--    일반적으로는 하나당 하나씩  -->
+
+<!--  계층구조가 분화가 되지 않아요? -->
+  <!-- 객체의 뭐? has관계???? 연산계 뭐요? 뭔 뭐??? 뭔구조?-->
+   <bean id="dbInfoVO1" class="kr.or.ddit.vo.DbInfoVO" 
+      p:driverClassName="#{dbInfo1['main.driverClassName']}"
+      p:initialSize="#{dbInfo1['main.initialSize']*2}"
+      p:url="#{dbInfo1['main.url']}"
+      p:user="#{dbInfo1['main.user']}"
+      p:password="#{dbInfo1['main.password']}"
+      p:maxTotal="#{dbInfo1['main.maxTotal']}"
+      p:maxWait="#{dbInfo1['main.maxWait']+3}"
+   /> 
+   
+   <!-- 단순히 property를 확인 -->
+   <bean id="dbInfoVO2" class="kr.or.ddit.vo.DbInfoVO" 
+      c:driverClassName="${main.driverClassName}"
+      c:initialSize="${main.initialSize}"
+      c:url="${main.url}"
+      c:user="${main.user}"
+      c:password="${main.password}"
+      c:maxTotal="${main.maxTotal}"
+      c:maxWait="${main.maxWait}"
+   /> 
+
+</beans>

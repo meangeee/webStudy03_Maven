@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- 	<context:annotation-config /> -->
+<!-- 	component-scan 에 의해 자동등록되는 빈 어노테이션. -->
+<!-- 	1) @Component -->
+<!-- 	2) @Service -->
+<!-- 	3) @Repository -->
+<!-- 	4) @Controller -->
+	
+<!-- 	Upgrade -->
+<!-- 	5) Configuration : java config 에서 사용. -->
+<!-- 	6) ControllerAdvice : AOP 방법론에 따라 advice 에 사용. -->
+<!-- 	7) RestController : Rest 방식의 처리 핸들러에 사용. -->
+<!-- 	의존관계 설정을 자동으로 할때 사용되는 어노테이션 -->
+<!-- 	1) AutoWired : type 기준 injection -->
+<!-- 	2) Resource  : injection 기준을 명시적으로 설정 가능. 생성자 주입 불가-->
+<!-- 	3) Inject(JSR-330) :  -->
+<!-- 	4) @Value : spEL 을 사용하기 위한 어노테이션 -->
+
+	<!-- <context:annotation-config />얘가 없어도 밑에가 해줌 근데 뭐가 없으면 앞에애를 꼭 해줘야한다고요? 그때가 언제라고요? -->
+	<context:component-scan base-package="kr.or.ddit.idol" use-default-filters="false">
+<!-- 		로딩하고 싶은 클래스 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+<!-- 		제외하고 싶은 클래스 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+</beans>

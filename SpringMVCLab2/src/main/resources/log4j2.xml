@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- appender    : 메시지 기록 위치(장소) -->
+<!-- layout      : 메시지 형식 -->
+<!-- logger      : 각 name값을 갖는 로그 기록자(로그 메시지 전달자) -->
+<!-- event level : debug < info < warn < trace < error < fatal -->
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%-5level %logger{.1} - %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="org.springframework" level="info" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Logger name="org.springframework.web" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Logger name="jdbc.sqltiming" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Logger name="jdbc.resultsettable" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Logger name="kr.or.ddit" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Root level="error">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>

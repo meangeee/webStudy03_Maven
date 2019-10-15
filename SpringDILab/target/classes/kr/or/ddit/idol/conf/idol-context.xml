@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="idolSearchDAO_Oracle" class="kr.or.ddit.idol.dao.IdolSearchDAO_Oracle">
+	</bean>
+	<bean id="idolSearchDAO_Mysql" class="kr.or.ddit.idol.dao.IdolSearchDAO_Mysql"></bean>
+<!-- 	new idolSearchServiceImpl(dao);-->
+	<bean id="idolSearchServiceImpl" class="kr.or.ddit.idol.service.IdolSearchServiceImpl">
+		<constructor-arg name="dao">
+<!-- 			<bean class="kr.or.ddit.idol.dao.IdolSearchDAO_Oracle" /> -->
+			<ref bean="idolSearchDAO_Mysql"/>
+		</constructor-arg>
+	</bean>
+	
+</beans>
