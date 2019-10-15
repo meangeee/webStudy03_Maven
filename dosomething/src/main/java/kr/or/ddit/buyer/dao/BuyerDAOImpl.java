@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.db.mybatis.CustomSqlSessionFactoryBuilder;
 import kr.or.ddit.vo.BuyerVO;
 import kr.or.ddit.vo.PagingInfoVO;
 
+@Repository
 public class BuyerDAOImpl implements IBuyerDAO {
 	private SqlSessionFactory sqlSessionFactory = CustomSqlSessionFactoryBuilder.getSqlSessionFactory();
 
