@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Base64;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -27,10 +32,16 @@ public class MemberVO implements Serializable {
 		this.mem_pass = mem_pass;
 	}
 	
+	@NotBlank
 	private String mem_id;
+	@NotBlank
+	@Length(min=4, max=12)
 	private String mem_pass;
+	@NotBlank
 	private String mem_name;
+	@Length(min=6, max=6)
 	private transient String mem_regno1;
+	@Length(min=7, max=7)
 	private transient String mem_regno2;
 	private String mem_bir;
 	private String mem_zip;
@@ -39,6 +50,8 @@ public class MemberVO implements Serializable {
 	private String mem_hometel;
 	private String mem_comtel;
 	private String mem_hp;
+	@Email
+	@NotBlank
 	private String mem_mail;
 	private String mem_job;
 	private String mem_like;

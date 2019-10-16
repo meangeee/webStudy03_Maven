@@ -21,10 +21,45 @@
    
    <default-servlet-handler/>
    
+   
    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
    
    <context:component-scan base-package="kr.or.ddit" use-default-filters="false">
       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
       <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
    </context:component-scan>
+   
+   <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
+   		p:basename="kr.or.ddit.msg.message"
+   />
+   
+   <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" 
+		p:cookieName="langCookie"
+		p:cookiePath="/"
+		p:cookieMaxAge="#{60*60*24*3}"
+   />
+   
+   
+   <interceptors>
+		<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+			p:paramName="lang"
+		/>
+		<interceptor>
+			<mapping path="/**/*.js" />
+			<mapping path="/**/*.html" />
+			<mapping path="/images/**" />
+			<beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor" 
+				p:cacheSeconds="0"
+			/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mypage" />
+			<beans:bean class="kr.or.ddit.common.interceptors.AuthenticationInterceptor" />
+		</interceptor>
+   	</interceptors>
+   
+   	
+   <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+   
+   
 </beans:beans>

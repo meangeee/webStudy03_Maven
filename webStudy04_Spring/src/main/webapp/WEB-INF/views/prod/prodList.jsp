@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,12 @@
    src="${pageContext.request.contextPath }/js/generateLprodAndBuyer.js"></script>
 </head>
 <body>
+   <input style="width: 50px; height: 50px" type="image" src="<c:url value="/images/k.png" />"
+   		onclick="location.href='?lang=ko';"
+   />
+   <input style="width: 50px; height: 50px" type="image" src="<c:url value="/images/a.png" />"
+   		onclick="location.href='?lang=en';"
+   />
    <form id="searchForm"> <!-- 숨어있는 진짜 폼 : 전송목적 -->
       <input type="hidden" name="page" /> 
       <input type="hidden" name="prod_lgu" value="${pagingVO.searchVO.prod_lgu }"/> 
@@ -47,21 +54,19 @@
    <table class="table table-bordered table-striped">
       <thead>
          <tr>
-            <th>상품코드</th>
-            <th>상품명</th>
-            <th>분류명</th>
-            <th>거래처명</th>
-            <th>구매가</th>
-            <th>판매가</th>
-            <th>마일리지</th>
+            <th><spring:message code="prod.prod_id"/></th>
+            <th><spring:message code="prod.prod_name"/></th>
+            <th><spring:message code="prod.prod_lgu"/></th>
+            <th><spring:message code="prod.prod_buyer"/></th>
+            <th><spring:message code="prod.prod_cost"/></th>
+            <th><spring:message code="prod.prod_price"/></th>
+            <th><spring:message code="prod.prod_mileage"/></th>
          </tr>
       </thead>
       <tbody>
          <c:set var="prodList" value="${pagingVO.dataList }" />
          <c:forEach var="prod" items="${prodList }">
-            <c:url value="/prod/prodView.do" var="viewURL">
-               <c:param name="what" value="${prod.prod_id }" />
-            </c:url>
+            <c:url value="/prod/${prod.prod_id }" var="viewURL" />
             <tr>
                <td>${prod.prod_id }</td>
                <td><a href="${viewURL }">${prod.prod_name }</a></td>

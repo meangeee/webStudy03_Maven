@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.ddit.prod.dao.IOthersDAO;
 import kr.or.ddit.vo.BuyerVO;
 
-@RestController
+@RestController 
 @RequestMapping("/prod/")
 public class OthersController {
 	@Inject

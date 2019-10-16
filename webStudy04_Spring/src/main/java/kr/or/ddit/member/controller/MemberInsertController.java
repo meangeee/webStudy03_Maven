@@ -1,23 +1,15 @@
 package kr.or.ddit.member.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,29 +52,14 @@ public class MemberInsertController{
 	//ok redirection
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String doPost(@ModelAttribute("member") MemberVO member, 
+	public String doPost(
+			@Valid @ModelAttribute("member") MemberVO member,
+			Errors errors, 
 			Model model) {
-		//미리공유 왜? 만약 가입하다가 검증에 실패. 그럴때마다 기존 데이터를 가지고 다녀야 해서 그러나 아직까진 비어있음
-//		session.setAttribute("member", member); 이건 왜 필요없어.
 		
-//		try {
-//			BeanUtils.populate(member, req.getParameterMap());
-//		} catch (IllegalAccessException | InvocationTargetException e) {
-//			throw new RuntimeException(e);
-//		}
-		
-		
-			
-		
-		//검증 여러개가 안될 수 있으니까
-		Map<String, String> errors = new HashMap<String, String>();
-		//통과 또 안될 수 있으니까
-		model.addAttribute("errors", errors);
-		
-		boolean valid = validate(member, errors);
-		//------------update까지 똑같음
-		
-		
+		//true면 에러가 있음
+		boolean valid = !errors.hasErrors();
+				
 		String viewName = "member/memberForm";
 		String message = null;
 		boolean redirect = false;
@@ -110,41 +87,5 @@ public class MemberInsertController{
 		//dispatch방식으로 기존 데이터를 갖고 갈 수 있다
 			return viewName;
 	}
-
-	private boolean validate(MemberVO member, Map<String, String> errors) {
-		boolean valid = true;
-		if (StringUtils.isBlank(member.getMem_id())) {
-			valid = false;
-			errors.put("mem_id", "회원아이디 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_pass())) {
-			valid = false;
-			errors.put("mem_pass", "비밀번호 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_name())) {
-			valid = false;
-			errors.put("mem_name", "이름 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_zip())) {
-			valid = false;
-			errors.put("mem_zip", "우편번호 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_add1())) {
-			valid = false;
-			errors.put("mem_add1", "주소1 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_add2())) {
-			valid = false;
-			errors.put("mem_add2", "주소2 누락");
-		}
-		if (StringUtils.isBlank(member.getMem_mail())) {
-			valid = false;
-			errors.put("mem_mail", "이메일 누락");
-		}
-		
-		
-		return valid;
-	}
-
 
 }

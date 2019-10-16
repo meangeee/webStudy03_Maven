@@ -1,8 +1,20 @@
 package kr.or.ddit.vo;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.common.hints.InsertHint;
+import kr.or.ddit.common.hints.UpdateHint;
 import lombok.Data;
 
 /**
@@ -20,19 +32,30 @@ import lombok.Data;
  */
 @Data
 public class ProdVO implements Serializable{ //얘 왜해요>?
+	@NotBlank(groups=UpdateHint.class)
 	private String prod_id;
+	@NotBlank
 	private String prod_name;
+	@NotBlank(groups=InsertHint.class)
 	private String prod_lgu;
 	private String lprod_nm;
+	@NotBlank(groups=InsertHint.class)
 	private String prod_buyer;
 	private String buyer_name;
+	@NotNull
+	@Min(0)
 	private Integer prod_cost;
+	@NotNull
+	@Min(0)
 	private Integer prod_price;
+	@NotNull
+	@Min(0)
 	private Integer prod_sale;
 	private String prod_outline;
 	private String prod_detail;
 	private String prod_img;
 	private Integer prod_totalstock;
+	@Pattern(regexp="\\d{4}-\\d{2}-\\d{2}")
 	private String prod_insdate;
 	private Integer prod_properstock;
 	private String prod_size;
@@ -45,6 +68,19 @@ public class ProdVO implements Serializable{ //얘 왜해요>?
 	private BuyerVO buyer;	//ProdVO has BuyerVO (1:1)
 	private List<MemberVO> memberList; //ProdVO has many MemberVO (1:N)
 	
+	private MultipartFile prod_image;
+	
+	public void setProd_image(MultipartFile prod_image) throws IOException {
+		this.prod_image = prod_image;
+		if(prod_image.getSize() <= 0) return;
+		prod_img = UUID.randomUUID().toString();
+	}
+	
+	public void transfer(File saveFolder) throws IllegalStateException, IOException {
+		if(prod_image==null || prod_img==null) return;
+		prod_image.transferTo(new File(saveFolder, prod_img));
+		
+	}
 	
 	@Override
 	public int hashCode() {

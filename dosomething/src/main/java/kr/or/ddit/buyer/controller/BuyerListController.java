@@ -17,7 +17,7 @@ import kr.or.ddit.buyer.service.IBuyerService;
 import kr.or.ddit.vo.BuyerVO;
 import kr.or.ddit.vo.PagingInfoVO;
 
-@Controller 오류
+@Controller
 public class BuyerListController{
 	//service가져오기
 	@Inject
@@ -25,7 +25,8 @@ public class BuyerListController{
 	@RequestMapping(value="/buyer/buyerList.do", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String doGet(
-			@RequestParam(name="page", required=false, defaultValue="1") int currentPage,
+			@RequestParam(name="page", required=false, defaultValue="1") 
+			int currentPage,
 			@RequestParam(required=false) String searchType,
 			@RequestParam(required=false) String searchWord,
 			Model model
@@ -44,23 +45,7 @@ public class BuyerListController{
 		pagingVO.setDataList(buyerList);
 		model.addAttribute("pagingVO", pagingVO);
 		
-//		if(accept.toLowerCase().contains("json")) {
-//			resp.setContentType("application/json;charset=UTF-8");
-			
-			
-//			String json = new MarshallingUtils().marshalling(pagingVO);
-			
-			//그것을 화면에 출력해준다
-//			try(
-//				PrintWriter out = resp.getWriter();
-//				){
-//				out.println(json);
-//				}
-//				return null;
-//			}else {
-				String viewName = "buyer/buyerList";
-				return viewName;
-//		}
+		return "buyer/buyerList";
 		
 	}
 }

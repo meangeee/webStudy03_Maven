@@ -109,30 +109,29 @@
    </update>
    
    <insert id="insertProd" parameterType="ProdVO">
-      <selectKey order="BEFORE" resultType="string" keyProperty="prod_id">
-         SELECT #{prod_lgu}||LPAD(NVL(TO_NUMBER(SUBSTR(MAX(PROD_ID), 5)), 0)+1, 6, '0')
-         FROM PROD
-         WHERE PROD_LGU = #{prod_lgu}
-      </selectKey>
-      INSERT INTO PROD (
-          PROD_ID,    PROD_NAME,    PROD_LGU,
-          PROD_BUYER,    PROD_COST,    PROD_PRICE,
-          PROD_SALE,    PROD_OUTLINE,    PROD_DETAIL,
-          PROD_IMG,    PROD_TOTALSTOCK,    PROD_INSDATE,
-          PROD_PROPERSTOCK,    PROD_SIZE,    PROD_COLOR,
-          PROD_DELIVERY,    PROD_UNIT,    PROD_QTYIN,
-          PROD_QTYSALE,    PROD_MILEAGE
-      ) VALUES (
-          #{prod_id},    #{prod_name},    #{prod_lgu},
-          #{prod_buyer},    #{prod_cost},    #{prod_price},
-          #{prod_sale},    #{prod_outline},    #{prod_detail},
-          #{prod_img},    #{prod_totalstock},    #{prod_insdate},
-          #{prod_properstock},    #{prod_size},    #{prod_color},
-          #{prod_delivery},    #{prod_unit},    #{prod_qtyin},
-          #{prod_qtysale},    #{prod_mileage}
-      )
-   
-   </insert>
+     <selectKey order="BEFORE" resultType="String" keyProperty="prod_id">
+        SELECT  #{prod_lgu}||LPAD(NVL(TO_NUMBER(SUBSTR(MAX(PROD_ID),5)),0)+1,6,'0') 
+        FROM PROD 
+        WHERE PROD_LGU=#{prod_lgu}
+     </selectKey>
+     INSERT INTO prod (
+       PROD_ID,PROD_NAME,PROD_LGU,
+       PROD_BUYER,PROD_COST,PROD_PRICE,
+       PROD_SALE,PROD_OUTLINE,PROD_DETAIL,
+          PROD_IMG,PROD_TOTALSTOCK,PROD_INSDATE,
+       PROD_PROPERSTOCK,PROD_SIZE,PROD_COLOR,
+       PROD_DELIVERY,PROD_UNIT,PROD_QTYIN,
+       PROD_QTYSALE,PROD_MILEAGE
+    ) VALUES (
+         #{prod_id},#{prod_name},#{prod_lgu},
+       #{prod_buyer},#{prod_cost},#{prod_price},
+       #{prod_sale},#{prod_outline},#{prod_detail},
+          #{prod_img},#{prod_totalstock},TO_DATE(#{prod_insdate},'YYYY-MM-DD'),
+       #{prod_properstock},#{prod_size},#{prod_color},
+       #{prod_delivery},#{prod_unit},#{prod_qtyin},
+       #{prod_qtysale},#{prod_mileage,jdbcType=NUMERIC}
+    )
+  </insert>
 </mapper>
 
 
