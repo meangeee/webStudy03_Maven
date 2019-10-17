@@ -1,32 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-<style type="text/css">
-	.error{
-		color: red;
-	}
-</style>	
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-<c:if test="${not empty message }">
-	<script type="text/javascript">
-		alert("${message }");
-	</script>
-	<c:remove var="message" scope="session"/>
-</c:if>		
-</head>
-<body>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <form action="${pageContext.request.contextPath }/member/memberUpdate.do" 
 		method="post" enctype="multipart/form-data">	
 	<table class="table table-bordered">
@@ -34,14 +9,15 @@
 			<th>회원아이디</th>
 			<td><input type="text" required class="form-control"
 				name="mem_id" value="${savedMember.mem_id }" />
-				<span class="error">${errors["mem_id"] }</span>	
+				<form:errors path="memberVO.mem_id" element="span" ccsClass="error" />
+
 			</td>
 		</tr>
 		<tr>
 			<th>비밀번호(${savedMember.mem_pass })</th>
 			<td><input type="text" required class="form-control"
 				name="mem_pass" value="" />
-				<span class="error">${errors["mem_pass"] }</span>	
+				<form:errors path="memberVO.mem_pass" element="span" ccsClass="error" />
 			</td>
 		</tr>
 		<tr>
@@ -217,7 +193,5 @@
 	});
 </script>
 <c:remove var="errors" scope="session"/>
-</body>
-</html>
 
 

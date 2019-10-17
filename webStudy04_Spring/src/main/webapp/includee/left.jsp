@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <form id="leftForm" action="<%=request.getContextPath()%>/module/layout.do">
 	<input type="hidden" name="command"/>
@@ -14,6 +15,11 @@
 	<li><a href="#" id="explorer">Server Explorer</a></li>
 </ul>
 
+<ul>
+	<c:forEach var="menu" items="${menuList }">
+		<li><a href="<c:url value="${menu.menuURL }" />">${menu.menuText }</a></li>
+	</c:forEach>
+</ul>
 <script type="text/javascript">
 	//계속해서 트레벌싱하는 상황을 막으려고
 	var leftForm = $('#leftForm');

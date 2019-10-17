@@ -137,29 +137,29 @@
 		});
 		
 		//list뽑기
-// 		$.ajax({
-// 			dataType : "json",
-// 			success : function(resp) {
+		$.ajax({
+			dataType : "json",
+			success : function(resp) {
 				
-// 				code = "";
-// 				$(resp).each(function(i, v) {
-// 					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
-// // 					alert(v.buyer_name);
-// 					code += "<tr>";
-// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_id + "</td>";
-// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
-// 					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_add1 + "</td>";
-// 					code += "</tr>";
-// 				});
-// 				body.html(code);
-// 				pagingArea.html(resp.pagingHTML);
-// 				pageTag.val("1");
-// 			},
-// 			error : function(errorResp) {
-// 				console.log(errorResp.stauts);
-// 			}
+				code = "";
+				$(resp).each(function(i, v) {
+					//tbody에 1행1열씩 반복되며 값을 넣어줘야함.
+// 					alert(v.buyer_name);
+					code += "<tr>";
+					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_id + "</td>";
+					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_name + "</td>";
+					code += "<td id='"+ v.buyer_id +"'>"+ v.buyer_add1 + "</td>";
+					code += "</tr>";
+				});
+				body.html(code);
+				pagingArea.html(resp.pagingHTML);
+				pageTag.val("1");
+			},
+			error : function(errorResp) {
+				console.log(errorResp.stauts);
+			}
 			
-// 		});
+		});
 		
 		//생성
 		var confirm = $('#confirm');

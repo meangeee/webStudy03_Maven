@@ -26,7 +26,8 @@ public class PageModulization extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {		
 		super.init(config);
 		//하드코딩안하려고
-		String serviceFile = getServletContext().getInitParameter("service");
+//		String serviceFile = getServletContext().getInitParameter("service");
+		String serviceFile = "/kr/or/ddit/servlet05/service.xml";
 		service = new Properties();
 		//xml읽어오려면 입력 stream이 필요함
 		//getClass 이servlet을 가져옴

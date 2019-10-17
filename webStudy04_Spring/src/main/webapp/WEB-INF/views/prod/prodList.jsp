@@ -2,28 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-<style type="text/css">
-.error {
-   color: red;
-}
-</style>
-<script type="text/javascript"
-   src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript"
-   src="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-   src="${pageContext.request.contextPath }/js/generateLprodAndBuyer.js"></script>
-</head>
-<body>
+
    <input style="width: 50px; height: 50px" type="image" src="<c:url value="/images/k.png" />"
    		onclick="location.href='?lang=ko';"
    />
@@ -129,5 +108,3 @@
    })
    
 </script>
-</body>
-</html>

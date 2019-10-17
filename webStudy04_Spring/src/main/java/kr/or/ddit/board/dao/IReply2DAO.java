@@ -2,9 +2,10 @@ package kr.or.ddit.board.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import kr.or.ddit.vo.PagingInfoVO;
 import kr.or.ddit.vo.Reply2VO;
-
 public interface IReply2DAO {
 	public int insertReply(Reply2VO reply);
 	public int selectReplyCount(PagingInfoVO<Reply2VO> pagingVO);

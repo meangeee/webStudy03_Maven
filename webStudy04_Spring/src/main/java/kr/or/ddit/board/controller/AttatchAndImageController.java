@@ -10,11 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,25 +32,20 @@ import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.wrapper.MultipartRequestWrapper;
 import kr.or.ddit.wrapper.PartWrapper;
 
-@CommandHandler
+@Controller
 public class AttatchAndImageController {
-	IBoardService service = new BoardServiceImpl();
+	@Inject
+	IBoardService service;
 	
 	File saveFolder = new File("d:/saveFiles");
 	
-	@URIMapping("/board/download.do")
-	public String download(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		//		save네임을가지고현재미들티어에있는 진ㅉ나 네임을 찾아
-//		그대상으로 개방 하고 뭐 카피를 떠서 ㅇ뭐요?!!?????!?!?!?!??!?!?!?!?!?!?!?!?!?!??!
-		String what = req.getParameter("what");
-		if(StringUtils.isBlank(what)) {
-			resp.sendError(400);
-			return null;
-		}
+	@RequestMapping("/board/download.do")
+	public String download(
+			@RequestParam(required=true) String what) {
 		Attatch2VO attatch = service.downloadAttatch(Integer.parseInt(what));
 		File downloadFile = new File(saveFolder, attatch.getAtt_savename());
-		resp.setContentType("application/octet-stream");
-		resp.setHeader("Content-Length", attatch.getAtt_filesize()+"");
+//		resp.setContentType("application/octet-stream");
+//		resp.setHeader("Content-Length", attatch.getAtt_filesize()+"");
 		// inline, attatchment
 		String filename = attatch.getAtt_filename();
 //		filename = URLEncoder.encode(filename, "UTF-8");

@@ -1,6 +1,7 @@
 package kr.or.ddit.board.dao;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.vo.Attatch2VO;
 import kr.or.ddit.vo.Board2VO;

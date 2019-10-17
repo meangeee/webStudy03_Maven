@@ -2,14 +2,21 @@ package kr.or.ddit.board.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Service;
+
 import kr.or.ddit.board.dao.IReply2DAO;
-import kr.or.ddit.board.dao.Reply2DAOImpl;
 import kr.or.ddit.enums.ServiceResult;
 import kr.or.ddit.vo.PagingInfoVO;
 import kr.or.ddit.vo.Reply2VO;
-
+@Service
 public class ReplyServiceImpl implements IReplyService {
-	IReply2DAO dao = new Reply2DAOImpl();
+	@Inject
+	IReply2DAO dao;
+	@Inject
+	SqlSessionTemplate sqlSession;
 	
 	@Override
 	public ServiceResult createReply(Reply2VO reply) {

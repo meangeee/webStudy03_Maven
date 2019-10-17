@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.ddit.wrapper.PartWrapper;
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -37,12 +38,13 @@ public class Board2VO implements Serializable{
 	
 	private List<Reply2VO> replyList;
 	private List<Attatch2VO> attatchList;
-	private PartWrapper[] bo_file;
-	public void setBo_file(PartWrapper[] bo_file) {
+	
+	private MultipartFile[] bo_file;
+	public void setBo_file(MultipartFile[] bo_file) {
 		this.bo_file = bo_file;
 		if(bo_file==null || bo_file.length==0) return;
 		attatchList = new ArrayList<>();
-		for(PartWrapper tmp : bo_file) {
+		for(MultipartFile tmp : bo_file) {
 			attatchList.add(new Attatch2VO(tmp));
 		}
 	}

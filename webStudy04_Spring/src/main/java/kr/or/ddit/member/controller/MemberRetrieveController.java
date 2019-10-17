@@ -81,7 +81,7 @@ public class MemberRetrieveController{ // Plain Old Java Object
 			MemberVO saved = service.retrieveMember(new MemberVO(who, null));
 			
 			model.addAttribute("member", saved);
-			String viewName = "member/memberView";
+			String viewName = "/member/memberView";
 			return viewName;
 		}
 }

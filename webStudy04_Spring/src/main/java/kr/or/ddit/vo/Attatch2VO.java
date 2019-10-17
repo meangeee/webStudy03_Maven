@@ -7,19 +7,19 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import kr.or.ddit.wrapper.PartWrapper;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class Attatch2VO implements Serializable{
-	public Attatch2VO(PartWrapper partWrapper){
-		this.partWrapper = partWrapper;
-		att_filename = partWrapper.getFileName();
-		att_mime = partWrapper.getContentType();
-		att_filesize = partWrapper.getSize();
+	public Attatch2VO(MultipartFile multipartFile){
+		this.partWrapper = multipartFile;
+		att_filename = multipartFile.getOriginalFilename();
+		att_mime = multipartFile.getContentType();
+		att_filesize = multipartFile.getSize();
 		att_fancysize = FileUtils.byteCountToDisplaySize(att_filesize);
 		att_savename = UUID.randomUUID().toString();
 	}
@@ -32,7 +32,7 @@ public class Attatch2VO implements Serializable{
 	private String att_fancysize;
 	private Integer att_downcount;
 	
-	private PartWrapper partWrapper;
+	private MultipartFile partWrapper;
 	public void saveFile(File saveFolder) throws IOException {
 		try(
 			InputStream is = partWrapper.getInputStream();

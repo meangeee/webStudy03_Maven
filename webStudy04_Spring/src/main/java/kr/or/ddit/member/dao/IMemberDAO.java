@@ -2,6 +2,8 @@ package kr.or.ddit.member.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.PagingInfoVO;
 /**
@@ -9,6 +11,7 @@ import kr.or.ddit.vo.PagingInfoVO;
  * CRUD
  *
  */
+@Repository //이거 왜 한다고요?
 public interface IMemberDAO {
 	
 	/**

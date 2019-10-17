@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+<!-- 화면의 갯수가 많아지면 definition도 많아지는데 이때는 와일드카드를 사용한다 -->
+   <definition name="super" template="/WEB-INF/views/template.jsp">
+      <put-attribute name="preScript" value="/includee/preScript.jsp"/>
+      <put-attribute name="topMenu" value="/includee/header.jsp"/>
+      <put-attribute name="leftMenu" value="/includee/left.jsp"/>
+      <put-attribute name="footer" value="/includee/footer.jsp"/>
+   </definition>
+   <definition name="member/*" extends="super" preparer="memberViewPreparer">
+      <put-attribute name="contents" value="/WEB-INF/views/member/{1}.jsp"/>
+   </definition>
+   
+   <definition name="prod/*" extends="super" preparer="prodViewPreparer">
+      <put-attribute name="contents" value="/WEB-INF/views/prod/{1}.jsp"/>
+   </definition>
+</tiles-definitions>
