@@ -29,7 +29,7 @@ public class BoardDeleteController {
 			case INVALIDPASSWORD: 
 				message = "비번 오류";
 				break;
-			case FAILED:
+			case FAILED: 
 				message = "서버 오류";
 				break;
 	
