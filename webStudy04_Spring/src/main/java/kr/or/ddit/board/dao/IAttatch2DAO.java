@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import kr.or.ddit.vo.Attatch2VO;
 import kr.or.ddit.vo.Board2VO;
 
+
+@Repository
 public interface IAttatch2DAO {
 	public int insertAttatches(Board2VO board);
 	public int insertAttatches(Board2VO board, SqlSession sqlSession);

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.vo.PagingInfoVO;
+
+@Repository
 public interface IBoard2DAO {
 	public int insertBoard(Board2VO board);
 	

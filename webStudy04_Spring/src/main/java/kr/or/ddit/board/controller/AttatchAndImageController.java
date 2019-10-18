@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Command;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.wrapper.MultipartRequestWrapper;
 import kr.or.ddit.wrapper.PartWrapper;
 
-@Controller
+@Command
 public class AttatchAndImageController {
 	@Inject
 	IBoardService service;

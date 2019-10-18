@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Command;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,11 +23,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.ddit.board.service.IReplyService;
 import kr.or.ddit.board.service.ReplyServiceImpl;
 import kr.or.ddit.enums.ServiceResult;
-import kr.or.ddit.mvc.annotation.URIMapping;
 import kr.or.ddit.vo.PagingInfoVO;
 import kr.or.ddit.vo.Reply2VO;
 
-@Controller
+@Command
 public class ReplyController {
 	IReplyService service = new ReplyServiceImpl();
 	
