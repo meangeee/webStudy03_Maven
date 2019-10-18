@@ -26,7 +26,7 @@ public class BoardDeleteController {
 		String viewName = "redirect:/board/boardView.do?what="+bo_noParam;
 		String message = null;
 		switch (result) {
-			case INVALIDPASSWORD:
+			case INVALIDPASSWORD: 
 				message = "비번 오류";
 				break;
 			case FAILED:
