@@ -17,4 +17,8 @@
    <definition name="prod/*" extends="super" preparer="prodViewPreparer">
       <put-attribute name="contents" value="/WEB-INF/views/prod/{1}.jsp"/>
    </definition>
+   
+   <definition name="board/*" extends="super" preparer="prodViewPreparer">
+      <put-attribute name="contents" value="/WEB-INF/views/board/{1}.jsp"/>
+   </definition>
 </tiles-definitions>

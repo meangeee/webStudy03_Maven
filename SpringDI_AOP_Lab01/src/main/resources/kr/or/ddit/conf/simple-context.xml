@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+	
+<!-- 	스프링 컨테이너 사용 단계 -->
+<!-- 	1. 컨테이너 구성 모듈의 추가(spring-context:core, context, bean, el) -->
+<!-- 	2. spring bean configuration file( bean metadata config file) 생성 -->
+<!-- 		1) 컨테이너가 관리할 객체(bean) 등록, class, id... -->
+<!-- 		2) 등록된 객체들 간의 의존관계 형성(DI:Dependency Injection) -->
+<!-- 	3. 어플리케이션 시작시점에 컨테이너 객체 생성(new) -->
+<!-- 	4. 컨테이너로부터 필요 객체 주입(getBean) -->
+<!-- 	5. 사용종료시 close -->
+
+<!-- 	** 의존성관계 형성 방법( DI 종류) -->
+<!-- 	1. setter Injection : property , p -->
+<!-- 	2. constructor Injection : constructor-arg , c -->
+	
+<!-- 	** 컨테이너의 종류 -->
+<!-- 	1. BeanFactory -->
+<!-- 	2. ApplicationContext -->
+<!-- 	3. ConfigurableApplicationContext -->
+<!-- 		1) ClassPathXmlApplicationContext -->
+<!-- 		2) GenericXmlApplicationContext("classpath:context.xml") -->
+<!-- 		   Smart Resource Loader 가 동작하므로, -->
+<!-- 		   	classpath: -->
+<!-- 		   	file: -->
+<!-- 		   접두어를 통해 동적으로 리소스를 검색하고 로딩함. -->
+<!-- 		3) AnnotationConfigApplicationContext(5.x fix) -->
+<!-- 	4. WebApplicationContext : 웹 어플용 -->
+		
+<!-- 	**컨테이너의 빈 관리 특성 -->
+<!-- 	1. 특별한 설정이 없는 한 singleton : scope -->
+<!-- 		1) singleton : 빈을 대상으로 객체를 하나만 운영. -->
+<!-- 		2) prototype : 주입시점에 주입될때마다 새로운 객체 생성. lazy init 사용과 비슷하다-->
+<!-- 		3) session/request : only web, -->
+<!-- 	2. 특별한 설정이 없는 한 모든 빈의 객체를 일시에 생성 -->
+<!-- 		lazy-init -->
+
+<!-- 	3. 빈의 객체 생성 순서 : depends-on="선행"
+		** 빈 객체의 생성 순서 : scope(prototype), lazy-init, depends-on -->
+
+
+	<bean init-method="init" lazy-init="false" id="mysqlDAO" class="kr.or.ddit.idol.dao.IdolSearchDAO_Mysql"></bean>
+	<!-- IdolSearchServiceImpl service1;-->
+	
+	<bean id="service1" class="kr.or.ddit.idol.service.IdolSearchServiceImpl">
+<!-- 		service1.setDao(new IdolSearchDAO_Mysql()); 밑에 코드가 이거임 -->
+		<property name="dao" ref="mysqlDAO"/>
+	</bean>
+	
+	<bean id="service2" class="kr.or.ddit.idol.service.IdolSearchServiceImpl">
+		<constructor-arg name="dao" ref="mysqlDAO" />
+	</bean> 
+	
+	<bean id="service3" class="kr.or.ddit.idol.service.IdolSearchServiceImpl" 
+		p:dao-ref="mysqlDAO"
+	/>
+	
+	<bean id="service4" class="kr.or.ddit.idol.service.IdolSearchServiceImpl"
+		c:dao-ref="mysqlDAO"
+	 />
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 	COC패러다임 -->
+	<bean id="variousDIVO1" class="kr.or.ddit.vo.VariousDIVO" 
+		c:bool="true"
+		c:ch="A"
+		c:num="23"
+		c:str="test"
+		c:file="classpath:kr/or/ddit/images/Jellyfish.jpg"	
+	/>
+	<bean id="variousDIVO2" class="kr.or.ddit.vo.VariousDIVO" 
+		p:bool="true"
+		p:ch="A"
+		p:num="23"
+		p:str="test"
+		p:file="classpath:kr/or/ddit/images/Jellyfish.jpg"	
+	/>
+
+</beans>

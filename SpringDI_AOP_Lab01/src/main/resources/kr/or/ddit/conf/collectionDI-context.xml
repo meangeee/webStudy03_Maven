@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<!-- 스키마 : beans, c, p, context, util -->
+	<!-- 재활용을 위해선 util이 필요함 -->
+	<!--이 자체로 하나의 bean임 = id와 scope를 설정하는 것 다만 초기 데이터를 설정 할 수 있음.-->
+	<!--list class 구현체 설정 기본값으로 arrayList로 되어있음 = 생략가능 -->
+	
+	<!-- 다른곳에서 불러오자 1.import -->
+<!-- 	<import resource="classpath:kr/or/ddit/conf/variousDI-context.xml"/> -->
+	
+	<util:list id="sampleList" scope="prototype" list-class="">
+		<ref bean="date"></ref>
+		<value>listText</value>
+	</util:list>
+	
+	<!-- set클래스 hash로 기본값임. 많이쓰는것들이 기본값 =coc -->
+	<util:set  id="sampleSet" set-class="java.util.LinkedHashSet">
+      <bean class="java.util.Date"/>
+      <value>text</value>
+   	</util:set>
+
+	
+	<util:map id="sampleMap">
+		<entry key="today">
+			<ref bean="date"/>
+		</entry>
+		<entry key="mapKey1" value="mapValue1" />
+		<entry key="variousDIVO">
+			<ref bean="variousDIVO1"/>
+		</entry>
+	</util:map>
+	
+	<!-- locaiton은 외부에있는 설정파일이 있다면 그때 여기다가 활용 -->
+	<util:properties id="sampleProps" location="classpath:kr/or/ddit/sercuredService.xml"> 
+		<prop key="key1">value1</prop>
+		<prop key="key2">value2</prop>
+	</util:properties>
+		
+	<!-- array는 동적으로 안됨 크기가 정해져있으니까 -->
+	<!-- 그래서 factory? -->
+<!--    FactoryBean으로 빈을 등록하는 경우, 해당 factoryBaen이 등록되지 않고  -->
+<!--    getObject 메소드 내에서 생성되는 객체가 빈으로 등록됨. -->
+	<bean id="sampleArray" class="kr.or.ddit.vo.StringArrayFactoryBean">
+	</bean>
+	
+	
+<!-- 	위에애를 sampleList에 넣어준다고요? -->
+	<bean id="vo2" class="kr.or.ddit.vo.CollectionDIVO"
+		p:list-ref="sampleList"
+		p:set-ref="sampleSet"
+		p:map-ref="sampleMap"
+		p:props-ref="sampleProps"
+		p:array-ref="sampleArray"
+	/>
+	
+	
+	<!-- 날짜 데이터 재사용 -->
+	<bean id="date" class="java.util.Date"></bean>
+	<bean id="vo1" class="kr.or.ddit.vo.CollectionDIVO">
+		<constructor-arg name="list">
+			<list>
+<!-- 				element를 넣어줘야함 -->
+				<ref bean="date"></ref>
+<!-- 				두번째 element를 추가하고 싶다면 value -->
+				<value>listText</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg name="set">
+			<set>
+<!-- 			element를 넣어줘야함 -->
+				<bean class="java.util.Date" />
+<!-- 				문자열을 넣어주고 싶다면 -->
+				<value>text</value>
+			</set>
+		</constructor-arg>
+		<constructor-arg name="map">
+			<map>
+<!-- 				map은 key와 value임으로 -->
+				<entry key="today">
+					<ref bean="date"/>
+				</entry>
+				<entry key="mapKey1" value="mapValue1" />
+			</map>
+		</constructor-arg>
+		<constructor-arg name="props">
+			<props>
+				<prop key="key1">value1</prop>
+				<prop key="key2">value2</prop>
+			</props>
+		</constructor-arg>
+		<constructor-arg>
+			<array>
+				<value>arrvalue1</value>
+				<value>arrvalue2</value>
+			</array>
+		</constructor-arg>
+	</bean>
+</beans>

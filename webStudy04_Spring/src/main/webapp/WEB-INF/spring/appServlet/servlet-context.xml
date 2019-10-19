@@ -1,78 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
+<beans:beans 
+	xmlns="http://www.springframework.org/schema/mvc"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
-   xmlns="http://www.springframework.org/schema/mvc"
-   xmlns:beans="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:c="http://www.springframework.org/schema/c"
-   xmlns:context="http://www.springframework.org/schema/context"
-   xmlns:p="http://www.springframework.org/schema/p"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-<!--    핸들러매핑, 어댑터, 뷰리저브, MessageConverter 등 
-      MVC모듈의 기본전략이  자동 등록됨. -->
-   <annotation-driven />
-   
-   <beans:bean id="IRVR" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-      p:prefix="/WEB-INF/views/"
-      p:suffix=".jsp"
-      p:order="2"
-   />
-   <beans:bean id="TVR" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
-      p:order="1"   
-   /> 
-   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
-      p:definitions="classpath:/kr/or/ddit/tiles/sample-definitions.xml"
-      p:preparerFactoryClass="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"
-   />
-   <!-- 일괄관리 어려울때 default로 사용  -->
-   <default-servlet-handler/>
-   
-<!--    3.파일업로드 처리 해주기 -->
-<!-- wrapper, 멀티파트파일 -->
-   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
-   
-   <context:component-scan base-package="kr.or.ddit" use-default-filters="false">
-      <context:include-filter type="annotation" 
-         expression="org.springframework.stereotype.Controller"/>
-      <context:include-filter type="annotation" 
-         expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-      <context:include-filter type="annotation" expression="kr.or.ddit.common.annotations.Preparer"/>
-   </context:component-scan>
-   
-   <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
-      p:basename="kr.or.ddit.msg.message"
-   />
-   
-   <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" 
-      p:cookieName="langCookie"
-      p:cookiePath="/"
-      p:cookieMaxAge="#{60*60*24*3}"
-   />
-   
-   <interceptors>
-      <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-         p:paramName="lang"
-      /> 
-      <!-- 일부매핑하고싶으면 -->
-      <interceptor>
-         <mapping path="/**/*.js"/>
-         <mapping path="/**/*.html"/>
-         <mapping path="/images/**"/>
-         <beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor"
-            p:cacheSeconds="0"
-         />
-      </interceptor>
-      <interceptor>
-         <mapping path="/mypage"/>
-         <beans:bean class="kr.or.ddit.common.interceptors.AuthenticationInterceptor"/>
-      </interceptor>
-      <!-- 위 에 js 같은 자원들 보호하기위한거 -->
-   </interceptors>
-   <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
-   
-   
-   
-   
+<!-- 	HandlerMapping/HandlerAdapter/ViewResolver/MessageConveter 등 -->
+<!-- 	MVC 모듈의 기본 전략이 자동 등록됨. -->
+	<annotation-driven />
+
+	<beans:bean id="IRVR" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/WEB-INF/views/"
+		p:suffix=".jsp"
+	/>
+	
+	<beans:bean id="TVR" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" 
+		p:order="1"
+	/>
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" 
+		p:definitions="classpath:/kr/or/ddit/tiles/sample-definitions.xml"
+		p:preparerFactoryClass="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"
+	/>
+	
+	<default-servlet-handler/>
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
+
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" 
+				expression="org.springframework.stereotype.Controller"/>		
+		<context:include-filter type="annotation" 
+				expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+		<context:include-filter type="annotation" 
+				expression="kr.or.ddit.common.annotations.Preparer"/>				
+	</context:component-scan>
+	
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
+		p:basename="kr.or.ddit.msg.message"
+	/>
+	
+	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+		p:cookieName="langCookie"
+		p:cookiePath="/"
+		p:cookieMaxAge="#{60*60*24*3}"
+	/>
+	
+	<interceptors>
+		<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" 
+			p:paramName="lang"
+		/>
+		<interceptor>
+			<mapping path="/**/*.js"/>
+			<mapping path="/**/*.html"/>
+			<mapping path="/**/*.css"/>
+			<mapping path="/images/**"/>
+			<beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor" 
+				p:cacheSeconds="0"
+			/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mypage"/>
+			<beans:bean class="kr.or.ddit.common.interceptors.AuthenticationInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
 </beans:beans>

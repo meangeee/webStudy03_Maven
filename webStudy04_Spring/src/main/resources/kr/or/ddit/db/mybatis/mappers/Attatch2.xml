@@ -16,7 +16,6 @@
 			    #{attach.att_savename},    #{attach.att_mime},    #{attach.att_filesize},
 			    #{attach.att_fancysize}
 			)
-		<!-- 뭐 때문에 이 쿼리가 필요하다고요? -->
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
@@ -24,8 +23,7 @@
 	<delete id="deleteAttatches" parameterType="Board2VO">
 		DELETE FROM ATTATCH2
 		WHERE BO_NO = #{bo_no}
-			  <if test="delAttaches!=null and delAttaches.length gt 0">
-				<!-- in연산자를 써야 함 이부분 조또 이해 못하겠어요. -->	
+			  <if test="delAttaches!=null and delAttaches.length gt 0">	
 				  AND ATT_NO IN 
 				  <foreach collection="delAttaches" 
 				  		item="delNo" open="(" close=")" separator=",">
@@ -50,3 +48,6 @@
 	</select>
 	
 </mapper>
+
+
+
