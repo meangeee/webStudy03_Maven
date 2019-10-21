@@ -6,7 +6,8 @@
    		size="512"
    />
    <sql id="searchFrag">
-      <where>
+   	  WHERE BOARD_TYPE = #{searchVO.board_type}
+   	  <trim prefixOverrides=" AND">
          <if test="searchMap!=null">
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchMap.searchWord)">
             <choose>
@@ -20,14 +21,16 @@
                   INSTR(BO_CONTENT, #{searchMap.searchWord})>0  
                </when>
                <otherwise>
+                (
                   BO_TITLE = #{searchMap.searchWord}                  
                   OR BO_WRITER = #{searchMap.searchWord}                  
                   OR BO_CONTENT LIKE '%'||#{searchMap.searchWord}||'%'
+               	)
                </otherwise>
             </choose>
             </if>
          </if>
-      </where>
+       </trim>
    </sql>
    
 <!--    <resultMap type="Board2VO" id="boardListMap" autoMapping="true"> -->

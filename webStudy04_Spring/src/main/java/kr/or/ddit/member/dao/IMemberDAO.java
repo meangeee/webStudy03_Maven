@@ -1,6 +1,7 @@
 package kr.or.ddit.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -49,4 +50,6 @@ public interface IMemberDAO {
 	 * @return 수정 성공 실패 여부를 확인할 row count
 	 */
 	public int deleteMember(MemberVO member);
+	
+	public void realDelete(Map<String, Object> paramMap);
 }

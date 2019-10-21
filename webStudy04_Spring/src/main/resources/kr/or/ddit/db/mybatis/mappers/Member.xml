@@ -119,6 +119,13 @@
 	MEM_DELETE = 'Y' 
 	WHERE MEM_ID = #{mem_id} 
   </delete>
+  
+  <update id="realDelete" parameterType="map" statementType="CALLABLE">
+  	{
+  		CALL PROC_DELETE(#{rowcnt,mode=OUT,javaType=java.lang.Integer,jdbcType=NUMERIC})
+  	}
+  </update>
+  
 </mapper>
 
 

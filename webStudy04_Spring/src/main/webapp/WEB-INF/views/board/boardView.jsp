@@ -1,28 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-<style type="text/css">
-	a{
-		cursor: pointer;
-	}
-</style>	
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${cPath }/toastmessage/css/jquery.toastmessage.css" />	
-<script type="text/javascript" src="${cPath }/toastmessage/jquery.toastmessage.js"></script>	
-</head>
-<body>
 	<h4>${board.board_name }</h4>
 	<table class="table table-bordered">
 		<tr>
@@ -30,7 +8,7 @@
 			<td>${board.bo_title }</td>
 		</tr>
 		<tr>
-			<th>작성자(${board.bo_pass })</th>
+			<th>작성자</th>
 			<td>${board.bo_writer }</td>
 		</tr>
 		<tr>
@@ -48,9 +26,9 @@
 		<tr>
 			<th>추천수</th>
 			<td>
-				<p id="likeCount">${board.bo_like } </p>
-				<c:if test="${likable}">
-					<input id="likeBtn" type="button" value="좋아요" />
+				<span id="likeArea">${board.bo_like }</span>
+				<c:if test="${likable }">
+					<button type="button" id="likeBtn">추천</button>
 				</c:if>
 			</td>
 		</tr>
@@ -83,7 +61,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<c:url value="/board/boardUpdate.do" var="updateURL">
+				<c:url value="/board/${board_type }/boardUpdate.do" var="updateURL">
 					<c:param name="what" value="${board.bo_no }" />
 				</c:url>
 				<input type="button" class="btn btn-info" value="수정" 
@@ -92,7 +70,7 @@
 				<input type="button" class="btn btn-info" value="삭제" 
 					data-toggle="modal" data-target="#deleteBoardModal"
 				/>
-				<c:url value="/board/boardInsert.do" var="insertURL">
+				<c:url value="/board/${board_type }/boardInsert.do" var="insertURL">
 					<c:param name="bo_parent" value="${board.bo_no }" />
 				</c:url>
 				<input type="button" class="btn btn-info"
@@ -107,9 +85,8 @@
 			</td>
 		</tr>
 	</table>
-	<form id="insertForm" action="${cPath }/board/replyInsert.do" method="post">
+	<form id="insertForm" action="${cPath }/board/${board.bo_no }/reply" method="post">
 		<input type="hidden" name="page" />
-		<input type="hidden" name="bo_no" value="${board.bo_no }" />
 		<input type="hidden" name="rep_ip" value="${pageContext.request.remoteAddr }"/>
 		<table class="table col-8 ml-4">
 			<tr>
@@ -136,13 +113,12 @@
 		
 		</tfoot>
 	</table>
-	<form id="listForm" action="${cPath }/board/replyList.do">
+	<form id="listForm" action="${cPath }/board/${board.bo_no }/reply" method="get">
 		<input type="hidden" name="page"/>
-		<input type="hidden" name="bo_no" value="${board.bo_no }"/>
 	</form>
-	<form id="deleteForm" action="${cPath }/board/replyDelete.do" method="post">
+	<form id="deleteForm" action="${cPath }/board/${board.bo_no }/reply" method="post">
+		<input type="hidden" name="_method" value="delete" />
 		<input type="hidden" name="page" />
-		<input type="hidden" name="bo_no" value="${board.bo_no }"/>
 		<input type="hidden" name="rep_no" />
 		<input type="hidden" name="rep_pass" />
 	</form>
@@ -156,8 +132,8 @@
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 		</div>
-	      <form action="${cPath }/board/boardDelete.do" method="post">
-	      	  <input type="hidden" name="bo_no" id="bo_no"  value="${board.bo_no }"/>
+	      <form action="${cPath }/board/${board_type }/boardDelete.do" method="post">
+	      	  <input type="hidden" name="bo_no" value="${board.bo_no }"/>
 		      <div class="modal-body">
 		          <div class="form-group">
 		            <input type="password" class="form-control" name="bo_pass" id="bo_pass" required placeholder="비밀번호"/>
@@ -180,9 +156,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="updateForm" action="${cPath }/board/replyUpdate.do" method="post">
+      <form id="updateForm" action="${cPath }/board/${board.bo_no }/reply" method="post">
+      		<input type="hidden" name="_method" value="put" />
       	  <input type="hidden" name="page" />	
-      	  <input type="hidden" name="bo_no" id="bo_no"  value="${board.bo_no }"/>
       	  <input type="hidden" name="rep_no" id="rep_no" />
 	      <div class="modal-body">
 	          <div class="form-group">
@@ -203,10 +179,30 @@
 </div>
 <script type="text/javascript" src="${cPath }/js/reply.js"></script>
 <script type="text/javascript">
-	var likeBtn = $("#likeBtn");
-	var likeCount =$("#likeCount");
 
 	let deleteBoardModal = $("#deleteBoardModal");
+	let likeArea = $("#likeArea");
+	let likeBtn = $("#likeBtn");
+	
+	likeBtn.on("click", function(){
+		$.ajax({
+			url : "${cPath}/board/${board_type}/boardLike.do",
+			data : {
+				what:${board.bo_no}
+			},
+			dataType : "text",
+			success : function(resp) {
+				if(resp=="OK"){
+					likeArea.text(parseInt(likeArea.text().trim())+1);
+					likeBtn.remove();
+				}
+			},
+			error : function(errorResp) {
+				console.log(errorResp.status);
+			}
+
+		});
+	});
 	deleteBoardModal.on("hidden.bs.modal", function(){
 		$(this).find("form").get(0).reset();
 	});
@@ -214,34 +210,7 @@
 		$(this).find("#bo_pass").focus();
 	});
 	
-	<c:if test="${not empty message }">
-		$(document).toastmessage('showWarningToast', '${message }');
-		<c:remove var="message" scope="session"/>
-	</c:if>
-	
-	
-	likeBtn.on("click", function(){
-		$.ajax({
-			url : "${cPath }/board/boardLike.do",
-			method : "post",
-			data : {
-				"bo_no" : ${board.bo_no}
-			},
-				
-			dataType : 'text',
-			success : function(resp) {
-// 				let tag = $("<p>").text(resp.bo_like);
-// 				$('#likeCount').html(tag);
-				if(resp=="OK"){
-					likeCount.text(parseInt(likeCount.text().trim())+1);
-					likeBtn.remove();
-				}
-			},
-			error : function(errorResp) {
-				console.log(errorResp.status);
-			}
-		});
-	})
 </script>
-</body>
-</html>
+
+
+

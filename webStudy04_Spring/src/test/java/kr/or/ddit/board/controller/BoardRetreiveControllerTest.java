@@ -26,7 +26,8 @@ public class BoardRetreiveControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mockMvc = MockMvcBuilders.webAppContextSetup(container).build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(container)
+				.build();
 	}
 
 	@Test

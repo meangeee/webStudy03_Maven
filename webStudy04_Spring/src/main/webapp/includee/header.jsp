@@ -7,7 +7,8 @@
 		<a href="${cPath }/prod">상품관리</a>
 		<a>거래처관리</a>
 		<a>알바생관리</a>
-		<a href="${cPath }/board/boardList.do">게시판</a>
+		<a href="${cPath }/board/B01/boardList.do">자유게시판</a>
+		<a href="${cPath }/board/B02/boardList.do">공지게시판</a>
 		<a>방명록</a>
 	</li>
 </ul>

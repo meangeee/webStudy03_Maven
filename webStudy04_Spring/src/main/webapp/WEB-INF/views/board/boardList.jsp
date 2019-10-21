@@ -2,30 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-<style type="text/css">
-	a{
-		cursor: pointer;
-	}
-</style>	
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-</head>
-<body>
 <!-- 행번호, 글번호, 제목, 작성자, 작성일, 조회수, 추천수 -->
 <!-- screensize : 7, blockSize : 5 -->
 <!-- 검색 조건 : 전체, 작성자, 제목, 내용 -->
-<h4>자유게시판 </h4>
+<h4>${board_type }</h4>
 <table class="table table-bordered">
 	<thead>
 		<tr>
@@ -76,7 +56,7 @@
 					<input type="submit" class="btn btn-info mr-2" value="검색" />
 					<input type="button" class="btn btn-info" 
 						value="새글쓰기" 
-						onclick="location.href='<c:url value="/board/boardInsert.do"/>';"
+						onclick="location.href='<c:url value="/board/${board_type }/boardInsert.do"/>';"
 					/>
 				</form>
 				<div id="pagingArea">
@@ -94,7 +74,7 @@
 	
 	listBody.on("click", "a", function(){
 		let bono = $(this).data("bono");
-		location.href="${cPath}/board/boardView.do?what="+bono;
+		location.href="${cPath}/board/${board_type}/boardView.do?what="+bono;
 	});
 	
 	$("[data-toggle='tooltip']").tooltip();
@@ -164,8 +144,6 @@
 	});
 	
 </script>
-</body>
-</html>
 
 
 
