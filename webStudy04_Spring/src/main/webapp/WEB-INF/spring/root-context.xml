@@ -19,6 +19,9 @@
 		<context:exclude-filter type="annotation" 
 				expression="org.springframework.web.bind.annotation.ControllerAdvice"/>		
 	</context:component-scan>
+
+	<util:set id="userList" value-type="SendVO" />
+	<util:list id="webSocketSessionList" value-type="org.springframework.web.socket.WebSocketSession"></util:list>
 </beans>
 
 

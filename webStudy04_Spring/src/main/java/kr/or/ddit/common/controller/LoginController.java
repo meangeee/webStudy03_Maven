@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.or.ddit.common.events.AuthenticateSuccessEvent;
 import kr.or.ddit.member.exception.NotAuthenticatedException;
 import kr.or.ddit.member.exception.UserNotFoundException;
 import kr.or.ddit.member.service.AuthenticateServiceImpl;
@@ -24,8 +27,19 @@ import kr.or.ddit.utils.CookieUtil;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
-public class LoginController {
+public class LoginController implements ApplicationEventPublisherAware{
 
+	@Inject
+	ApplicationEventPublisher publisher;
+	
+	@Override
+	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 	@RequestMapping(value = "/login")
 	public String loginForm() {
 //		String saveId = new CookieUtil(req).getCookieValue("idCookie");
@@ -71,7 +85,7 @@ public class LoginController {
 			}
 			idCookie.setMaxAge(maxAge);
 			resp.addCookie(idCookie);
-
+			publisher.publishEvent(new AuthenticateSuccessEvent(this, savedMember));
 			session.setAttribute("authMember", savedMember);// 로그인에 성공했다
 			// 이동방식
 			viewName = "redirect:/";
@@ -83,5 +97,6 @@ public class LoginController {
 		}
 		return viewName;
 	}
+
 
 }

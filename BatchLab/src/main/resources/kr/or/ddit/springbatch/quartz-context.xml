@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- job을 실행시킬 수 이쏘도록 detail등록 -->
+	<bean id="batchExecutionQuartzJob" class="kr.or.ddit.springbatch.BatchExecutionQuartzJob" />
+	<bean id="methodInvokingJobDetail" 
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="batchExecutionQuartzJob"
+		p:targetMethod="batchJobExecute"
+	/>
+	
+	<!-- 시간설정 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="methodInvokingJobDetail"
+		p:cronExpression="20 27 14 ? * *"
+	/>
+	
+	<!-- 얘 뭐하는 애? -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" 
+		p:triggers-ref="cronTrigger"
+	/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+

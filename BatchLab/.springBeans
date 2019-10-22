@@ -9,9 +9,23 @@
 	<configs>
 		<config>src/main/resources/kr/or/ddit/springtask/task-context.xml</config>
 		<config>src/main/resources/kr/or/ddit/quartz/quartz-context.xml</config>
+		<config>src/main/resources/kr/or/ddit/springbatch/batch-context.xml</config>
+		<config>src/main/resources/kr/or/ddit/springbatch/datasource-context.xml</config>
+		<config>src/main/resources/kr/or/ddit/springbatch/quartz-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
 	<configSets>
+		<configSet>
+			<name><![CDATA[batch-config]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/main/resources/kr/or/ddit/springbatch/batch-context.xml</config>
+				<config>src/main/resources/kr/or/ddit/springbatch/datasource-context.xml</config>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
 	</configSets>
 </beansProjectDescription>

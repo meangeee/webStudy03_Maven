@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 어노테이션 ? 주입을 받으려면이라고?? 뭐라고여ㅛ? -->
+	<context:annotation-config />
+	
+	<!-- embedded db설정 -->
+	<!-- datasource이름은 datasource로. -->
+		<!-- db를 쓰려면 schema정보가 필요 = table정보 -->
+		<!-- schema정보를 갖고있는  애를 불러옴-->
+   <jdbc:embedded-database id="realDataSource" type="HSQL">
+      <jdbc:script location="classpath:schema-all.sql" />
+      <jdbc:script location="classpath*:org/springframework/batch/core/schema-hsqldb.sql"/>
+   </jdbc:embedded-database>
+<!--    embedded테이블하나 완성 -->
+	
+	<!-- 얘가 가로챈다음에 실제 데이터 소스를 대신 ?? 뭐요?/ proxy뭐하는새끼에요 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource" 
+		c:realDataSource-ref="realDataSource"
+	/>
+	<!-- mybatis는 세션관리하려면 sqlsessionfactory해줘야하니까-->
+	<!-- 뭐 진짜 데이터인줄알고 proxy가 로그를 찍어준다는데 진짜데이터어쩌고가 무슨말이에요 -->
+	<!-- id bean은 왜 지우는데요. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" 
+		p:dataSource-ref="dataSource"
+		p:mapperLocations="classpath:kr/or/ddit/springbatch/mappers/*.xml"
+		p:typeAliasesPackage="kr.or.ddit.springbatch"
+	>
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration" 
+				p:lazyLoadingEnabled="true"
+				p:mapUnderscoreToCamelCase="true"
+			/>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 주입 받을 수 있는 구조 완성 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource"
+	/>
+		
+</beans>

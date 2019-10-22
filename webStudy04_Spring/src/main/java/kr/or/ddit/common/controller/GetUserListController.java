@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
 public class GetUserListController {
 	@RequestMapping(value="/getUserList.do", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
 	public Set<MemberVO> userList(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		Set<MemberVO> userList = 
 				(Set<MemberVO>) req.getServletContext().getAttribute("userList");
