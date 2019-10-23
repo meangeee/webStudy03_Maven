@@ -31,7 +31,7 @@ public class MemberDeleteController{
 	 	MemberVO authMember = (MemberVO) session.getAttribute("authMember");
 //	 	String password = req.getParameter("password");
 	 	MemberVO member = new MemberVO(authMember.getMem_id(), password);
-	 	
+
 	 	if(session.isNew()||authMember==null) {
 	 		resp.sendError(400);
 	 		return null;

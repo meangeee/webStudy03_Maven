@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <h4 class="text-center">${prod.prod_name }</h4>
 	<table class="table table-bordered">
@@ -107,14 +108,16 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<c:url value="/prod/prodUpdate.do" var="updateURL">
-					<c:param name="what" value="${prod.prod_id }"/>
-				</c:url>
+				<sec:authorize url="/prod/prodUpdate.do">
+					<c:url value="/prod/prodUpdate.do" var="updateURL">
+						<c:param name="what" value="${prod.prod_id }" />
+					</c:url>
 				<button type="button" class="btn btn-info"
-					onclick="location.href='${updateURL}';"
-				>상품 수정</button>
-			</td>
-		</tr>
+					onclick="location.href='${updateURL}';">
+					상품수정</button>
+			</sec:authorize>
+		</td>
+		</tr>  
 	</table>
 	<h4>구매 기록</h4>
 	<table>

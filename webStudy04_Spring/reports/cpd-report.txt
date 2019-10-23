@@ -1,0 +1,535 @@
+Found a 18 line (100 tokens) duplication in the following files: 
+Starting at line 100 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+Starting at line 131 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+
+			ServiceResult result = service.modifyReply(reply);
+			if(ServiceResult.OK.equals(result)) {
+				viewName = String.format(redirectPtrn, reply.getBo_no(), page);
+			}else {
+				messageMap.put("failed", true);
+				messageMap.put("message", "비번 오류");
+			}	
+		}else {
+			messageMap.put("failed", true);
+			messageMap.put("message", "입력 데이터 확인 필요");
+
+		}
+		if(messageMap.size()>1) {
+			return messageMap;
+		}else {
+			return list(page, reply.getBo_no());
+		}
+	}
+=====================================================================
+Found a 10 line (74 tokens) duplication in the following files: 
+Starting at line 56 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+Starting at line 28 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+
+			@RequestParam(required=false) String searchType,
+			@RequestParam(required=false) String searchWord,
+			@RequestParam(name="page", required=false, defaultValue="1") int currentPage
+			, Model model
+			){
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("searchType", searchType);
+		searchMap.put("searchWord", searchWord);
+		
+		PagingInfoVO<Board2VO> pagingVO = 
+=====================================================================
+Found a 9 line (60 tokens) duplication in the following files: 
+Starting at line 92 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+Starting at line 123 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+
+			, @Validated(UpdateHint.class) Reply2VO reply
+			, Errors errors, HttpServletResponse resp
+			) throws IOException {
+		Map<String, Object> messageMap = new HashMap<>();
+		messageMap.put("reply", reply);
+		boolean valid = !errors.hasErrors();
+		String viewName = null;
+		if(valid) {
+			ServiceResult result = service.modifyReply(reply);
+=====================================================================
+Found a 11 line (59 tokens) duplication in the following files: 
+Starting at line 110 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+Starting at line 136 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+
+	public ServiceResult modifyBoard(Board2VO board) {
+		Board2VO savedBoard = retrieveBoard(board);
+		ServiceResult result = null;
+		String bo_pass = null;
+		try {
+			bo_pass = encryptSha512(board.getBo_pass());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (savedBoard.getBo_pass().equals(bo_pass)) {
+=====================================================================
+Found a 7 line (53 tokens) duplication in the following files: 
+Starting at line 54 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+Starting at line 83 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+
+	public String list(
+			@PathVariable(required=true) String board_type,
+			@RequestParam(required=false) String searchType,
+			@RequestParam(required=false) String searchWord,
+			@RequestParam(name="page", required=false, defaultValue="1") int currentPage
+			, Model model
+			){
+=====================================================================
+Found a 13 line (53 tokens) duplication in the following files: 
+Starting at line 50 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ComboServlet.java
+Starting at line 90 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ComboServlet.java
+
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      String src = request.getParameter("src");
+      String target = request.getParameter("target");
+      if (src == null) {
+         src = "";
+      }
+
+      if (target == null) {
+         target = "";
+      }
+
+      String leftPath = this.application.getRealPath(src.trim());
+=====================================================================
+Found a 9 line (48 tokens) duplication in the following files: 
+Starting at line 98 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 114 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+
+				json.append(marshallingObjectToJson(list.get(i))+",");
+			}
+			int lastIndex = json.lastIndexOf(",");
+			if(lastIndex==json.length()-1) 
+					json.deleteCharAt(lastIndex);
+		}
+		json.append("]");
+		return json.toString();
+	}
+=====================================================================
+Found a 11 line (48 tokens) duplication in the following files: 
+Starting at line 48 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\vo\DataBasePropertyVO.java
+Starting at line 89 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\vo\ProdVO.java
+
+		result = prime * result + ((property_name == null) ? 0 : property_name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+=====================================================================
+Found a 10 line (46 tokens) duplication in the following files: 
+Starting at line 47 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\service\ProdServiceImpl.java
+Starting at line 84 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\service\ProdServiceImpl.java
+
+		int cnt = dao.insertProd(prod);
+		if (cnt > 0) {
+			try {
+				prod.transfer(saveFolder);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e); // 이거 요ㅐ요?
+			}
+			result = ServiceResult.OK;
+		} else {
+=====================================================================
+Found a 8 line (45 tokens) duplication in the following files: 
+Starting at line 35 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardInsertController.java
+Starting at line 39 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardUpdateController.java
+
+			@Validated(InsertHint.class) @ModelAttribute("board") Board2VO board
+			, Errors errors, Model model) {
+		
+		boolean valid = !errors.hasErrors();
+		String viewName = null;
+		String message = null;
+		if (valid) {
+			ServiceResult result = service.createBoard(board);
+=====================================================================
+Found a 6 line (43 tokens) duplication in the following files: 
+Starting at line 27 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+Starting at line 70 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+
+	public String memberList(
+			@RequestParam(required=false) String searchType,
+			@RequestParam(required=false) String searchWord,
+			@RequestParam(name="page", required=false, defaultValue="1") int currentPage
+			, Model model
+			) {
+=====================================================================
+Found a 5 line (42 tokens) duplication in the following files: 
+Starting at line 56 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+Starting at line 71 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+
+			@RequestParam(required=false) String searchType,
+			@RequestParam(required=false) String searchWord,
+			@RequestParam(name="page", required=false, defaultValue="1") int currentPage
+			, Model model
+			){
+=====================================================================
+Found a 5 line (42 tokens) duplication in the following files: 
+Starting at line 85 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+Starting at line 28 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+
+			@RequestParam(required=false) String searchType,
+			@RequestParam(required=false) String searchWord,
+			@RequestParam(name="page", required=false, defaultValue="1") int currentPage
+			, Model model
+			){
+=====================================================================
+Found a 9 line (41 tokens) duplication in the following files: 
+Starting at line 26 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\BoardViewPreparer.java
+Starting at line 25 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\MemberViewPreparer.java
+Starting at line 20 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\ProdViewPreparer.java
+
+		MenuVO menu2 = new MenuVO("게시판생성","/board/boardInsert.do");
+		List<MenuVO> menuList = Arrays.asList(menu1, menu2);
+		Map<String, Object> requestScope =
+				req.getContext(Request.APPLICATION_SCOPE);
+		requestScope.put("menuList", menuList);
+	}
+	
+	
+}
+=====================================================================
+Found a 11 line (36 tokens) duplication in the following files: 
+Starting at line 79 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\service\MemberServiceImpl.java
+Starting at line 98 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\service\MemberServiceImpl.java
+
+			int cnt = dao.updateMember(member);
+			if (cnt > 0)
+				result = ServiceResult.OK;
+			else
+				result = ServiceResult.FAILED;
+		} catch (NotAuthenticatedException e) {
+			// 비번이 틀렸을 경우 실행
+			result = ServiceResult.INVALIDPASSWORD;
+		}
+		return result;
+	}
+=====================================================================
+Found a 4 line (34 tokens) duplication in the following files: 
+Starting at line 69 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+Starting at line 100 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+Starting at line 131 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\ReplyController.java
+
+			ServiceResult result = service.createReply(reply);
+			if(ServiceResult.OK.equals(result)) {
+				viewName = String.format(redirectPtrn, reply.getBo_no(), page);
+			}else {
+=====================================================================
+Found a 4 line (34 tokens) duplication in the following files: 
+Starting at line 62 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 85 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+
+ 			}
+ 			int lastIndex = json.lastIndexOf(",");
+ 			if(lastIndex == json.length()-1) json.deleteCharAt(lastIndex);
+			json.append("}");
+=====================================================================
+Found a 13 line (34 tokens) duplication in the following files: 
+Starting at line 28 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\test\java\kr\or\ddit\board\controller\BoardInsertControllerTest.java
+Starting at line 22 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\test\java\kr\or\ddit\board\controller\BoardRetreiveControllerTest.java
+
+public class BoardInsertControllerTest {
+   
+   @Inject
+   WebApplicationContext container;
+   MockMvc mockMvc; //mockMvc 2개생성 케이스가 2개 있으니까 
+   
+   @Before
+   public void setUp() throws Exception {
+      mockMvc = MockMvcBuilders.webAppContextSetup(container).build();
+   }
+
+   @Test
+   public void testBoardForm() throws Exception {
+=====================================================================
+Found a 10 line (33 tokens) duplication in the following files: 
+Starting at line 89 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet01\CalculatorServlet.java
+Starting at line 46 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet01\UserAgentServlet.java
+
+		html.append("</body>");
+		html.append("</html>");
+
+		try (PrintWriter out = resp.getWriter();) {
+			out.println(html);
+		}
+
+	}
+
+}
+=====================================================================
+Found a 6 line (32 tokens) duplication in the following files: 
+Starting at line 47 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ImageFolderServlet.java
+Starting at line 54 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ImageFolderServlet.java
+
+		if(first.equals("COPY")) {
+			try (
+        			FileInputStream input = new FileInputStream(targetPath);
+        			FileOutputStream output = new FileOutputStream(put);) {
+        			IOUtils.copy(input, output);
+        	}
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 22 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\common\security\CustomAuthenticateSuccessHandler.java
+Starting at line 23 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\common\security\CustomLogoutSuccessHandler.java
+
+	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		MemberVO authMember = (MemberVO) authentication.getPrincipal();
+		publisher.publishEvent(new AuthenticateSuccessEvent(this, authMember));
+=====================================================================
+Found a 13 line (30 tokens) duplication in the following files: 
+Starting at line 30 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\AttatchAndImageController.java
+Starting at line 40 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+
+public class AttatchAndImageController {
+	@Inject
+	IBoardService service;
+	@Inject
+	WebApplicationContext container;
+	ServletContext application;
+	
+	@PostConstruct
+	public void init() {
+		application = container.getServletContext();
+	}
+	
+	@RequestMapping("/board/download.do")
+=====================================================================
+Found a 15 line (30 tokens) duplication in the following files: 
+Starting at line 47 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardInsertController.java
+Starting at line 55 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardUpdateController.java
+
+				break;
+			default:
+				message = "서버 오류";
+				viewName = "board/boardForm";
+				break;
+			}
+							
+		} else {
+			viewName = "board/boardForm";
+		}
+		
+		model.addAttribute("message", message);
+		return viewName;
+	}
+}
+=====================================================================
+Found a 5 line (29 tokens) duplication in the following files: 
+Starting at line 90 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardRetreiveController.java
+Starting at line 76 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\controller\MemberRetrieveController.java
+
+		list(board_type, searchType, searchWord, currentPage, model);
+		return (PagingInfoVO<MemberVO>) model.asMap().get("pagingVO");
+	}
+	
+	@RequestMapping("boardView.do")
+=====================================================================
+Found a 12 line (29 tokens) duplication in the following files: 
+Starting at line 125 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+Starting at line 162 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+
+				result = ServiceResult.OK;
+			} else {
+				result = ServiceResult.FAILED;
+			}
+		} else {
+			result = ServiceResult.INVALIDPASSWORD;
+		}
+		return result;
+	}
+
+	@Override // AOP
+	public ServiceResult removeBoard(Board2VO board) {
+=====================================================================
+Found a 11 line (29 tokens) duplication in the following files: 
+Starting at line 65 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdInsertController.java
+Starting at line 60 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdUpdateController.java
+
+				viewName = "redirect:/prod/"+ prod.getProd_id();
+				break;
+			}
+		} else {
+			viewName = "prod/prodForm";
+		}
+
+		model.addAttribute("message", message);
+
+		return viewName;
+	}
+=====================================================================
+Found a 3 line (29 tokens) duplication in the following files: 
+Starting at line 32 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdUpdateController.java
+Starting at line 24 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdViewController.java
+
+	public String updateForm(@RequestParam(name = "what", required = true) String prod_id, Model model) {
+		ProdVO prod = service.retrieveProd(prod_id);
+		model.addAttribute("vo", prod);
+=====================================================================
+Found a 7 line (29 tokens) duplication in the following files: 
+Starting at line 19 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ImageViewerModel2Servlet.java
+Starting at line 28 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet03\FileManagerServlet.java
+
+public class ImageViewerModel2Servlet extends HttpServlet{
+	private ServletContext application;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		application = getServletContext();
+=====================================================================
+Found a 4 line (29 tokens) duplication in the following files: 
+Starting at line 84 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 98 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 114 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+
+			); 
+		}
+		int lastIndex = json.lastIndexOf(",");
+		if(lastIndex == json.length()-1) json.deleteCharAt(lastIndex);
+=====================================================================
+Found a 11 line (28 tokens) duplication in the following files: 
+Starting at line 81 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+Starting at line 23 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\ReplyServiceImpl.java
+
+		cnt += processAttatch(board);
+		ServiceResult result = null;
+		if (cnt > 0)
+			result = ServiceResult.OK;
+		else
+			result = ServiceResult.FAILED;
+		return result;
+	}
+
+	@Override
+	public Board2VO retrieveBoard(Board2VO board) {
+=====================================================================
+Found a 9 line (28 tokens) duplication in the following files: 
+Starting at line 11 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\common\events\AuthenticateSuccessEvent.java
+Starting at line 11 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\common\events\LogoutSuccessEvent.java
+
+	public AuthenticateSuccessEvent(Object target, MemberVO authMember) {
+		super(target);
+		this.authMember = authMember;
+	}
+	
+	public MemberVO getAuthMember() {
+		return authMember;
+	}
+}
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 62 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 99 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+Starting at line 115 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\utils\MarshallingUtils.java
+
+ 			}
+ 			int lastIndex = json.lastIndexOf(",");
+ 			if(lastIndex == json.length()-1) json.deleteCharAt(lastIndex);
+=====================================================================
+Found a 7 line (27 tokens) duplication in the following files: 
+Starting at line 21 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardInsertController.java
+Starting at line 22 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\controller\BoardUpdateController.java
+
+public class BoardInsertController {
+	@Inject
+	IBoardService service;
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public String boardForm(
+			@PathVariable(required=true) String board_type
+=====================================================================
+Found a 6 line (27 tokens) duplication in the following files: 
+Starting at line 42 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\ReplyServiceImpl.java
+Starting at line 51 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\ReplyServiceImpl.java
+
+		int cnt = dao.updateReply(reply);
+		ServiceResult result = null;
+		if(cnt > 0) result = ServiceResult.OK;
+		else result = ServiceResult.INVALIDPASSWORD;
+		return result;
+	}
+=====================================================================
+Found a 8 line (27 tokens) duplication in the following files: 
+Starting at line 6 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\enums\BrowserType.java
+Starting at line 6 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\enums\OsType.java
+Starting at line 19 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet01\CalculatorServlet.java
+
+   BrowserType(String name){
+      this.name = name;
+   }
+   private String name;
+   public String getName() {
+      return this.name;
+   }
+   public static BrowserType searchBrowser(String userAgent){
+=====================================================================
+Found a 6 line (27 tokens) duplication in the following files: 
+Starting at line 50 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdInsertController.java
+Starting at line 46 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\prod\controller\ProdUpdateController.java
+
+		boolean vaild = !errors.hasErrors();
+
+		String viewName = null;
+		String message = null;
+		if (vaild) {
+			ServiceResult result = service.createProd(prod);
+=====================================================================
+Found a 6 line (26 tokens) duplication in the following files: 
+Starting at line 10 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\exception\CommonException.java
+Starting at line 10 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\exception\NotAuthenticatedException.java
+Starting at line 9 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\member\exception\UserNotFoundException.java
+
+	public CommonException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CommonException(String message, Throwable cause) {
+=====================================================================
+Found a 6 line (26 tokens) duplication in the following files: 
+Starting at line 43 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\vo\DataBasePropertyVO.java
+Starting at line 83 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\vo\ProdVO.java
+
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((property_name == null) ? 0 : property_name.hashCode());
+=====================================================================
+Found a 8 line (25 tokens) duplication in the following files: 
+Starting at line 81 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+Starting at line 183 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\BoardServiceImpl.java
+Starting at line 23 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\board\service\ReplyServiceImpl.java
+
+		cnt += processAttatch(board);
+		ServiceResult result = null;
+		if (cnt > 0)
+			result = ServiceResult.OK;
+		else
+			result = ServiceResult.FAILED;
+		return result;
+	}
+=====================================================================
+Found a 6 line (25 tokens) duplication in the following files: 
+Starting at line 27 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ImageFolderServlet.java
+Starting at line 49 of C:\Users\PC-24\git\webStudy03_Maven\webStudy04_Spring\src\main\java\kr\or\ddit\servlet02\ImageViewerModel2Servlet.java
+
+		rd.forward(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

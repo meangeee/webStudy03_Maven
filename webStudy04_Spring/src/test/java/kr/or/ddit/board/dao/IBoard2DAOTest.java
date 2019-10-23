@@ -87,12 +87,18 @@ public class IBoard2DAOTest {
 
 	@Test
 	public void testSelectBoardCount() {
+		Board2VO searchVO = new Board2VO();
+		searchVO.setBoard_type("B01");
+		pagingVO.setSearchVO(searchVO);
 		int count = boardDAO.selectBoardCount(pagingVO);
 		assertThat(count, greaterThanOrEqualTo(100));
 	}
 
 	@Test
 	public void testSelectBoardList() {
+		Board2VO searchVO = new Board2VO();
+		searchVO.setBoard_type("B01");
+		pagingVO.setSearchVO(searchVO);
 		pagingVO.setCurrentPage(1);
 		List<Board2VO> list = boardDAO.selectBoardList(pagingVO);
 		assertThat(list, not(hasItem(new Board2VO(606))));

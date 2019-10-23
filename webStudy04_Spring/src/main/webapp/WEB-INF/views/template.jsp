@@ -34,6 +34,8 @@
 <c:if test="${not empty message }">
 $(document).toastmessage('showWarningToast', '${message }');
 </c:if>
+
+
 </script>
 </body>
 </html>

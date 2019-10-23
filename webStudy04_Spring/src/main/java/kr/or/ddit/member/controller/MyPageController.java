@@ -4,6 +4,7 @@ package kr.or.ddit.member.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,9 @@ public class MyPageController {
 	IMemberService service;
 
 	@RequestMapping("/mypage")
-	public String doGet(HttpSession session, Model model) {
+	public String doGet(Authentication authentication , Model model) {
 		String viewName = null;
-		MemberVO authMember = (MemberVO) session.getAttribute("authMember");
+		MemberVO authMember = (MemberVO) authentication.getPrincipal();
 		MemberVO savedMember = service.retrieveMember(authMember);
 		model.addAttribute("savedMember", savedMember);
 		viewName = "member/mypage";

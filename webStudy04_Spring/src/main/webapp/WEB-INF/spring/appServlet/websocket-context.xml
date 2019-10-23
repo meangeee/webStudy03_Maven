@@ -8,8 +8,10 @@
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd">
 	
 	<bean id="echoHandler" class="kr.or.ddit.websocket.EchoHandler"></bean>
+<!-- 	<bean id="pushMessageHandler" class="kr.or.ddit.websocket.PushMessageHandler"></bean> -->
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+<!-- 		<websocket:mapping handler="pushMessageHandler" path="/echo"/> -->
 	</websocket:handlers>
-
+	
 </beans>

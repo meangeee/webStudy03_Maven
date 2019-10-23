@@ -32,7 +32,7 @@ public class BoardRetreiveControllerTest {
 
 	@Test
 	public void testList() throws Exception {
-		mockMvc.perform(get("/board/boardList.do")
+		mockMvc.perform(get("/board/B01/boardList.do")
 						.param("page", "2")
 				)
 				.andExpect(status().isOk())

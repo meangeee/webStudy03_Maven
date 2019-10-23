@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans 
    xmlns="http://www.springframework.org/schema/mvc"
-    xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:beans="http://www.springframework.org/schema/beans"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:c="http://www.springframework.org/schema/c"
    xmlns:context="http://www.springframework.org/schema/context"
@@ -9,11 +9,12 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-
-<!--    HandlerMapping/HandlerAdapter/ViewResolver/MessageConveter 등 -->
-<!--    MVC 모듈의 기본 전략이 자동 등록됨. -->
+   
+<!--    HandlerMapping/HandlerAdapter/ViewResolver/MessageConveter등 -->
+<!--    MVC모듈의 기본전략이 자동등록됨 MVC패턴구현에 필요한 기본전략들을 자동등록해주는 설정 -->
    <annotation-driven />
-
+   
+<!--    언제나 가장 마지막 순서여야 한다 view컴포넌트를 특정영역으로 별도 관리하기 위한 viewResolver등록 -->
    <beans:bean id="IRVR" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
       p:prefix="/WEB-INF/views/"
       p:suffix=".jsp"
@@ -23,61 +24,60 @@
       p:order="1"
    />
    
+   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
+      p:definitions="classpath:/kr/or/ddit/tiles/*-definitions.xml"
+      p:preparerFactoryClass="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"
+   />
+   
    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" 
       p:order="2"
    />
    
-   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" 
-      p:definitions="classpath:/kr/or/ddit/tiles/sample-definitions.xml"
-      p:preparerFactoryClass="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"
-   />
-   
-   <beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></beans:bean>
-   
-   <beans:bean id="downloadView" class="kr.or.ddit.board.view.DownloadView"></beans:bean>
+   <!--    우리대신에 모델데이터를 마샬링해주는 view jsonView를 이용해서 view를 해결--> 
+<!--    <beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />  -->
+   <beans:bean id="downloadView" class="kr.or.ddit.board.view.DownloadView" /> 
    
    <default-servlet-handler/>
    
-   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
-
+   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+   
    <context:component-scan base-package="kr.or.ddit" use-default-filters="false">
-      <context:include-filter type="annotation" 
-            expression="org.springframework.stereotype.Controller"/>      
-      <context:include-filter type="annotation" 
-            expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-      <context:include-filter type="annotation" 
-            expression="kr.or.ddit.common.annotations.Preparer"/>            
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+      <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+      <context:include-filter type="annotation" expression="kr.or.ddit.common.annotations.Preparer"/>
+      
    </context:component-scan>
    
    <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
       p:basename="kr.or.ddit.msg.message"
    />
-   
-   <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
-      p:cookieName="langCookie"
+   <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" 
+      p:cookieName="langCookie" 
       p:cookiePath="/"
       p:cookieMaxAge="#{60*60*24*3}"
    />
    
+<!--    자동으로 매핑임 <mapping path="/**/*.js"/>   제이쿼리 파일을 상관없이 모두다  -->
+<!-- p:cacheSeconds="0"캐시를 남기지마라 정적자원은 캐시를 남기지 않도록 설정-->
    <interceptors>
       <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" 
          p:paramName="lang"
       />
       <interceptor>
-         <mapping path="/**/*.js"/>
-         <mapping path="/**/*.html"/>
-         <mapping path="/**/*.css"/>
+         <mapping path="/**/*.js"/>      
+         <mapping path="/**/*.html"/>      
          <mapping path="/images/**"/>
-         <beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor" 
+         <beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor"
             p:cacheSeconds="0"
-         />
+         />      
       </interceptor>
-      <interceptor>
-         <mapping path="/mypage"/>
-         <beans:bean class="kr.or.ddit.common.interceptors.AuthenticationInterceptor" />
-      </interceptor>
+      
    </interceptors>
    
    <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+   
+<!--    requestMapping -->
+   <view-controller path="/login" view-name="login/loginForm"/>
+   <view-controller path="/" view-name="index"/>
+<!--    i18n 국제화를 지원하는 패키지 l10n -->
 </beans:beans>
-

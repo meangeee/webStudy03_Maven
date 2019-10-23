@@ -26,15 +26,16 @@ public class ImageServlet extends HttpServlet {
       String imageName = req.getParameter("image");
 
       int status = 200;
-
+      File imgFile = null;
       if (imageName == null || imageName.trim().length() == 0) {
          status = HttpServletResponse.SC_BAD_REQUEST;
+      }else {
+    	  imgFile = new File(folder, imageName);
+    	  if (!imgFile.exists()) {
+    		  status = HttpServletResponse.SC_NOT_FOUND;
+    	  }
       }
 
-      File imgFile = new File(folder, imageName);
-      if (!imgFile.exists()) {
-         status = HttpServletResponse.SC_NOT_FOUND;
-      }
       if (status == 200) {
     	 Cookie imageCookie = CookieUtil.createCookie("imageCookie", imageName, 
     			 req.getContextPath(), TextType.PATH ,60*60*24*7);

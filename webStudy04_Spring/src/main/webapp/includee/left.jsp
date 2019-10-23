@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<form id="leftForm" action="<%=request.getContextPath()%>/module/layout.do">
-	<input type="hidden" name="command"/>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<form id="leftForm"
+	action="<%=request.getContextPath()%>/module/layout.do">
+	<input type="hidden" name="command" />
 </form>
 
 <ul>
@@ -16,9 +18,16 @@
 </ul>
 
 <ul>
-	<c:forEach var="menu" items="${menuList }">
-		<li><a href="<c:url value="${menu.menuURL }" />">${menu.menuText }</a></li>
+	<c:forEach items="${menuList }" var="menu">
+		<sec:authorize url="${menu.menuURL }">
+			<li><a href="<c:url value='${menu.menuURL }'/>">${menu.menuText }</a></li>
+		</sec:authorize>
 	</c:forEach>
+</ul>
+<!-- 접속자 리스트 -->
+<!-- /pushmessage -->
+<ul>
+
 </ul>
 <script type="text/javascript">
 	//계속해서 트레벌싱하는 상황을 막으려고

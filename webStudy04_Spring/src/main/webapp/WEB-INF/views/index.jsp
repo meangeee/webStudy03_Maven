@@ -2,20 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
-<body>
-	<form name="logoutForm"
-		action="${pageContext.request.contextPath}/logout" method="post">
-
-	</form>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="authMember"/>
+</sec:authorize>
+	
 	<c:choose>
 		<c:when test="${not empty authMember }">
 			<a href="${cPath}/mypage">${authMember.mem_name}님
@@ -90,31 +81,3 @@
    })
 
 </script>
-
-
-	<!-- <script type="text/javascript"> -->
-	<!--    var userListArea = $("#userListArea");  -->
-	<!--    setInterval(() => { -->
-	<!--       $.ajax({ -->
-	<%--          url : "${cPath}/getUserList.do", --%>
-	<!--          dataType : "json", -->
-	<!--          success : function(resp) { -->
-	<!--             var liTags = []; -->
-	<!--             $(resp).each(function(){ -->
-	<!--                let liTag = $("<li>").text( -->
-	<!--                            $(this).prop("mem_name") -->
-	<!--                         ); -->
-	<!--                liTags.push(liTag); -->
-	<!--             }); -->
-	<!--             userListArea.html(liTags); -->
-	<!--          }, -->
-	<!--          error : function(err) { -->
-	<!--             console.log(err.status); -->
-	<!--          } -->
-
-	<!--       }); -->
-	<!--    }, 2000); -->
-
-	<!-- </script> -->
-</body>
-</html>
