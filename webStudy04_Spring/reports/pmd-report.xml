@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.13.0" timestamp="2019-10-24T11:50:44.830">
+<file name="src/main/java/kr/or/ddit/board/controller/BoardRetreiveController.java">
+<violation beginline="123" endline="123" begincolumn="0" endcolumn="0" rule="AvoidReassigningParameters" ruleset="pmd-eclipse" package="kr.or.ddit.board.controller" class="BoardRetreiveController" priority="2">
+RULE#5:Reassigning values to parameters is a questionable practice
+</violation>
+<violation beginline="123" endline="123" begincolumn="0" endcolumn="0" rule="AvoidReassigningParameters" ruleset="pmd-eclipse" package="kr.or.ddit.board.controller" class="BoardRetreiveController" priority="2">
+RULE#5:Reassigning values to parameters is a questionable practice
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/board/controller/ReplyController.java">
+<violation beginline="57" endline="57" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.board.controller" class="ReplyController" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="57" endline="57" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.board.controller" class="ReplyController" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/board/service/BoardServiceImpl.java">
+<violation beginline="33" endline="33" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.service" class="BoardServiceImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="33" endline="33" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.service" class="BoardServiceImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="35" endline="35" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.service" class="BoardServiceImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="35" endline="35" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.service" class="BoardServiceImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/common/controller/FileUploadTestController.java">
+<violation beginline="45" endline="45" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.controller" class="FileUploadTestController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="45" endline="45" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.controller" class="FileUploadTestController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.controller" class="FileUploadTestController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.controller" class="FileUploadTestController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/common/events/AuthenticateSuccessEvent.java">
+<violation beginline="8" endline="8" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="AuthenticateSuccessEvent" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="8" endline="8" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="AuthenticateSuccessEvent" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/common/events/CustomEventListener.java">
+<violation beginline="34" endline="34" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="CustomEventListener" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="34" endline="34" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="CustomEventListener" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/common/events/LogoutSuccessEvent.java">
+<violation beginline="8" endline="8" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="LogoutSuccessEvent" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="8" endline="8" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.common.events" class="LogoutSuccessEvent" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/member/controller/IdCheckController.java">
+<violation beginline="38" endline="38" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.member.controller" class="IdCheckController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="38" endline="38" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.member.controller" class="IdCheckController" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/prod/controller/ProdListController.java">
+<violation beginline="25" endline="25" begincolumn="0" endcolumn="0" rule="UnusedPrivateField" ruleset="pmd-eclipse" package="kr.or.ddit.prod.controller" class="ProdListController" priority="3">
+RULE#34:Detects when a private field is declared and/or assigned a value, but not used.
+</violation>
+<violation beginline="25" endline="25" begincolumn="0" endcolumn="0" rule="UnusedPrivateField" ruleset="pmd-eclipse" package="kr.or.ddit.prod.controller" class="ProdListController" priority="3">
+RULE#34:Detects when a private field is declared and/or assigned a value, but not used.
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/prod/controller/ProdUpdateController.java">
+<violation beginline="72" endline="72" begincolumn="0" endcolumn="0" rule="UnusedPrivateMethod" ruleset="pmd-eclipse" package="kr.or.ddit.prod.controller" class="ProdUpdateController" priority="2">
+RULE#35:Unused Private Method detects when a private method is declared but is unused.
+</violation>
+<violation beginline="72" endline="72" begincolumn="0" endcolumn="0" rule="UnusedPrivateMethod" ruleset="pmd-eclipse" package="kr.or.ddit.prod.controller" class="ProdUpdateController" priority="2">
+RULE#35:Unused Private Method detects when a private method is declared but is unused.
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/prod/service/ProdServiceImpl.java">
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.prod.service" class="ProdServiceImpl" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.prod.service" class="ProdServiceImpl" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="90" endline="90" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.prod.service" class="ProdServiceImpl" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="90" endline="90" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.prod.service" class="ProdServiceImpl" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/CalculatorServlet.java">
+<violation beginline="56" endline="56" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="56" endline="56" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="57" endline="57" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="57" endline="57" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="76" endline="76" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="76" endline="76" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="79" endline="79" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="79" endline="79" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="82" endline="82" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="82" endline="82" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="85" endline="85" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="85" endline="85" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="CalculatorServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/DescriptionServlet.java">
+<violation beginline="66" endline="66" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="66" endline="66" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="80" endline="80" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="80" endline="80" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="86" endline="86" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="86" endline="86" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="87" endline="87" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="87" endline="87" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="89" endline="89" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="89" endline="89" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="95" endline="95" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="95" endline="95" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="96" endline="96" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="96" endline="96" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="DescriptionServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/GugudanServlet.java">
+<violation beginline="81" endline="81" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="GugudanServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="81" endline="81" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="GugudanServlet" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/HttpRequestDescServlet.java">
+<violation beginline="68" endline="68" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="68" endline="68" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="69" endline="69" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="69" endline="69" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="70" endline="70" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="70" endline="70" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="77" endline="77" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="77" endline="77" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="82" endline="82" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="82" endline="82" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="HttpRequestDescServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/ImageServlet.java">
+<violation beginline="30" endline="30" begincolumn="0" endcolumn="0" rule="InefficientEmptyStringCheck" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="ImageServlet" priority="3">
+RULE#22: Avoid using String.trim().length() in processing Empty String
+</violation>
+<violation beginline="30" endline="30" begincolumn="0" endcolumn="0" rule="InefficientEmptyStringCheck" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="ImageServlet" priority="3">
+RULE#22: Avoid using String.trim().length() in processing Empty String
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/SampleProcessServlet.java">
+<violation beginline="28" endline="28" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="SampleProcessServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="28" endline="28" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="SampleProcessServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="43" endline="43" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="SampleProcessServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="43" endline="43" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="SampleProcessServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet01/UserAgentServlet.java">
+<violation beginline="31" endline="31" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="UserAgentServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="31" endline="31" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet01" class="UserAgentServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet02/ImageFolderServlet.java">
+<violation beginline="36" endline="36" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet02" class="ImageFolderServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="36" endline="36" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.servlet02" class="ImageFolderServlet" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/servlet05/PageModulization.java">
+<violation beginline="38" endline="38" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.servlet05" class="PageModulization" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="38" endline="38" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.servlet05" class="PageModulization" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/utils/CookieUtil.java">
+<violation beginline="17" endline="17" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="17" endline="17" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="19" endline="19" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="19" endline="19" begincolumn="0" endcolumn="0" rule="ImmutableField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#20:Do not use final attribute in the constructor
+</violation>
+<violation beginline="19" endline="19" begincolumn="0" endcolumn="0" rule="UnusedPrivateField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#34:Detects when a private field is declared and/or assigned a value, but not used.
+</violation>
+<violation beginline="19" endline="19" begincolumn="0" endcolumn="0" rule="UnusedPrivateField" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="3">
+RULE#34:Detects when a private field is declared and/or assigned a value, but not used.
+</violation>
+<violation beginline="60" endline="60" begincolumn="0" endcolumn="0" rule="AvoidReassigningParameters" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="2">
+RULE#5:Reassigning values to parameters is a questionable practice
+</violation>
+<violation beginline="60" endline="60" begincolumn="0" endcolumn="0" rule="AvoidReassigningParameters" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="CookieUtil" priority="2">
+RULE#5:Reassigning values to parameters is a questionable practice
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/utils/MarshallingUtils.java">
+<violation beginline="59" endline="59" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="59" endline="59" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="73" endline="73" begincolumn="0" endcolumn="0" rule="FinalFieldCouldBeStatic" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#19: change to static final field
+</violation>
+<violation beginline="73" endline="73" begincolumn="0" endcolumn="0" rule="FinalFieldCouldBeStatic" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#19: change to static final field
+</violation>
+<violation beginline="98" endline="98" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="98" endline="98" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="114" endline="114" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+<violation beginline="114" endline="114" begincolumn="0" endcolumn="0" rule="InefficientStringBuffering" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="MarshallingUtils" priority="3">
+RULE#23:Dont directly concatenate nonliteral in the StringBuffer function
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/utils/ReflectionUtils.java">
+<violation beginline="80" endline="80" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="ReflectionUtils" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="80" endline="80" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="ReflectionUtils" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="85" endline="85" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="ReflectionUtils" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+<violation beginline="85" endline="85" begincolumn="0" endcolumn="0" rule="AvoidThrowingRawExceptionTypes" ruleset="pmd-eclipse" package="kr.or.ddit.utils" class="ReflectionUtils" priority="1">
+RULE#2:Avoid throwing certain exception types
+</violation>
+</file>
+<file name="src/main/java/kr/or/ddit/websocket/EchoHandler.java">
+<violation beginline="34" endline="34" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="34" endline="34" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="40" endline="40" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="40" endline="40" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="52" endline="52" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="52" endline="52" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.websocket" class="EchoHandler" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/test/java/kr/or/ddit/board/dao/IBoard2DAOTest.java">
+<violation beginline="43" endline="43" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="43" endline="43" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="48" endline="48" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="48" endline="48" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="60" endline="60" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="60" endline="60" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.board.dao" class="IBoard2DAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+<file name="src/test/java/kr/or/ddit/member/dao/IMemberDAOTest.java">
+<violation beginline="36" endline="36" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.member.dao" class="IMemberDAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+<violation beginline="36" endline="36" begincolumn="0" endcolumn="0" rule="SystemPrintln" ruleset="pmd-eclipse" package="kr.or.ddit.member.dao" class="IMemberDAOTest" externalInfoUrl="http://pmd.sourceforge.net/rules/logging-java.html#SystemPrintln" priority="2">
+RULE#39:Consider using a logger rather than System.out.print() statement
+</violation>
+</file>
+</pmd>

@@ -35,6 +35,8 @@ import kr.or.ddit.vo.Board2VO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.PagingInfoVO;
 
+
+//@PreAuthorize AOP방법론 weaving proxy
 @Controller
 @RequestMapping("/board/{board_type}")
 public class BoardRetreiveController {

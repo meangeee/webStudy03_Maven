@@ -49,6 +49,7 @@
       <intercept-url pattern="/member/**" access="hasRole('ROLE_ADMIN')"/>
       <intercept-url pattern="/prod/prodUpdate.do" access="hasRole('ROLE_ADMIN')"/>
       <intercept-url pattern="/prod/prodInsert.do" access="hasRole('ROLE_ADMIN')"/>
+      
       <intercept-url pattern="/**" access="permitAll"/>
    </http>
 </beans:beans >

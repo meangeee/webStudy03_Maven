@@ -6,11 +6,11 @@
 	background-color: yellow;
 }
 
-#leftMenu {
-	float: left;
-	width: 20%;
-	heigth: 500px;
-	background-color: cyan;
+#leftMenu{
+   float : left;
+   width : 20%;
+   height : 1500px;
+   background-color : cyan;
 }
 
 #contents {

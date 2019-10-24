@@ -32,7 +32,7 @@ public class AttatchAndImageController {
 	IBoardService service;
 	@Inject
 	WebApplicationContext container;
-	ServletContext application;
+	ServletContext application;  
 	
 	@PostConstruct
 	public void init() {

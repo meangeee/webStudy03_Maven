@@ -34,7 +34,7 @@
 <c:if test="${not empty message }">
 $(document).toastmessage('showWarningToast', '${message }');
 </c:if>
-
+//wss 뭔데요? ws?
 
 </script>
 </body>

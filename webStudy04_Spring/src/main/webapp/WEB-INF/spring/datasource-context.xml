@@ -29,7 +29,6 @@
 		<property name="configuration">
 			<bean class="org.apache.ibatis.session.Configuration" 
 				p:lazyLoadingEnabled="true"
-				p:mapUnderscoreToCamelCase="true"
 			/>
 		</property>
 	</bean>
