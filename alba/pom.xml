@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.apach.log4j-version>2.12.1</org.apach.log4j-version>
+		<org.apach.log4j-version>2.13.3</org.apach.log4j-version>
 	</properties>
 	<build>
 		<plugins>
